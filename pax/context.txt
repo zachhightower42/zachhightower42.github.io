@@ -1,0 +1,17 @@
+Base Stats //centered text
+HP <HP value> MP <MP value> Stamina <Stamina value> Stamina regen <Stamina regen value> Movespeed <Movespeed value>
+
+Race //centered text, smaller than Base Stats
+<race selection>
+
+Points Distribution
+//Put the point displays here in a row
+
+Skills and Proficiencies
+//Center the skill name and put the skill level directly underneath it.
+//For all the proficiencies of that skill, left align them in a single row
+//In the form of: <Proficiency name> <Proficiency level>
+
+Traits
+//Make the traits list into a table with two columns where each row has
+//two traits in it.

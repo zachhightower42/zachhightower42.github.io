@@ -1,0 +1,709 @@
+<!-- PAX Sheet Maker - A tool for making sheets for Pax Equus-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAX Sheet Maker</title>
+    <link rel="stylesheet" href="pax_sheet_maker_stylesheet.css">
+    <script src="pax_sheet_maker_script.js"></script>
+  </head>
+  <body>
+    <h2>Base Stats</h2>
+    <div id="baseStats">
+      <label for="baseHP">Base HP:</label>
+      <input type="number" id="baseHP" value="15" readonly /><br />
+
+      <label for="baseMP">Base MP:</label>
+      <input type="number" id="baseMP" value="15" readonly /><br />
+
+      <label for="baseStamina">Base Stamina:</label>
+      <input type="number" id="baseStamina" value="3" readonly /><br />
+
+      <label for="baseStaminaRegen">Base Stamina Regen:</label>
+      <input type="number" id="baseStaminaRegen" value="10" readonly /><br />
+
+      <label for="baseMovespeed">Base Movespeed:</label>
+      <input type="number" id="baseMovespeed" value="5" readonly /><br />
+    </div>
+
+    <h2>Race</h2>
+    <div id="raceSelection">
+      <label for="race">Race:</label>
+      <select id="race" onchange="updateRaceStats()">
+        <option value="">Select a race</option>
+        <option value="Earthen">Earthen</option>
+        <option value="Avian">Avian</option>
+        <option value="Mythican">Mythican</option></select
+      ><br />
+    </div>
+
+    <h2>Points Distribution</h2>
+    <div id="pointsDistribution">
+      <label for="skillPoints">Skill Points Remaining:</label>
+      <input type="number" id="skillPoints" value="48" readonly /><br />
+
+      <label for="proficiencyPoints">Proficiency Points Remaining:</label>
+      <input type="number" id="proficiencyPoints" value="12" readonly /><br />
+
+      <label for="traitPoints">Trait Points Remaining:</label>
+      <input type="number" id="traitPoints" value="2" readonly /><br />
+    </div>
+
+    <h2>Skills and Proficiencies</h2>
+    <div id="skillsAndProficiencies">
+      <div class="skill">
+        <h3>Fortitude</h3>
+        <label for="fortitude">Fortitude Level:</label>
+        <input type="number" id="fortitude" value="5" readonly />
+        <button onclick="incrementSkill('fortitude', 14)">+</button>
+        <button onclick="decrementSkill('fortitude')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="strength">Strength:</label>
+          <input type="number" id="strength" value="5" readonly />
+          <button onclick="incrementProficiency('strength')">+</button>
+          <button onclick="decrementProficiency('strength')">-</button>
+
+          <label for="size">Size:</label>
+          <input type="number" id="size" value="5" readonly />
+          <button onclick="incrementProficiency('size')">+</button>
+          <button onclick="decrementProficiency('size')">-</button>
+
+          <label for="stamina">Stamina:</label>
+          <input type="number" id="stamina" value="5" readonly />
+          <button onclick="incrementProficiency('stamina')">+</button>
+          <button onclick="decrementProficiency('stamina')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Resolve</h3>
+        <label for="resolve">Resolve Level:</label>
+        <input type="number" id="resolve" value="5" readonly />
+        <button onclick="incrementSkill('resolve', 14)">+</button>
+        <button onclick="decrementSkill('resolve')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="dauntless">Dauntless:</label>
+          <input type="number" id="dauntless" value="5" readonly />
+          <button onclick="incrementProficiency('dauntless')">+</button>
+          <button onclick="decrementProficiency('dauntless')">-</button>
+
+          <label for="ascetic">Ascetic:</label>
+          <input type="number" id="ascetic" value="5" readonly />
+          <button onclick="incrementProficiency('ascetic')">+</button>
+          <button onclick="decrementProficiency('ascetic')">-</button>
+
+          <label for="inspiring">Inspiring:</label>
+          <input type="number" id="inspiring" value="5" readonly />
+          <button onclick="incrementProficiency('inspiring')">+</button>
+          <button onclick="decrementProficiency('inspiring')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Finesse</h3>
+        <label for="finesse">Finesse Level:</label>
+        <input type="number" id="finesse" value="5" readonly />
+        <button onclick="incrementSkill('finesse', 14)">+</button>
+        <button onclick="decrementSkill('finesse')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="speed">Speed:</label>
+          <input type="number" id="speed" value="5" readonly />
+          <button onclick="incrementProficiency('speed')">+</button>
+          <button onclick="decrementProficiency('speed')">-</button>
+
+          <label for="precision">Precision:</label>
+          <input type="number" id="precision" value="5" readonly />
+          <button onclick="incrementProficiency('precision')">+</button>
+          <button onclick="decrementProficiency('precision')">-</button>
+
+          <label for="reflexes">Reflexes:</label>
+          <input type="number" id="reflexes" value="5" readonly />
+          <button onclick="incrementProficiency('reflexes')">+</button>
+          <button onclick="decrementProficiency('reflexes')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Stealth</h3>
+        <label for="stealth">Stealth Level:</label>
+        <input type="number" id="stealth" value="5" readonly />
+        <button onclick="incrementSkill('stealth', 14)">+</button>
+        <button onclick="decrementSkill('stealth')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="sleightOfHand">Sleight-of-Hand:</label>
+          <input type="number" id="sleightOfHand" value="5" readonly />
+          <button onclick="incrementProficiency('sleightOfHand')">+</button>
+          <button onclick="decrementProficiency('sleightOfHand')">-</button>
+
+          <label for="subtlety">Subtlety:</label>
+          <input type="number" id="subtlety" value="5" readonly />
+          <button onclick="incrementProficiency('subtlety')">+</button>
+          <button onclick="decrementProficiency('subtlety')">-</button>
+
+          <label for="ghostliness">Ghostliness:</label>
+          <input type="number" id="ghostliness" value="5" readonly />
+          <button onclick="incrementProficiency('ghostliness')">+</button>
+          <button onclick="decrementProficiency('ghostliness')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Beguile</h3>
+        <label for="beguile">Beguile Level:</label>
+        <input type="number" id="beguile" value="5" readonly />
+        <button onclick="incrementSkill('beguile', 14)">+</button>
+        <button onclick="decrementSkill('beguile')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="charming">Charming:</label>
+          <input type="number" id="charming" value="5" readonly />
+          <button onclick="incrementProficiency('charming')">+</button>
+          <button onclick="decrementProficiency('charming')">-</button>
+
+          <label for="bargaining">Bargaining:</label>
+          <input type="number" id="bargaining" value="5" readonly />
+          <button onclick="incrementProficiency('bargaining')">+</button>
+          <button onclick="decrementProficiency('bargaining')">-</button>
+
+          <label for="fibbing">Fibbing:</label>
+          <input type="number" id="fibbing" value="5" readonly />
+          <button onclick="incrementProficiency('fibbing')">+</button>
+          <button onclick="decrementProficiency('fibbing')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Awareness</h3>
+        <label for="awareness">Awareness Level:</label>
+        <input type="number" id="awareness" value="5" readonly />
+        <button onclick="incrementSkill('awareness', 14)">+</button>
+        <button onclick="decrementSkill('awareness')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="nyctophobe">Nyctophobe:</label>
+          <input type="number" id="nyctophobe" value="5" readonly />
+          <button onclick="incrementProficiency('nyctophobe')">+</button>
+          <button onclick="decrementProficiency('nyctophobe')">-</button>
+
+          <label for="honest">Honest:</label>
+          <input type="number" id="honest" value="5" readonly />
+          <button onclick="incrementProficiency('honest')">+</button>
+          <button onclick="decrementProficiency('honest')">-</button>
+
+          <label for="gutFeeling">Gut-Feeling:</label>
+          <input type="number" id="gutFeeling" value="5" readonly />
+          <button onclick="incrementProficiency('gutFeeling')">+</button>
+          <button onclick="decrementProficiency('gutFeeling')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Investigation</h3>
+        <label for="investigation">Investigation Level:</label>
+        <input type="number" id="investigation" value="5" readonly />
+        <button onclick="incrementSkill('investigation', 14)">+</button>
+        <button onclick="decrementSkill('investigation')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="reading">Reading:</label>
+          <input type="number" id="reading" value="5" readonly />
+          <button onclick="incrementProficiency('reading')">+</button>
+          <button onclick="decrementProficiency('reading')">-</button>
+
+          <label for="discerning">Discerning:</label>
+          <input type="number" id="discerning" value="5" readonly />
+          <button onclick="incrementProficiency('discerning')">+</button>
+          <button onclick="decrementProficiency('discerning')">-</button>
+
+          <label for="chessmaster">Chessmaster:</label>
+          <input type="number" id="chessmaster" value="5" readonly />
+          <button onclick="incrementProficiency('chessmaster')">+</button>
+          <button onclick="decrementProficiency('chessmaster')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Combat</h3>
+        <label for="combat">Combat Level:</label>
+        <input type="number" id="combat" value="5" readonly />
+        <button onclick="incrementSkill('combat', 12)">+</button>
+        <button onclick="decrementSkill('combat')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="rifles">Rifles:</label>
+          <input type="number" id="rifles" value="5" readonly />
+          <button onclick="incrementProficiency('rifles')">+</button>
+          <button onclick="decrementProficiency('rifles')">-</button>
+
+          <label for="knives">Knives:</label>
+          <input type="number" id="knives" value="5" readonly />
+          <button onclick="incrementProficiency('knives')">+</button>
+          <button onclick="decrementProficiency('knives')">-</button>
+
+          <label for="bareHooves">Bare Hooves:</label>
+          <input type="number" id="bareHooves" value="5" readonly />
+          <button onclick="incrementProficiency('bareHooves')">+</button>
+          <button onclick="decrementProficiency('bareHooves')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Industry</h3>
+        <label for="industry">Industry Level:</label>
+        <input type="number" id="industry" value="5" readonly />
+        <button onclick="incrementSkill('industry', 12)">+</button>
+        <button onclick="decrementSkill('industry')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="engineering">Engineering:</label>
+          <input type="number" id="engineering" value="5" readonly />
+          <button onclick="incrementProficiency('engineering')">+</button>
+          <button onclick="decrementProficiency('engineering')">-</button>
+
+          <label for="gunsmithing">Gunsmithing:</label>
+          <input type="number" id="gunsmithing" value="5" readonly />
+          <button onclick="incrementProficiency('gunsmithing')">+</button>
+          <button onclick="decrementProficiency('gunsmithing')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Education</h3>
+        <label for="education">Education Level:</label>
+        <input type="number" id="education" value="5" readonly />
+        <button onclick="incrementSkill('education', 12)">+</button>
+        <button onclick="decrementSkill('education')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="medicine">Medicine:</label>
+          <input type="number" id="medicine" value="5" readonly />
+          <button onclick="incrementProficiency('medicine')">+</button>
+          <button onclick="decrementProficiency('medicine')">-</button>
+
+          <label for="history">History:</label>
+          <input type="number" id="history" value="5" readonly />
+          <button onclick="incrementProficiency('history')">+</button>
+          <button onclick="decrementProficiency('history')">-</button>
+        </div>
+      </div>
+
+      <div class="skill">
+        <h3>Witchery</h3>
+        <label for="witchery">Witchery Level:</label>
+        <input type="number" id="witchery" value="5" readonly />
+        <button onclick="incrementSkill('witchery', 12)">+</button>
+        <button onclick="decrementSkill('witchery')">-</button>
+
+        <div class="proficiencies">
+          <h4>Proficiencies</h4>
+          <label for="arcaneArts">Arcane Arts:</label>
+          <input type="number" id="arcaneArts" value="5" readonly />
+          <button onclick="incrementProficiency('arcaneArts')">+</button>
+          <button onclick="decrementProficiency('arcaneArts')">-</button>
+
+          <label for="lightMagic">Light Magic:</label>
+          <input type="number" id="lightMagic" value="5" readonly />
+          <button onclick="incrementProficiency('lightMagic')">+</button>
+          <button onclick="decrementProficiency('lightMagic')">-</button>
+        </div>
+      </div>
+      <div class="traits">
+        <h3>Traits</h3>
+        <ul>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="missFortune"
+              onclick="updateTraits(this)"
+            />
+            <label for="missFortune"><strong>Miss Fortune</strong></label>
+            <p>
+              Choose a number from 2 to 19. Whenever you roll that number on a
+              d20, it is automatically counted as a critfail. However, if
+              someone attacks you and rolls that number, it is also counted as a
+              critfail.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="twiceAsBright"
+              onclick="updateTraits(this)"
+            />
+            <label for="twiceAsBright"><strong>Twice as Bright</strong></label>
+            <p>+1 to Hit Dice. +2 to Jam threshold.</p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="smallFrame"
+              onclick="updateTraits(this)"
+            />
+            <label for="smallFrame"><strong>Small Frame</strong></label>
+            <p>+4 Movespeed, -2 max HP</p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="bigBoned"
+              onclick="updateTraits(this)"
+            />
+            <label for="bigBoned"><strong>Big Boned</strong></label>
+            <p>-4 Movespeed, +2 max HP</p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="husky"
+              onclick="updateTraits(this)"
+            />
+            <label for="husky"><strong>"Husky"</strong></label>
+            <p>+4 HP. You cannot Sprint.</p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="jobDoneRight"
+              onclick="updateTraits(this)"
+            />
+            <label for="jobDoneRight"><strong>A Job Done Right</strong></label>
+            <p>
+              You no longer get a Critical Success upon rolling a 20. However,
+              you get a Critical Success every time your roll's result is 35 or
+              more.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="steadyAsShegoes"
+              onclick="updateTraits(this)"
+            />
+            <label for="steadyAsShegoes"
+              ><strong>Steady as she Goes</strong></label
+            >
+            <p>
+              +1 to Stamina Regeneration. Sprinting only grants a flat +3
+              Movespeed.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="fourEyes"
+              onclick="updateTraits(this)"
+            />
+            <label for="fourEyes"><strong>Four-Eyes</strong></label>
+            <p>
+              Gain 2 free PP in Education or Industry. Your character must wear
+              glasses. Without, you suffer -6 to Awareness, Investigation,
+              Combat, and Finesse.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="purdy"
+              onclick="updateTraits(this)"
+            />
+            <label for="purdy"><strong>Purdy</strong></label>
+            <p>
+              +1 to Beguile when speaking to someone attracted to your gender.
+              -1 to Beguile when you are not.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="bloodless"
+              onclick="updateTraits(this)"
+            />
+            <label for="bloodless"><strong>Bloodless</strong></label>
+            <p>
+              When bleeding, spending one action to stave bleeding will stop the
+              bleeding for two full turns. -2 max HP.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="fanning"
+              onclick="updateTraits(this)"
+            />
+            <label for="fanning"><strong>Fanning</strong></label>
+            <p>
+              Single-Action revolvers get an optional Fire Rate 6. RNG is
+              reduced to 5, and you roll at a -8 penalty.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="trueGrit"
+              onclick="updateTraits(this)"
+            />
+            <label for="trueGrit"><strong>True Grit</strong></label>
+            <p>
+              You can use Two-Handed firearms with a crippled forearm without
+              penalty. You lose 2 HP per action.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="centreMass"
+              onclick="updateTraits(this)"
+            />
+            <label for="centreMass"><strong>Centre Mass</strong></label>
+            <p>+1 to Combat rolls. -1 to Hit Dice.</p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="selfImprovement"
+              onclick="updateTraits(this)"
+            />
+            <label for="selfImprovement"
+              ><strong>Self-Improvement*</strong></label
+            >
+            <p>
+              (Can be taken more than once) *Costs 1 PP +2 to a chosen Skill.
+              Can't go over base cap.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="specialized"
+              onclick="updateTraits(this)"
+            />
+            <label for="specialized"><strong>Specialized</strong></label>
+            <p>
+              -2 from a Skill of your choice. Cannot go lower than 3. Gain 1
+              free Proficiency Point.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="thestral"
+              onclick="updateTraits(this)"
+            />
+            <label for="thestral"><strong>Thestral</strong></label>
+            <p>
+              You suffer no Awareness or Investigation penalties at night. You
+              suffer -2 to Awareness, Investigation, and Stealth during the day.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="hatTrick"
+              onclick="updateTraits(this)"
+            />
+            <label for="hatTrick"><strong>Hat Trick</strong></label>
+            <p>
+              Fire the first shot in combat and roll 6 or above on your hit dice
+              to shoot off the enemy's hat. You will gain a +10 to Beguile
+              against this enemy.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="viceCity"
+              onclick="updateTraits(this)"
+            />
+            <label for="viceCity"><strong>Vice City</strong></label>
+            <p>
+              When drinking alcohol or smoking tobacco, gain a +2 to Beguile and
+              gain +2 max HP. When sober, suffer a -2 to each.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="recklessEndangerment"
+              onclick="updateTraits(this)"
+            />
+            <label for="recklessEndangerment"
+              ><strong>Reckless Endangerment</strong></label
+            >
+            <p>
+              +1 to Fire Rate to firearms with Cap 2 or more. +2 to Jam
+              threshold.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="triggerDiscipline"
+              onclick="updateTraits(this)"
+            />
+            <label for="triggerDiscipline"
+              ><strong>Trigger Discipline</strong></label
+            >
+            <p>
+              -1 to Fire Rate for all guns with Fire Rate 2 or more. -1 to Jam
+              Threshold.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="levering"
+              onclick="updateTraits(this)"
+            />
+            <label for="levering"><strong>Levering</strong></label>
+            <p>
+              Lever-actions get an optional Fire Rate 3. RNG is reduced to 8,
+              and you roll at a -6 penalty.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="dualWielding"
+              onclick="updateTraits(this)"
+            />
+            <label for="dualWielding"><strong>Dual-Wielding</strong></label>
+            <p>
+              You can hold and shoot two pistols at once, both at a -6 penalty.
+              RNG is reduced to 8.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="slamFire"
+              onclick="updateTraits(this)"
+            />
+            <label for="slamFire"><strong>Slam-Fire</strong></label>
+            <p>
+              Pump-actions get an optional Fire Rate 3. RNG is reduced to 4, and
+              you roll at a -6 penalty.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="eighteenKaratRunOfBadLuck"
+              onclick="updateTraits(this)"
+            />
+            <label for="eighteenKaratRunOfBadLuck"
+              ><strong>18-Karat Run of Bad Luck</strong></label
+            >
+            <p>
+              You get one use of Luck per session. This can be used to increase
+              a roll of 12 on any Hit Die, including friends or foes, to 18, or
+              decrease it to 1.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="heavyLoader"
+              onclick="updateTraits(this)"
+            />
+            <label for="heavyLoader"><strong>Heavy-Loader</strong></label>
+            <p>
+              +2 to Jam Threshold. All Reliable guns then have their Jam
+              Threshold set to 1. +2 to all Jam Rolls. Gain a flat +2 DAM, and
+              +2 to Hit Dice with all firearms.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="lightLoader"
+              onclick="updateTraits(this)"
+            />
+            <label for="lightLoader"><strong>Light-Loader</strong></label>
+            <p>
+              All weapons move up one tier in reliability, unless they are
+              semi-automtaic. -2 to all Jam Rolls. Flat -2 DAM to all firearms,
+              and -1 to Hit Dice.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="chuckeroo"
+              onclick="updateTraits(this)"
+            />
+            <label for="chuckeroo"><strong>Chuckeroo</strong></label>
+            <p>
+              All one-handed firearms are now Throwable, and can be thrown using
+              the gun's weapon proficiency. Deals 1d8+(1/2 Fortitude) damage. On
+              a seven, it discharges, unless it's empty.
+            </p>
+          </li>
+          <li>
+            <input
+              type="checkbox"
+              name="trait"
+              id="focusFire"
+              onclick="updateTraits(this)"
+            />
+            <label for="focusFire"><strong>Focus-Fire</strong></label>
+            <p>
+              Follow-up shots on an opponent you have already struck are at a +2
+              bonus to Combat rolls, and a +8 to any Investigation or Awareness
+              rolls to track said target. Until that target is downed, killed,
+              captured, or flees off of the map, suffer a -4 Multi-Target
+              penalty to any other targets.
+            </p>
+          </li>
+        </ul>
+        <li>
+          <input type="checkbox" name="trait" id="flight" disabled />
+          <label for="flight"><strong>Flight</strong></label>
+          <p>Travel through the air, light as a breeze.</p>
+        </li>
+      </div>
+    </div>
+  </body>
+</html>

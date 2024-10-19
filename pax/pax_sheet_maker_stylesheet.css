@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.base-stats, .race, .points-distribution {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.base-stats span {
+    margin: 0 10px;
+}
+
+.skills-proficiencies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.skill {
+    width: 48%;
+    margin-bottom: 20px;
+}
+
+.skill h3 {
+    text-align: center;
+}
+
+.skill-level {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.proficiencies {
+    display: flex;
+    justify-content: space-between;
+}
+
+.traits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.trait {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
