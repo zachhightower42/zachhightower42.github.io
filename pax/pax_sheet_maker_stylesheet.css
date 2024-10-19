@@ -1,48 +1,118 @@
 body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #f4f4f4;
 }
 
 h2 {
-    text-align: center;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+#baseStats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.base-stats, .race, .points-distribution {
+#baseStats div {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
+}
+
+#baseStats label {
+    margin-right: 5px;
+}
+
+#baseStats input {
+    width: 40px;
+}
+
+.race, .points-distribution {
     text-align: center;
     margin-bottom: 20px;
 }
-
-.base-stats span {
-    margin: 0 10px;
-}
-
 .skills-proficiencies {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
 .skill {
-    width: 48%;
-    margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
 }
 
 .skill h3 {
     text-align: center;
+    margin-bottom: 15px;
 }
 
-.skill-level {
+.skill > label {
+    width: 100%;
     text-align: center;
     margin-bottom: 10px;
 }
 
-.proficiencies {
+.skill-control {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
 }
 
+.skill-control input[type="number"] {
+    width: 50px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.skill-control button {
+    margin: 0 2px;
+}
+
+.proficiencies {
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+.proficiencies h4 {
+    margin-bottom: 10px;
+}
+
+.proficiencies label {
+    display: inline-block;
+    width: 100px;
+    margin-right: 5px;
+}
+
+.proficiencies input[type="number"] {
+    width: 40px;
+    margin-right: 5px;
+}
+
+.proficiencies button {
+    padding: 2px 5px;
+    font-size: 0.8em;
+}
 .traits {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -52,4 +122,41 @@ h2 {
 .trait {
     border: 1px solid #ccc;
     padding: 10px;
+}
+
+input[type="number"], select {
+    width: 60px;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.traits ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.traits li {
+    margin-bottom: 15px;
+}
+
+.traits label {
+    font-weight: bold;
+}
+
+.traits p {
+    margin-top: 5px;
+    font-size: 0.9em;
 }

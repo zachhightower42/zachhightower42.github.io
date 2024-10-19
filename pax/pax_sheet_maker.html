@@ -10,23 +10,30 @@
     <script src="pax_sheet_maker_script.js"></script>
   </head>
   <body>
-    <h2>Base Stats</h2>
-    <div id="baseStats">
-      <label for="baseHP">Base HP:</label>
-      <input type="number" id="baseHP" value="15" readonly /><br />
-
-      <label for="baseMP">Base MP:</label>
-      <input type="number" id="baseMP" value="15" readonly /><br />
-
-      <label for="baseStamina">Base Stamina:</label>
-      <input type="number" id="baseStamina" value="3" readonly /><br />
-
-      <label for="baseStaminaRegen">Base Stamina Regen:</label>
-      <input type="number" id="baseStaminaRegen" value="10" readonly /><br />
-
-      <label for="baseMovespeed">Base Movespeed:</label>
-      <input type="number" id="baseMovespeed" value="5" readonly /><br />
+    <h2>Stats</h2>
+<div id="baseStats">
+    <div>
+        <label for="baseHP">HP:</label>
+        <input type="number" id="baseHP" value="15" readonly />
     </div>
+    <div>
+        <label for="baseMP">MP:</label>
+        <input type="number" id="baseMP" value="15" readonly />
+    </div>
+    <div>
+        <label for="baseStamina">Stamina:</label>
+        <input type="number" id="baseStamina" value="3" readonly />
+    </div>
+    <div>
+        <label for="baseStaminaRegen">Stamina Regen:</label>
+        <input type="number" id="baseStaminaRegen" value="10" readonly />
+    </div>
+    <div>
+        <label for="baseMovespeed">Movespeed:</label>
+        <input type="number" id="baseMovespeed" value="5" readonly />
+    </div>
+</div>
+
 
     <h2>Race</h2>
     <div id="raceSelection">
@@ -55,10 +62,12 @@
     <div id="skillsAndProficiencies">
       <div class="skill">
         <h3>Fortitude</h3>
-        <label for="fortitude">Fortitude Level:</label>
-        <input type="number" id="fortitude" value="5" readonly />
-        <button onclick="incrementSkill('fortitude', 14)">+</button>
-        <button onclick="decrementSkill('fortitude')">-</button>
+        <label for="fortitude">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('fortitude')">-</button>
+          <input type="number" id="fortitude" value="5" readonly />
+          <button onclick="incrementSkill('fortitude', 14)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -81,10 +90,12 @@
 
       <div class="skill">
         <h3>Resolve</h3>
-        <label for="resolve">Resolve Level:</label>
-        <input type="number" id="resolve" value="5" readonly />
-        <button onclick="incrementSkill('resolve', 14)">+</button>
-        <button onclick="decrementSkill('resolve')">-</button>
+        <label for="resolve">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('resolve')">-</button>
+          <input type="number" id="resolve" value="5" readonly />
+          <button onclick="incrementSkill('resolve', 14)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -107,10 +118,12 @@
 
       <div class="skill">
         <h3>Finesse</h3>
-        <label for="finesse">Finesse Level:</label>
-        <input type="number" id="finesse" value="5" readonly />
-        <button onclick="incrementSkill('finesse', 14)">+</button>
-        <button onclick="decrementSkill('finesse')">-</button>
+        <label for="finesse">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('finesse')">-</button>
+          <input type="number" id="finesse" value="5" readonly />
+          <button onclick="incrementSkill('finesse', 14)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -133,10 +146,12 @@
 
       <div class="skill">
         <h3>Stealth</h3>
-        <label for="stealth">Stealth Level:</label>
-        <input type="number" id="stealth" value="5" readonly />
-        <button onclick="incrementSkill('stealth', 14)">+</button>
-        <button onclick="decrementSkill('stealth')">-</button>
+        <label for="stealth">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('stealth')">-</button>
+          <input type="number" id="stealth" value="5" readonly />
+          <button onclick="incrementSkill('stealth', 14)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -159,10 +174,12 @@
 
       <div class="skill">
         <h3>Beguile</h3>
-        <label for="beguile">Beguile Level:</label>
-        <input type="number" id="beguile" value="5" readonly />
-        <button onclick="incrementSkill('beguile', 14)">+</button>
-        <button onclick="decrementSkill('beguile')">-</button>
+        <label for="beguile">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('beguile')">-</button>
+          <input type="number" id="beguile" value="5" readonly />
+          <button onclick="incrementSkill('beguile', 14)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -185,10 +202,12 @@
 
       <div class="skill">
         <h3>Awareness</h3>
-        <label for="awareness">Awareness Level:</label>
-        <input type="number" id="awareness" value="5" readonly />
-        <button onclick="incrementSkill('awareness', 14)">+</button>
-        <button onclick="decrementSkill('awareness')">-</button>
+        <label for="awareness">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('awareness')">-</button>
+          <input type="number" id="awareness" value="5" readonly />
+          <button onclick="incrementSkill('awareness', 14)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -211,10 +230,12 @@
 
       <div class="skill">
         <h3>Investigation</h3>
-        <label for="investigation">Investigation Level:</label>
-        <input type="number" id="investigation" value="5" readonly />
-        <button onclick="incrementSkill('investigation', 14)">+</button>
-        <button onclick="decrementSkill('investigation')">-</button>
+        <label for="investigation">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('investigation')">-</button>
+          <input type="number" id="investigation" value="5" readonly />
+          <button onclick="incrementSkill('investigation', 14)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -237,10 +258,12 @@
 
       <div class="skill">
         <h3>Combat</h3>
-        <label for="combat">Combat Level:</label>
-        <input type="number" id="combat" value="5" readonly />
-        <button onclick="incrementSkill('combat', 12)">+</button>
-        <button onclick="decrementSkill('combat')">-</button>
+        <label for="combat">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('combat')">-</button>
+          <input type="number" id="combat" value="5" readonly />
+          <button onclick="incrementSkill('combat', 12)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -263,10 +286,12 @@
 
       <div class="skill">
         <h3>Industry</h3>
-        <label for="industry">Industry Level:</label>
-        <input type="number" id="industry" value="5" readonly />
-        <button onclick="incrementSkill('industry', 12)">+</button>
-        <button onclick="decrementSkill('industry')">-</button>
+        <label for="industry">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('industry')">-</button>
+          <input type="number" id="industry" value="5" readonly />
+          <button onclick="incrementSkill('industry', 12)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -284,10 +309,12 @@
 
       <div class="skill">
         <h3>Education</h3>
-        <label for="education">Education Level:</label>
-        <input type="number" id="education" value="5" readonly />
-        <button onclick="incrementSkill('education', 12)">+</button>
-        <button onclick="decrementSkill('education')">-</button>
+        <label for="education">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('education')">-</button>
+          <input type="number" id="education" value="5" readonly />
+          <button onclick="incrementSkill('education', 12)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
@@ -305,10 +332,12 @@
 
       <div class="skill">
         <h3>Witchery</h3>
-        <label for="witchery">Witchery Level:</label>
-        <input type="number" id="witchery" value="5" readonly />
-        <button onclick="incrementSkill('witchery', 12)">+</button>
-        <button onclick="decrementSkill('witchery')">-</button>
+        <label for="witchery">Skill Level:</label>
+        <div class="skill-control">
+          <button onclick="decrementSkill('witchery')">-</button>
+          <input type="number" id="witchery" value="5" readonly />
+          <button onclick="incrementSkill('witchery', 12)">+</button>
+        </div>
 
         <div class="proficiencies">
           <h4>Proficiencies</h4>
