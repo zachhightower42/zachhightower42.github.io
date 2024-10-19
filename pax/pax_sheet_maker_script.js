@@ -281,3 +281,57 @@ const skillProficiencyMap = {
   education: ['medicine', 'history'],
   witchery: ['arcaneArts', 'lightMagic']
 };
+
+function exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let yPos = 10;
+    const pageHeight = doc.internal.pageSize.height;
+
+    function addContent(text, fontSize = 12, indent = 0) {
+        doc.setFontSize(fontSize);
+        const splitText = doc.splitTextToSize(text, 180 - indent);
+        if (yPos + (splitText.length * fontSize / 2) > pageHeight - 10) {
+            doc.addPage();
+            yPos = 10;
+        }
+        doc.text(splitText, 10 + indent, yPos);
+        yPos += splitText.length * fontSize / 2 + 5;
+    }
+
+    // Add base stats
+    addContent("Base Stats:");
+    addContent(`HP: ${baseStats.hp}`, 10, 10);
+    addContent(`MP: ${baseStats.mp}`, 10, 10);
+    addContent(`Stamina: ${baseStats.stamina}`, 10, 10);
+    addContent(`Stamina Regen: ${baseStats.staminaRegen}`, 10, 10);
+    addContent(`Movespeed: ${baseStats.movespeed}`, 10, 10);
+
+    // Add race
+    addContent(`Race: ${document.getElementById("race").value}`);
+
+    // Add skills and proficiencies
+    addContent("Skills and Proficiencies:");
+    for (let skill in skills) {
+        addContent(`${skill}: ${skills[skill]}`, 12);
+        if (skillProficiencyMap[skill]) {
+            skillProficiencyMap[skill].forEach(proficiency => {
+                addContent(`${proficiency}: ${proficiencies[proficiency]}`, 10, 20);
+            });
+        }
+    }
+
+    // Add selected traits with descriptions
+    addContent("Selected Traits:");
+    selectedTraits.forEach(trait => {
+        const traitElement = document.querySelector(`label[for="${trait}"]`);
+        const traitName = traitElement.textContent;
+        const traitDescription = traitElement.nextElementSibling.textContent.trim();
+        
+        addContent(`${traitName}:`, 12);
+        addContent(traitDescription, 10, 10);
+    });
+
+    // Save the PDF
+    doc.save("pax_character_sheet.pdf");
+}
