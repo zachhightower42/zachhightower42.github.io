@@ -285,52 +285,83 @@ const skillProficiencyMap = {
 function exportToPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    let yPos = 10;
+    let yPos = 20;
     const pageHeight = doc.internal.pageSize.height;
+    const pageWidth = doc.internal.pageSize.width;
 
-    function addContent(text, fontSize = 12, indent = 0) {
+    function addContent(text, fontSize = 12, indent = 0, isBold = false) {
         doc.setFontSize(fontSize);
-        const splitText = doc.splitTextToSize(text, 180 - indent);
-        if (yPos + (splitText.length * fontSize / 2) > pageHeight - 10) {
+        doc.setFont(undefined, isBold ? 'bold' : 'normal');
+        const splitText = doc.splitTextToSize(text, pageWidth - 20 - indent);
+        if (yPos + (splitText.length * fontSize / 2) > pageHeight - 20) {
             doc.addPage();
-            yPos = 10;
+            yPos = 20;
         }
         doc.text(splitText, 10 + indent, yPos);
         yPos += splitText.length * fontSize / 2 + 5;
     }
 
-    // Add base stats
-    addContent("Base Stats:");
-    addContent(`HP: ${baseStats.hp}`, 10, 10);
-    addContent(`MP: ${baseStats.mp}`, 10, 10);
-    addContent(`Stamina: ${baseStats.stamina}`, 10, 10);
-    addContent(`Stamina Regen: ${baseStats.staminaRegen}`, 10, 10);
-    addContent(`Movespeed: ${baseStats.movespeed}`, 10, 10);
-
-    // Add race
-    addContent(`Race: ${document.getElementById("race").value}`);
-
-    // Add skills and proficiencies
-    addContent("Skills and Proficiencies:");
-    for (let skill in skills) {
-        addContent(`${skill}: ${skills[skill]}`, 12);
-        if (skillProficiencyMap[skill]) {
-            skillProficiencyMap[skill].forEach(proficiency => {
-                addContent(`${proficiency}: ${proficiencies[proficiency]}`, 10, 20);
-            });
-        }
+    function addHorizontalLine() {
+        doc.setDrawColor(0);
+        doc.line(10, yPos, pageWidth - 10, yPos);
+        yPos += 5;
     }
 
+    // Add title
+    doc.setFontSize(24);
+    doc.setFont(undefined, 'bold');
+    doc.text("Pax Character Sheet", pageWidth / 2, 15, { align: "center" });
+    addHorizontalLine();
+    yPos += 10; // Add extra space
+    // Add base stats
+    addContent("Stats", 18, 0, { align: "center", isBold: true });
+    addContent(`HP: ${baseStats.hp}    MP: ${baseStats.mp}`, 12, 10);
+    addContent(`Stamina: ${baseStats.stamina}    Stamina Regen: ${baseStats.staminaRegen}    Movespeed: ${baseStats.movespeed}`, 12, 10);
+    addHorizontalLine();
+
+    // Add race
+    addContent(`Race: ${document.getElementById("race").value}`, 14, 0, { align: "center" });
+    addHorizontalLine();
+
+    // Add skills and proficiencies
+    addContent("Skills and Proficiencies", 16, 0, { align: "center" });
+    for (let skill in skills) {
+        addContent(`${skill}: ${skills[skill]}`, 14, 0, true);
+        if (skillProficiencyMap[skill]) {
+            let proficiencyText = "";
+            skillProficiencyMap[skill].forEach(proficiency => {
+                proficiencyText += `${proficiency}: ${proficiencies[proficiency]}    `;
+            });
+            doc.setFont(undefined, 'bold');
+            doc.text(proficiencyText, 30, yPos);
+            doc.setFont(undefined, 'normal');
+            yPos += 7;
+        }
+        addHorizontalLine();
+    }
+    addHorizontalLine();
+
+    yPos += 10; // Add extra space
+
+
     // Add selected traits with descriptions
-    addContent("Selected Traits:");
+    addContent("Traits", 16, 0, { align: "center" });
     selectedTraits.forEach(trait => {
         const traitElement = document.querySelector(`label[for="${trait}"]`);
         const traitName = traitElement.textContent;
         const traitDescription = traitElement.nextElementSibling.textContent.trim();
         
-        addContent(`${traitName}:`, 12);
-        addContent(traitDescription, 10, 10);
+        addContent(`${traitName}:`, 14, 0, true);
+        addContent(traitDescription, 12, 10);
     });
+
+    // Add footer with page numbers
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFontSize(10);
+        doc.text(`Page ${i} of ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: "center" });
+    }
 
     // Save the PDF
     doc.save("pax_character_sheet.pdf");
