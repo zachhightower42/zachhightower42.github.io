@@ -110,32 +110,14 @@ function incrementSkill(skill, skillCap) {
     skills[skill]++;
     baseStats.skillPoints--;
     updateStats(skill);
-    updateDisplay();
-  }
-}
-
-function decrementSkill(skill) {
-  if (skills[skill] > 5) {
-    skills[skill]--;
-    baseStats.skillPoints++;
-    updateStats(skill);
-    updateDisplay();
-  }
-}
-
-function incrementProficiency(proficiency) {
-  if (proficiencies[proficiency] <= 16 && baseStats.proficiencyPoints > 0) {
-    proficiencies[proficiency] += 2;
-    baseStats.proficiencyPoints--;
-    updateDisplay();
-  } else if (proficiencies[proficiency] === 17 && baseStats.proficiencyPoints > 0) {
-    alert("Can't increase proficiency beyond 18");
-    updateDisplay();
-  }
-}function decrementProficiency(proficiency) {
-  if (proficiencies[proficiency] > 5) {
-    proficiencies[proficiency] -= 2;
-    baseStats.proficiencyPoints++;
+    
+    // Increment associated proficiencies
+    skillProficiencyMap[skill].forEach(proficiency => {
+      if (proficiencies[proficiency] < 18) {
+        proficiencies[proficiency]++;
+      }
+    });
+    
     updateDisplay();
   }
 }
@@ -145,10 +127,54 @@ function decrementSkill(skill) {
     skills[skill]--;
     baseStats.skillPoints++;
     updateStats(skill, true);
+    
+    // Decrement associated proficiencies
+    skillProficiencyMap[skill].forEach(proficiency => {
+      if (proficiencies[proficiency] > 5) {
+        proficiencies[proficiency]--;
+      }
+    });
+    
+    updateDisplay();
+  }
+}
+function incrementProficiency(proficiency) {
+  if (proficiencies[proficiency] <= 16 && baseStats.proficiencyPoints > 0) {
+    proficiencies[proficiency] += 2;
+    baseStats.proficiencyPoints--;
+    updateDisplay();
+  } else if (proficiencies[proficiency] === 17 && baseStats.proficiencyPoints > 0) {
+    alert("Can't increase proficiency beyond 18");
     updateDisplay();
   }
 }
 
+function decrementProficiency(proficiency) {
+  const associatedSkill = Object.keys(skillProficiencyMap).find(skill => skillProficiencyMap[skill].includes(proficiency));
+  if (proficiencies[proficiency] > 5 && proficiencies[proficiency] > skills[associatedSkill]) {
+    proficiencies[proficiency] -= 2;
+    baseStats.proficiencyPoints++;
+    updateDisplay();
+  }
+}
+function decrementSkill(skill) {
+  if (skills[skill] > 5) {
+    skills[skill]--;
+    baseStats.skillPoints++;
+    updateStats(skill, true);
+    
+
+    if (skillProficiencyMap[skill]) {
+      skillProficiencyMap[skill].forEach(proficiency => {
+        if (proficiencies[proficiency] > 5) {
+          proficiencies[proficiency]--;
+        }
+      });
+    }
+    
+    updateDisplay();
+  }
+}
 function updateStats(skill, isDecrement = false) {
   switch (skill) {
     case "fortitude":
@@ -241,3 +267,17 @@ function resetTraits() {
   baseStats.traitPoints = 2; // Reset to initial value
   updateDisplay();
 }
+
+const skillProficiencyMap = {
+  fortitude: ['strength', 'size', 'stamina'],
+  resolve: ['dauntless', 'ascetic', 'inspiring'],
+  finesse: ['speed', 'precision', 'reflexes'],
+  stealth: ['sleightOfHand', 'subtlety', 'ghostliness'],
+  beguile: ['charming', 'bargaining', 'fibbing'],
+  awareness: ['nyctophobe', 'honest', 'gutFeeling'],
+  investigation: ['reading', 'discerning', 'chessmaster'],
+  combat: ['rifles', 'knives', 'bareHooves'],
+  industry: ['engineering', 'gunsmithing'],
+  education: ['medicine', 'history'],
+  witchery: ['arcaneArts', 'lightMagic']
+};
