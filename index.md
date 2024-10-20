@@ -5,4 +5,4 @@
 Pages to visit
 
 - [Pax Sheet Maker](pax/pax_sheet_maker.html)
-- [Roll20 Macros and Instructions](macros_and_instruc.md)
+- [Roll20 Macros and Instructions](pax/macros_and_instruc.md)
