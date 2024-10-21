@@ -12,6 +12,17 @@
 
   </head>
   <body>
+    <h2>Name and Bio</h2>
+      <div id="name">
+        <label for="characterName">Character Name:</label>
+        <input type="text" id="characterName" name="characterName">
+      </div>
+  
+        <div id="bio">
+          <label for="characterBio">Character Bio:</label>
+          <textarea id="characterBio" name="characterBio" rows="10" cols="100"></textarea>
+        </div>
+  
     <h2>Stats</h2>
 <div id="baseStats">
     <div>
@@ -62,6 +73,7 @@
         <label for="traitPoints">Trait Points Remaining:</label>
         <input type="number" id="traitPoints" value="2" readonly />
       </div>
+      
     </div>
 
     <h2>Skills and Proficiencies</h2>
@@ -744,6 +756,30 @@
         </ul>
       </div>
     </div>
+<h2 class="shop-header">Shop</h2>
+<div>
+  <label for="bits">Bits:</label>
+  <input type="number" id="bits" value="100" />
+  <button onclick="incrementBits()">+</button>
+  <button onclick="decrementBits()">-</button>
+</div>
+<div class="shop">
+  <div class="item">
+    <h4>Item Template</h4>
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" name="itemName" />
+
+    <label for="itemInfo">Item Info:</label>
+    <textarea id="itemInfo" name="itemInfo" rows="4" cols="50"></textarea>
+
+    <label for="itemAmount">Amount:</label>
+    <input type="number" id="itemAmount" name="itemAmount" min="1" value="1" />
+
+    <label for="itemCost">Cost per Item:</label>
+    <input type="number" id="itemCost" name="itemCost" min="0" step="0.01" />
+  </div>
+</div>
+
     <button onclick="exportToPDF()">Export to PDF</button>
   </body>
 </html>

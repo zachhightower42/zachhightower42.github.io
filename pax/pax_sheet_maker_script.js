@@ -313,6 +313,19 @@ function exportToPDF() {
     doc.text("Pax Character Sheet", pageWidth / 2, 15, { align: "center" });
     addHorizontalLine();
     yPos += 10; // Add extra space
+    
+        // Add character name
+        const characterName = document.getElementById('characterName').value;
+        addContent(`Character Name: ${characterName}`, 16, 0, true);
+        yPos += 5;
+        addHorizontalLine();
+        // Add character bio
+        const characterBio = document.getElementById('characterBio').value;
+        addContent("Character Bio:", 14, 0, true);
+        addContent(characterBio, 12, 10);
+        addHorizontalLine();
+        yPos += 10; // Add extra space
+    
     // Add base stats
     addContent("Stats", 18, 0, { align: "center", isBold: true });
     addContent(`HP: ${baseStats.hp}    MP: ${baseStats.mp}`, 12, 10);
