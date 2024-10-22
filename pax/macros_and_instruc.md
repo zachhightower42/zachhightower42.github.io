@@ -6,6 +6,8 @@
 `&{template:default} {{name=?{What is the roll}}} {{Roll=[[1d20 + ?{Modifier|0}]]}} {{Action=*?{Any added info about roll}*}} {{TN=20}} {{CRIT on=[[20 + ?{Modifier|0}]]}}`
 {% endraw %}
  This roll is made up of queries to the user using the `?{}` command in roll20 and a few other neat little tricks to allow for a nice looking display.
+ 
+ ![Basic Roll Example](zachhightower42.github.io/pax/roll examples images/ex for pax basic roll 1.png)
 
 **Initiative roll basic**
 {% raw %}
