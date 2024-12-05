@@ -47,3 +47,22 @@ You should also copy paste the name of the weapon into the spot currently occupi
 All you have to do is enter the damage, and then put in the location, it will give you the amount of damage done and what kind of effect it had, if any, on the place you shot. 
 
 Currently it only goes up to calculating headshots, because in virtually all scenarios that's all that will be needed. 
+
+## Sarge's Bug Game and Delve
+
+**Basic roll**
+{% raw %}
+`&{template:default} {{name=?{What is the roll}}} {{?{Attribute 1}=[[1d?{Attribute 1 die type}]]}} {{?{Attribute 2}=[[1d?{Attribute 2 die type}]]}} {{?{Attribute 3}=[[1d?{Attribute 3 die type}]]}}`
+{% endraw %}
+ This roll is made up of queries to the user using the `?{}` command in roll20 and a few other neat little tricks to allow for a nice looking display. It only allows for three different conditions on the roll.
+ 
+ ![Basic Roll Example](zachhightower42.github.io/pax/roll examples images/bug game basic example roll.png)
+
+
+**Effect Roll**
+{% raw %}
+`&{template:default} {{name=?{What is the roll}}} {{Result=[[?{first value}+?{second value}]]}} {{Effect=?{dice effect class}}}`
+{% endraw %}
+This roll is made up of queries to the user using the `?{}` command in roll20 and a few other neat little tricks to allow for a nice looking display. It takes in three values from the user and displays the effects of the roll so that you can see how it actually resolves.
+ 
+ ![Effect Roll Example](zachhightower42.github.io/pax/roll examples images/bug game effect roll example.png)
