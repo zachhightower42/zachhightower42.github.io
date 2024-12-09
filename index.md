@@ -7,7 +7,7 @@ Pages to visit
 - [Pax Sheet Maker](pax/pax_sheet_maker.html)
 - [Roll20 Macros and Instructions](pax/macros_and_instruc.md)
 - [Armitage's Caselog](pax/armitageJournal/armitageJournal.html)
-- [Zachary Hightower's Author Page](temp_author_page.md)
+- [Zachary Hightower's Author Page](WIP_zacharyHightowerAuthorPage/work/temp_author_page.md) 
 
 
 **NOTICE** 
