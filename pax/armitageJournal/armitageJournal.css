@@ -18,6 +18,6 @@ iframe {
     
     margin-bottom: 0px; /* Optional: space from the bottom */
     display: block;
-    margin-left: 160px;
+    margin-left: auto;
     margin-right: auto;
 }
