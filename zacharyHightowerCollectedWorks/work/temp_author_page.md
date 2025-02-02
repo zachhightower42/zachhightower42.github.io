@@ -1,6 +1,7 @@
 # Author Page for Zachary Hightower
 
-Here you can find a collection of stories I've written and a little information about me. 
+Here you can find a collection of stories I've written and my contact info
+Most of this was written a while ago, so it's not exactly up to date. Hoping to add more content soon, now that I have more time.  
 
 
 # Short Stories
@@ -75,7 +76,7 @@ Here you can find a collection of stories I've written and a little information 
 
 
 # Contact Info
-Feel free to contact me if you see anything you like or have questions.
+Feel free to contact me
 
 Email: zachhightower42@gmail.com
 Discord: doc4242
