@@ -2,22 +2,23 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    background-image: url('assets/desk\ background.jpg');
+    min-height: 100vh;
+    background-image: url('assets/desk background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
+.iframe-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
 iframe {
-    width: 100%; /* Adjust width as needed */
-    height: 100%; /* Adjust height as needed */
-    
-    margin-bottom: 0px; /* Optional: space from the bottom */
+    width: 80%;
+    height: 600px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    border: none;
 }
