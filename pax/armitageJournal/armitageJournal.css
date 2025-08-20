@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     padding: 0;
@@ -18,6 +17,14 @@ body {
     max-width: 900px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-image: url('old book asset tb.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 40px 60px; /* Adjust as needed for book margins */
+    box-sizing: border-box;
+    min-height: 480px; /* Match book image height if needed */
 }
 
 iframe {
@@ -26,4 +33,8 @@ iframe {
     display: block;
     border: none;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.315);
+    background: transparent;
+    border-radius: 12px; /* Optional: soften corners */
+    max-width: 780px; /* Prevent overflow from book image */
+    max-height: 400px; /* Adjust to fit inside book */
 }
