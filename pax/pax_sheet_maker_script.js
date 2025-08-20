@@ -1061,6 +1061,21 @@ function buyShopItem(section, idx) {
   renderInventory();
 }
 
+function incrementBits() {
+  const bitsInput = document.getElementById('bits');
+  let bits = parseFloat(bitsInput.value) || 0;
+  bitsInput.value = bits + 1;
+}
+
+function decrementBits() {
+  const bitsInput = document.getElementById('bits');
+  let bits = parseFloat(bitsInput.value) || 0;
+  if (bits > 0) {
+    bitsInput.value = bits - 1;
+  }
+}
+window.incrementBits = incrementBits;
+window.decrementBits = decrementBits;
 window.levelUp = levelUp;
 window.addItemToInventory = addItemToInventory;
 window.buyShopItem = buyShopItem;
