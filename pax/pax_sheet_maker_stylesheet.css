@@ -226,4 +226,61 @@ button:hover {
     background-color: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}    
+}
+#inventoryTable {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #fff;
+}
+#inventoryTable th, #inventoryTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+#inventoryTable th {
+    background: #3498db;
+    color: #fff;
+}
+#inventoryTable td button {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#inventoryTable td button:hover {
+    background: #c0392b;
+}
+.shop-section {
+  margin-bottom: 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  padding: 15px;
+}
+.shop-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.shop-table th, .shop-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+.shop-table th {
+  background: #3498db;
+  color: #fff;
+}
+.shop-table td button {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.shop-table td button:hover {
+  background: #219150;
+}
