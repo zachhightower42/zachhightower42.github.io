@@ -28,13 +28,13 @@ body {
 }
 
 iframe {
-    width: 100%;
-    height: 75vh;
+    width: 110%;
+    height: 90vh;
     display: block;
     border: none;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.315);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
     background: transparent;
     border-radius: 12px; /* Optional: soften corners */
     max-width: 780px; /* Prevent overflow from book image */
-    max-height: 400px; /* Adjust to fit inside book */
+    max-height: 600px; /* Adjust to fit inside book */
 }
