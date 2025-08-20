@@ -13,8 +13,8 @@ body {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 150%;
-    max-width: 1800px;
+    width: 125%;
+    max-width: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +24,7 @@ body {
     background-position: center;
     padding: 40px 60px; /* Adjust as needed for book margins */
     box-sizing: border-box;
-    min-height: 960px; /* Match book image height if needed */
+    min-height: 600px; /* Match book image height if needed */
 }
 
 iframe {
