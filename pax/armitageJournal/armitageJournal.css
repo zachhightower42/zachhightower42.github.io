@@ -35,6 +35,6 @@ iframe {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
     background: transparent;
     border-radius: 12px; /* Optional: soften corners */
-    max-width: 800px; /* Prevent overflow from book image */
+    max-width: 830px; /* Prevent overflow from book image */
     max-height: 600px; /* Adjust to fit inside book */
 }
