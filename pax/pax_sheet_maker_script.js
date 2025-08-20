@@ -1060,3 +1060,10 @@ function buyShopItem(section, idx) {
   });
   renderInventory();
 }
+
+window.levelUp = levelUp;
+window.addItemToInventory = addItemToInventory;
+window.buyShopItem = buyShopItem;
+window.incrementBits = incrementBits;
+window.decrementBits = decrementBits;
+window.removeInventoryItem = removeInventoryItem;
