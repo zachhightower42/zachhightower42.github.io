@@ -292,7 +292,7 @@ button:hover {
 }
 .undertale-textbox {
     position: absolute;
-    right: -320px;
+    right: 0px;
     top: 0;
     opacity: 1;
     transition: opacity 1s;

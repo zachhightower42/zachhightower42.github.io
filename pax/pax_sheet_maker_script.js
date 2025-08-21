@@ -911,17 +911,19 @@ document.addEventListener("DOMContentLoaded", function () {
     shopHeaderClickCount++;
 
     if (shopHeaderClickCount === 1) {
-      showUndertaleTextBox("sheetmaker_assets/undertale_text_box.gif", 6000);
+      showUndertaleTextBox("sheetmaker_assets/undertale_text_box.gif", 3000);
     } else if (shopHeaderClickCount === 2) {
-      showUndertaleTextBox("sheetmaker_assets/undertale_text_box(1).gif", 4000, function () {
+      showUndertaleTextBox("sheetmaker_assets/undertale_text_box(1).gif", 3000, function () {
         setTimeout(function () {
-          showUndertaleTextBox("sheetmaker_assets/undertale_text_box(2).gif", 4000);
+          showUndertaleTextBox("sheetmaker_assets/undertale_text_box(2).gif", 3000);
         }, 1000);
       });
+      setTimeout(function () {
       shopMusic.style.display = "block";
       shopMusic.play();
-    }
-  });
+    }, 1000); // Play music after 1 second delay
+  }
+});
 
   function showUndertaleTextBox(imgSrc, duration, callback) {
     // Remove any existing text box
