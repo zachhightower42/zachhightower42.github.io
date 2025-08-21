@@ -419,18 +419,31 @@ function exportToPDF() {
 let inventory = [];
 
 function addItemToInventory() {
-  const name = document.getElementById('itemName').value.trim();
-  const info = document.getElementById('itemInfo').value.trim();
-  const amount = parseInt(document.getElementById('itemAmount').value, 10) || 1;
-  const cost = parseFloat(document.getElementById('itemCost').value) || 0;
-  let stats = prompt("Enter item stats (optional):", "");
-
+  // Prompt for all fields
+  const name = prompt("Enter item name:").trim();
   if (!name) {
     alert("Item name is required.");
     return;
   }
+  const info = prompt("Enter item description:").trim();
+  const stats = prompt("Enter item stats (optional):", "").trim();
+  const cost = prompt("Enter item cost (number or price string):", "").trim();
+  let amount = parseInt(prompt("Enter item amount:", "1"), 10);
+  if (isNaN(amount) || amount < 1) amount = 1;
 
-  inventory.push({ name, info, amount, stats, cost });
+  // Check if item already exists in inventory (match by name, info, stats, cost)
+  const existing = inventory.find(inv =>
+    inv.name === name &&
+    inv.info === info &&
+    inv.stats === stats &&
+    inv.cost === cost
+  );
+
+  if (existing) {
+    existing.amount += amount;
+  } else {
+    inventory.push({ name, info, amount, stats, cost });
+  }
   renderInventory();
 }
 
@@ -496,9 +509,9 @@ Gun Accessories:
 
 Gun belt - A belt to hold all your fantastic holsters! (note, belt is not actually a gun) - No stats - ฿2
 Holster - A holster to accesorize with your gun belt! Also holds guns. - No stats -  ฿3
-Quick-draw holster - Draw even faster! Speeds up drawing animation by at least 1% - No stats - ฿11
+Quick draw holster - Draw even faster! Speeds up drawing animation by at least 1% - No stats - ฿11
 Rifle scabbard - Hold larger guns! - No stats - ฿3
-Speed-load cylinder - Comes in full moon and half moon. (Also half sun and full sun for sunny personalities) - No stats - ฿3
+Speed load cylinder - Comes in full moon and half moon. (Also half sun and full sun for sunny personalities) - No stats - ฿3
 Rifle Scope - Look at things further away to make sure you're shooting the right things - No stats - ฿5
 Telescopic Rifle Scope - May or may not be a telescope - No stats - ฿8
 
@@ -506,7 +519,7 @@ General Equipment:
 
 Axe, Small - A small axe for small jobs - No stats - ฿2
 Axe, Large Woodaxe - A large axe for large jobs - No stats - ฿4
-All-Purpose Saddlebags - Carry everything you own, never let them take it away - No stats - ฿2
+All Purpose Saddlebags - Carry everything you own, never let them take it away - No stats - ฿2
 Big Packmule Saddlebags - Carry everything that you own, and more! (note, carrying more than you own is technically thievery) - No stats - ฿3
 Barbed wire (per yard) - Erect a pointy barrier against intruders, prank your friends! - No stats - 5¢
 Bed roll - For sleeping under the stars. Not tested for sleeping over the stars - No stats - ฿4
@@ -532,7 +545,7 @@ Watch, standard - A watch made out of standards - No stats - ฿2.50
 Watch, gold - A watch made out of gold, for those without standards - No stats - ฿10
 Weapon Repair Kit - For when your weapons feel more like weapoffs - No stats - ฿5
 
-Explosives:
+Explosive Supplies:
 
 Blasting cap - Helps with blowing things up. Cannot be equipped on things that don't blow up - No stats - ฿1
 Dynamite (per stick) - Useful for mining and other applications (please do not use on bosses) - No stats - ฿3
@@ -576,79 +589,80 @@ Barbers Tools - Unlocks hairstyle changes. (note, must have requisite amount of 
 
 Single-Shot Rifles:
 
-Varmit Plinker - Plinks varmints, for larger varmints, try our varmint plonker - Two-Handed | Long | CAP 1 |DAM 10 | RNG 15 | Pierce 1 | Reload 1 | Fire Rate 1 | JT 0 - ฿8
-Spronkfield 181 - Not actually useful for spronking through fields - Two-Handed | Long | CAP 1 | DAM 15 | RNG 20 | Pierce 2 | JT 0 -  ฿15
-Hamery Single-Shot Rifle - Loading multiple shots is not reccomended, unless you like the taste of exploded barrel - Two-Handed | Long | CAP 1 | DAM 17 | RNG 25 | Pierce 3 | JT 0 - ฿21
-Bullard .45 70 - Developed by John Bullard, the famous earth pony - Two-Handed | Long | CAP 1 | DAM 20 | RNG 35 | Pierce 4 | JT 0 - ฿32
-Mooser 171 - Developed by John Mooser, the famous penguin - Two-Handed | Long | CAP 2 | DAM 12 | RNG 20 | Pierce 2 | JT 0 - ฿30
-Bullard .55-80 - Slightly better than the Bullard .45 70, developed by John Bullard's competitive brother, Smith Bullard - Two-Handed | Long | CAP 1 | DAM 24 | RNG 25 | Pierce 5 | JT 1 | Limited Use: 8 - ฿80
+Varmit Plinker - Plinks varmints, for larger varmints, try our varmint plonker - Two Handed | Long | CAP 1 |DAM 10 | RNG 15 | Pierce 1 | Reload 1 | Fire Rate 1 | JT 0 - ฿8
+Spronkfield 181 - Not actually useful for spronking through fields - Two Handed | Long | CAP 1 | DAM 15 | RNG 20 | Pierce 2 | JT 0 -  ฿15
+Hamery Single Shot Rifle - Loading multiple shots is not reccomended, unless you like the taste of exploded barrel - Two Handed | Long | CAP 1 | DAM 17 | RNG 25 | Pierce 3 | JT 0 - ฿21
+Bullard .45 70 - Developed by John Bullard, the famous earth pony - Two Handed | Long | CAP 1 | DAM 20 | RNG 35 | Pierce 4 | JT 0 - ฿32
+Mooser 171 - Developed by John Mooser, the famous penguin - Two Handed | Long | CAP 2 | DAM 12 | RNG 20 | Pierce 2 | JT 0 - ฿30
+Bullard .55-80 - Slightly better than the Bullard .45 70, developed by John Bullard's competitive brother, Smith Bullard - Two Handed | Long | CAP 1 | DAM 24 | RNG 25 | Pierce 5 | JT 1 | Limited Use: 8 - ฿80
 
-Lever-Action Rifles:
+Lever Action Rifles:
 
-Winniechester .32 - Like the Winniechester .32 Long Tube, but with a shorter tube - Two-Handed | Long | CAP 8 | DAM 10 | RNG 15 | Pierce 2 | Fire Rate 2 | JT 1 - ฿15
-Winniechester .32 Long Tube - Equal in tube size to itself - Two-Handed | Long | CAP 16 | DAM 10 | RNG 15 | Pierce 2 | Fire Rate 2 | JT 1 - ฿25
-Hamery 186 - Remember to pay your respects to Hamery 1 through 185 - Two-Handed | Long | CAP 8 | DAM 12 | RNG 20 | Pierce 2 | JT 1 - ฿41
-Brush Gun - Actually fires bullets - Two-Handed | Long | CAP 5 | DAM 18 | RNG 20 | Pierce 3 | JT 2 - ฿55
-Semper Fi Carbine Rifle - Comes with a military codebook (code for book, not included) - Two-Handed | Long | CAP 8 | DAM 16 | RNG 15 | Pierce 2 | JT 3 | Reload 8 - ฿90
+Winniechester .32 - Like the Winniechester .32 Long Tube, but with a shorter tube - Two Handed | Long | CAP 8 | DAM 10 | RNG 15 | Pierce 2 | Fire Rate 2 | JT 1 - ฿15
+Winniechester .32 Long Tube - Equal in tube size to itself - Two Handed | Long | CAP 16 | DAM 10 | RNG 15 | Pierce 2 | Fire Rate 2 | JT 1 - ฿25
+Hamery 186 - Remember to pay your respects to Hamery 1 through 185 - Two Handed | Long | CAP 8 | DAM 12 | RNG 20 | Pierce 2 | JT 1 - ฿41
+Brush Gun - Actually fires bullets - Two Handed | Long | CAP 5 | DAM 18 | RNG 20 | Pierce 3 | JT 2 - ฿55
+Semper Fi Carbine Rifle - Comes with a military codebook (code for book, not included) - Two Handed | Long | CAP 8 | DAM 16 | RNG 15 | Pierce 2 | JT 3 | Reload 8 - ฿90
 
-Bolt-Action Rifles:
+Bolt Action Rifles:
 
-LeBulle 218 - Developed by Bullard's Prench cousin, the famous pegasus - Two-Handed | Long | CAP 10 | DAM 16 | RNG 30 | Pierce 3 | JT 2 - ฿75
-Lee Reignfield Rifle - Perfect for reenacting the Battle of the Some - Two-Handed | Long | CAP 5 | DAM 16 | RNG 25 | Pierce 2 | Reload 5 (Empty) | JT 2 - ฿75
-Karabou Bjonnson 223 - Developed by Kara, the famous 'Bou (any relation to player characters purely coincidental) - Two-Handed | Long | CAP 6 | DAM 18 | RNG 25 | Pierce 1 | Reload 6 | JT 2 - ฿140
+LeBulle 218 - Developed by Bullard's Prench cousin, the famous pegasus - Two Handed | Long | CAP 10 | DAM 16 | RNG 30 | Pierce 3 | JT 2 - ฿75
+Lee Reignfield Rifle - Perfect for reenacting the Battle of the Some - Two Handed | Long | CAP 5 | DAM 16 | RNG 25 | Pierce 2 | Reload 5 (Empty) | JT 2 - ฿75
+Karabou Bjonnson 223 - Developed by Kara, the famous 'Bou (any relation to player characters purely coincidental) - Two Handed | Long | CAP 6 | DAM 18 | RNG 25 | Pierce 1 | Reload 6 | JT 2 - ฿140
 
-Big-Game Rifles:
+Big Game Rifles:
 
-Bullard .700 Stampede - Terrifyingly, this is only seven tenths of Bullard's real power - Two-Handed | Long | CAP 2 | DAM 25 | RNG 25 | Pierce 5 | Reload 2 | Limited Use: 6 | JT 2 - ฿90
-Bullard 1326 Thunderhoof - This weapon is for REAL BIG SHOTS only - Two-Handed | Long | CAP 1 | DAM 35 | RNG 12 | Pierce 5 | Destruction 5 | Limited Use: 4 | JT 2 - ฿200
+Bullard .700 Stampede - Terrifyingly, this is only seven tenths of Bullard's real power - Two Handed | Long | CAP 2 | DAM 25 | RNG 25 | Pierce 5 | Reload 2 | Limited Use: 6 | JT 2 - ฿90
+Bullard 1326 Thunderhoof - This weapon is for REAL BIG SHOTS only - Two Handed | Long | CAP 1 | DAM 35 | RNG 12 | Pierce 5 | Destruction 5 | Limited Use: 4 | JT 2 - ฿200
 
 Shotguns, All Shotguns come with Destruction 2: 
 
-Amareican Arms 12GSS - The classic two barrel option, add another barrel for only six payments of 1.99 - Two-Handed | Long | CAP 1 |DAM 6d8 | RNG 12 | JT 0 - ฿12
-Colt 2 12 - Truly, your enemies are DOOMed - Two-Handed | Long | CAP 2 |DAM 4d6 | RNG 8 | Reload 2 | Fire Rate 2 | JT 0   - ฿27
-Coach Gun - This gun has helped many sports teams to victory - Two-Handed | Long | CAP 2 |DAM 6d6 | RNG 5 | Reload 2 | Fire Rate 2 | JT 0 - ฿35
-Colt Bushman Combination Shotgun - Thrice the barrels at quadruple the price - Two-Handed | Long | CAP 2 | DAM 5d6 | RNG 8 | Reload 3 | Fire Rate 2 | JT 0 ALTFIRE CAP 1 | DAM 15 | RNG 20 | Pierce 2 | JT 0  -  ฿85
-Winniechester Smokeless 20 - Pump up the action - Two-Handed | Long | CAP 7 | DAM 3d6 | RNG 10 | Fire Rate 2 | JT 1 - ฿45
-Mooseberg 200 - Thankfully, it only kicks like one moose - Two-Handed | Long | CAP 6 | DAM 5d8 | RNG 8 | JT 1 - ฿65
-Bearing Arms Survivors Shotgun - Exercise your right to bear arms, but not your right to bare arms, that'd be weird - Two-Handed | Long | CAP 4 | DAM 4d6 | RNG 12 | JT 1 | Concealable - ฿105
-Amareican Arms Boonie Buster 12GP - Don't ask me what a boonie is, the censors will kill me - Two-Handed | Long | CAP 6 | DAM 6d6 | RNG 8 | JT 1 - ฿150
-Winniechester “Sweet 16” - This gun is barely legal in most states - Two-Handed | Long | CAP 5 |DAM 5d6 | RNG 8 | JT 2 - ฿60
-Lee Reignfield .410 - Superb for getting those tough to reach spots - Two-Handed | Long | CAP 5 | DAM 4d8 | RNG 10 | Reload 5 (Empty) | JT 2 - ฿75
-Creusot Loire Pistolet dFour - As the name says, this gun is as good as four pistols (note, we do not speak Prench) - Two-Handed | Long | CAP 3 | DAM 4+2d20 | RNG 8 | JT 1 - ฿155
+Amareican Arms 12GSS - The classic two barrel option, add another barrel for only six payments of 1.99 - Two Handed | Long | CAP 1 |DAM 6d8 | RNG 12 | JT 0 - ฿12
+Colt 2 12 - Truly, your enemies are DOOMed - Two Handed | Long | CAP 2 |DAM 4d6 | RNG 8 | Reload 2 | Fire Rate 2 | JT 0   - ฿27
+Coach Gun - This gun has helped many sports teams to victory - Two Handed | Long | CAP 2 |DAM 6d6 | RNG 5 | Reload 2 | Fire Rate 2 | JT 0 - ฿35
+Colt Bushman Combination Shotgun - Thrice the barrels at quadruple the price - Two Handed | Long | CAP 2 | DAM 5d6 | RNG 8 | Reload 3 | Fire Rate 2 | JT 0 ALTFIRE CAP 1 | DAM 15 | RNG 20 | Pierce 2 | JT 0 - ฿85
+Winniechester Smokeless 20 - Pump up the action - Two Handed | Long | CAP 7 | DAM 3d6 | RNG 10 | Fire Rate 2 | JT 1 - ฿45
+Mooseberg 200 - Thankfully, it only kicks like one moose - Two Handed | Long | CAP 6 | DAM 5d8 | RNG 8 | JT 1 - ฿65
+Bearing Arms Survivors Shotgun - Exercise your right to bear arms, but not your right to bare arms, that'd be weird - Two Handed | Long | CAP 4 | DAM 4d6 | RNG 12 | JT 1 | Concealable - ฿105
+Amareican Arms Boonie Buster 12GP - Don't ask me what a boonie is, the censors will kill me - Two Handed | Long | CAP 6 | DAM 6d6 | RNG 8 | JT 1 - ฿150
+Winniechester “Sweet 16” - This gun is barely legal in most states - Two Handed | Long | CAP 5 |DAM 5d6 | RNG 8 | JT 2 - ฿60
+Lee Reignfield .410 - Superb for getting those tough to reach spots - Two Handed | Long | CAP 5 | DAM 4d8 | RNG 10 | Reload 5 (Empty) | JT 2 - ฿75
+Creusot Loire Pistolet dFour - As the name says, this gun is as good as four pistols (note, we do not speak Prench) - Two Handed | Long | CAP 3 | DAM 4+2d20 | RNG 8 | JT 1 - ฿155
 
 Punt Guns:
-Amareican Arms 4GSS - This gun is for the birds. Really, it is! - Two-Handed | Long | CAP 1 | DAM 10d8 | RNG 12 | Limited Use: 2 | 1d6 Damage to Self | JT 0 - ฿90
+
+Amareican Arms 4GSS - This gun is for the birds. Really, it is! - Two Handed | Long | CAP 1 | DAM 10d8 | RNG 12 | Limited Use: 2 | 1d6 Damage to Self | JT 0 - ฿90
 
 Handguns:      
 
-Colt Standard .32 - A classic wheel gun, also a real gun - One-Handed | Short | CAP 6 | DAM 10 | RNG 12 | Pierce 1 | Reload 2 | Fire Rate 1 | JT 0 - ฿10
-Colt Peacemaker - Called the peacemaker, but actually frowned upon in treaty negotiations - One-Handed | Short | CAP 6 | DAM 12 | RNG 15 | Pierce 2 | Reload 2 | JT 0 - ฿18
-Neighgant SA .32 - If you're resorting to this, you're probably in trouble - One-Handed | Short | CAP 7 | DAM 10 | RNG 10 | Reload 2 | No Speed Loaders | JT 0 - ฿8
-Neighgant DA .32 - Double the action, double the price! - One-Handed | Short | CAP 7 | DAM 10 | RNG 10 | Fire Rate 2 | Reload 2 | No Speed Loaders | JT 1 - ฿16
-Scoffield .32 - Despite the name, this gun is nothing to scoff at - One-Handed | Short | CAP 5 | DAM 10 | RNG 10 | Reload 5 | JT 0 - ฿24
-Karabou Bjonnson .357 Magnus - Did I fire six shots, or only five? Huh? Punk? - One-Handed | Short | CAP 6 | DAM 12 | RNG 15 | Pierce 4 | JT 0 - ฿30
-Colt Army .44 - The greatest revolver ever made, according to all polled Ocelots - One-Handed | Short | CAP 6 | DAM 14 | RNG 15 | Pierce 2 | JT 0 - ฿35
-Bearing Arms Bear Defender - Historically, this gun has not been used to defend bears, only their arms - One-Handed | Short | CAP 4 | DAM 16 | RNG 8 | Pierce 4 | JT 1 | Recoil 6 - ฿45
+Colt Standard .32 - A classic wheel gun, also a real gun - One Handed | Short | CAP 6 | DAM 10 | RNG 12 | Pierce 1 | Reload 2 | Fire Rate 1 | JT 0 - ฿10
+Colt Peacemaker - Called the peacemaker, but actually frowned upon in treaty negotiations - One Handed | Short | CAP 6 | DAM 12 | RNG 15 | Pierce 2 | Reload 2 | JT 0 - ฿18
+Neighgant SA .32 - If you're resorting to this, you're probably in trouble - One Handed | Short | CAP 7 | DAM 10 | RNG 10 | Reload 2 | No Speed Loaders | JT 0 - ฿8
+Neighgant DA .32 - Double the action, double the price! - One Handed | Short | CAP 7 | DAM 10 | RNG 10 | Fire Rate 2 | Reload 2 | No Speed Loaders | JT 1 - ฿16
+Scoffield .32 - Despite the name, this gun is nothing to scoff at - One Handed | Short | CAP 5 | DAM 10 | RNG 10 | Reload 5 | JT 0 - ฿24
+Karabou Bjonnson .357 Magnus - Did I fire six shots, or only five? Huh? Punk? - One Handed | Short | CAP 6 | DAM 12 | RNG 15 | Pierce 4 | JT 0 - ฿30
+Colt Army .44 - The greatest revolver ever made, according to all polled Ocelots - One Handed | Short | CAP 6 | DAM 14 | RNG 15 | Pierce 2 | JT 0 - ฿35
+Bearing Arms Bear Defender - Historically, this gun has not been used to defend bears, only their arms - One Handed | Short | CAP 4 | DAM 16 | RNG 8 | Pierce 4 | JT 1 | Recoil 6 - ฿45
 
 Derringers:
 
-Colt “Snakebite” .22 - Snakes have filed suit for reputational damages for their association with this gun - One-Handed | Short | CAP 2 | DAM 6 | RNG 6 | Reload 2 | Fire Rate 2 | Holdout Weapon | JT 0 - ฿20
-Winniechester “Double Deuce” .32 - Great for when you've been caught with your pants down - One-Handed | Short | CAP 2 | DAM 10 | RNG 4 | Reload 2 | Fire Rate 2 | Holdout Weapon | JT 0 - ฿35
-Colt Hammerless .177 - No hammers were harmed in the production of this gun - One-Handed | Short | CAP 5 | DAM 4 | RNG 2 | Fire Rate 3 | Quiet | Holdout Weapon | JT 1 - ฿25
-Bearing Arms Soltarian Expedition - Plenty of options for which arms you want to bare - One-Handed | Short | CAP 2 | DAM 10 OR DAM 3d8 | RNG 2 | Fire Rate 2 | Holdout Weapon | JT 1 - ฿40
-Amareican Arms Pepperbox - Not to be used for spicing your food, the lawsuits were terrible - One-Handed | Short | CAP 4 | DAM 2d8 | RNG 2 | Fire Rate 2 | Holdout Weapon | JT 1 - ฿40
-Cavesson .45 Special - It's big, it's bold, and it's brash, for a holdout gun, anyway - One-Handed | Short | CAP 2 | DAM 12 | RNG 2 | Fire Rate 2 | Holdout Weapon | JT 0 - ฿45
+Colt “Snakebite” .22 - Snakes have filed suit for reputational damages for their association with this gun - One Handed | Short | CAP 2 | DAM 6 | RNG 6 | Reload 2 | Fire Rate 2 | Holdout Weapon | JT 0 - ฿20
+Winniechester “Double Deuce” .32 - Great for when you've been caught with your pants down - One Handed | Short | CAP 2 | DAM 10 | RNG 4 | Reload 2 | Fire Rate 2 | Holdout Weapon | JT 0 - ฿35
+Colt Hammerless .177 - No hammers were harmed in the production of this gun - One Handed | Short | CAP 5 | DAM 4 | RNG 2 | Fire Rate 3 | Quiet | Holdout Weapon | JT 1 - ฿25
+Bearing Arms Soltarian Expedition - Plenty of options for which arms you want to bare - One Handed | Short | CAP 2 | DAM 10 OR DAM 3d8 | RNG 2 | Fire Rate 2 | Holdout Weapon | JT 1 - ฿40
+Amareican Arms Pepperbox - Not to be used for spicing your food, the lawsuits were terrible - One Handed | Short | CAP 4 | DAM 2d8 | RNG 2 | Fire Rate 2 | Holdout Weapon | JT 1 - ฿40
+Cavesson .45 Special - It's big, it's bold, and it's brash, for a holdout gun, anyway - One Handed | Short | CAP 2 | DAM 12 | RNG 2 | Fire Rate 2 | Holdout Weapon | JT 0 - ฿45
 
 Hand-Cannons:
 
-LeMare 2A Revolver - Is it a gun? Is it a shotgun? Is it a plane? It's LeMare! - One-Handed | Short | CAP 9 | DAM 10 | RNG 10 | No Speed Loaders ALT-FIRE CAP 1 | DAM 7d2!! | RNG 1 | JT 1 - ฿45
-Colt Trotter - If whatever you're shooting at isn't gone by the time the cylinder is empty, please use the complimentary prayer book - One-Handed | Short | CAP 6 | DAM 16 | RNG 15 | Reload 0.2 | JT 1 - ฿60
-Amareican Arms 12GSS Sawn Off - For those that like the concept of melee weapons, but lack upper body strength - One-Handed | Short | CAP 1 | DAM 6d4!! | RNG 5 | JT 1 - ฿9
-Colt 2 12 Sawn-Off - A cuter version of the big colt - One-Handed | Short | CAP 2 | DAM 4d4!! | RNG 3 | Reload 2 | Fire Rate 2 | JT 1 - ฿16
-Flare Gun - This isn't a real weapon, but it can be used to signal that you need one - One-Handed | Short | CAP 1 | DAM N/A | RNG 0 | Fire 1d4 | JT 0 - ฿3
+LeMare 2A Revolver - Is it a gun? Is it a shotgun? Is it a plane? It's LeMare! - One Handed | Short | CAP 9 | DAM 10 | RNG 10 | No Speed Loaders ALT-FIRE CAP 1 | DAM 7d2!! | RNG 1 | JT 1 - ฿45
+Colt Trotter - If whatever you're shooting at isn't gone by the time the cylinder is empty, please use the complimentary prayer book - One Handed | Short | CAP 6 | DAM 16 | RNG 15 | Reload 0.2 | JT 1 - ฿60
+Amareican Arms 12GSS Sawn Off - For those that like the concept of melee weapons, but lack upper body strength - One Handed | Short | CAP 1 | DAM 6d4!! | RNG 5 | JT 1 - ฿9
+Colt 2 12 Sawn-Off - A cuter version of the big colt - One Handed | Short | CAP 2 | DAM 4d4!! | RNG 3 | Reload 2 | Fire Rate 2 | JT 1 - ฿16
+Flare Gun - This isn't a real weapon, but it can be used to signal that you need one - One Handed | Short | CAP 1 | DAM N/A | RNG 0 | Fire 1d4 | JT 0 - ฿3
 Amareican Arms Mareisian Double Barrel Revolver - Twice the shooting, twice the reloading, nine tenths of the reliability - One Handed | Short | CAP 10 | DAM 11 | RNG 10 | JT 2 | Fire Rate 2 - ฿95
-Unwanted Surprise - It takes a daring customer to use this bad boy - One-Handed | Short | CAP 1 | DAM 8d2!! | RNG 1 | Reload 0.5 | JT 3 This single-shot shotgun is disguised as a break-action revolver. - ฿95
-Maretini Volley Pistol - Be your own firing squad - One-Handed | Short | CAP 1 | DAM (1d9)*6 | RNG 4 | Reload 2 | JT 4 This pistol fires nine bullets at once. - ฿155
+Unwanted Surprise - It takes a daring customer to use this bad boy - One Handed | Short | CAP 1 | DAM 8d2!! | RNG 1 | Reload 0.5 | JT 3 This single-shot shotgun is disguised as a break-action revolver. - ฿95
+Maretini Volley Pistol - Be your own firing squad - One Handed | Short | CAP 1 | DAM (1d9)*6 | RNG 4 | Reload 2 | JT 4 This pistol fires nine bullets at once. - ฿155
 
 Experimental Pistols:
 
@@ -663,10 +677,10 @@ Bohaymen Krkna Hrad 8mm - It may be short on vowels, but never on firepower - On
 
 Bolt Throwers:
  
-Longbow - They say it won the seven year war, hopefully yours won't take that long -Two Handed | Long | CAP 1 | DAM 8 | RNG 8 | Silent | JT 0  - ฿2
+Longbow - They say it won the seven year war, hopefully yours won't take that long - Two Handed | Long | CAP 1 | DAM 8 | RNG 8 | Silent | JT 0  - ฿2
 Recurve Bow - It's bringing curvy back - Two Handed | Long | CAP 1 | DAM 10 | RNG 10 | Silent | JT 0 - ฿5 
 Crossbow - I wouldn't want to cross anyone with this state of the art hardware - Two Handed | Long | CAP 1 | DAM 12 | RNG 10 | Silent | Can take Special Ammo | JT 0 - ฿30
-Arbalest - It's the arbaBest! - TwoHanded | Long | CAP 1 | DAM 15 | RNG 15 | Reload 0.5 | Quiet | Can take Special Ammo | JT 1 - ฿70
+Arbalest - It's the arbaBest! - Two Handed | Long | CAP 1 | DAM 15 | RNG 15 | Reload 0.5 | Quiet | Can take Special Ammo | JT 1 - ฿70
 
 
 Pneumatic Weapons:
@@ -681,6 +695,7 @@ Cannon - If you can carry this, you're legally a fortification - Artillery | Tur
 Gatling Gun - Useful for mission trips, whatever you leave behind will be undeniably holey - Artillery | Turret | CAP 100 | DAM 15 | RNG 15 | Fire Rate 10 | JT 2 - ฿ 1,000
 
 Explosives:
+
 Dynamite - Useful for mining and other applications (please do not use on bosses) - Mostly Reliable | Thrown or Placed | Light | DAM 10d4 | Blast 2 | 1 Round Fuse | Destruction 2 - ฿3
 Dynamite Bundle - For those that feel one dynamite will get lonely - Semi Reliable | Thrown or Placed | Heavy | DAM 10d8 | Blast 4 | 1 Round Fuse | Destruction 3 - ฿10
 Thermite Dynamite - A fantastic light show, but not to be used at kid's parties -  Unreliable | Thrown or Placed | Heavy | DAM 20d6 | Blast 5 | Blinding | 1 Round Fuse | Fire 2d8 | Destruction 4 - ฿30
@@ -821,20 +836,34 @@ function buyShopItem(section, idx) {
   const item = shopData[section][idx];
   const bitsInput = document.getElementById('bits');
   let bits = parseFloat(bitsInput.value);
+
   if (bits < item.cost) {
     alert('Not enough bits!');
     return;
   }
+
+  // Check if item already exists in inventory (match by name and stats)
+  const existing = inventory.find(inv =>
+    inv.name === item.name &&
+    inv.info === item.description &&
+    inv.stats === item.stats &&
+    inv.cost === item.priceDisplay
+  );
+
+  if (existing) {
+    existing.amount += 1;
+  } else {
+    inventory.push({
+      name: item.name,
+      info: item.description,
+      amount: 1,
+      stats: item.stats,
+      cost: item.priceDisplay
+    });
+  }
+
   bits -= item.cost;
   bitsInput.value = bits;
-  // Add to inventory
-  inventory.push({
-    name: item.name,
-    info: item.description,
-    amount: 1,
-    stats: item.stats,
-    cost: item.priceDisplay
-  });
   renderInventory();
 }
 
