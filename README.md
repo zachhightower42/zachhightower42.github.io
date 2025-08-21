@@ -20,8 +20,6 @@ This is a repository for various writing projects that are worthy enough to see 
 
 
 # TODO
-- [ ] Consider adding shopping functionality, maybe in a seperate page
-- [ ] Add inventory whenever I add the shopping functionality
-- [ ] Add level up function +2 Skill points, +2 PP, and +1 Trait per level up.
+
 - [ ] Add the ability to export as a .json file that can be loaded back in to make edits and do other fun stuff
-- [ ] Work on giving Armitage's journal another background element that makes it appear you're reading it from a book.
+- [ ] Finish getting the shop and inventory fixed up
