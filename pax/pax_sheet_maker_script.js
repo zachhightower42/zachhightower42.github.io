@@ -583,7 +583,7 @@ Gold Damascened Firearm - Engravings of this caliber also give no tactical advan
 Specialty Ammunition - For guns that you only read about in magazines - No Stats (priced per bullet) - ฿2.50
 Telegram, Domestic - Perfect for sending messages to your wife, spouse, spife, or wouse - No Stats (priced per word) - 2¢
 Telegram, International - For when causing a domestic incident just won't cut it - No Stats (priced per word) - 50¢
-30-Volume Encyclopedia - This is useless! - No Stats - ฿25
+30 Volume Encyclopedia - This is useless! - No Stats - ฿25
 Barbers Tools - Unlocks hairstyle changes. (note, must have requisite amount of hair for changes) - No Stats - ฿12
 
 
@@ -617,7 +617,7 @@ Bullard 1326 Thunderhoof - This weapon is for REAL BIG SHOTS only - Two Handed |
 
 Shotguns, All Shotguns come with Destruction 2: 
 
-Amareican Arms 12GSS - The classic two barrel option, add another barrel for only six payments of 1.99 - Two Handed | Long | CAP 1 |DAM 6d8 | RNG 12 | JT 0 - ฿12
+Amareican Arms 12GSS - The classic single barrel option, add another barrel for only nineteen payments of 19.99 - Two Handed | Long | CAP 1 |DAM 6d8 | RNG 12 | JT 0 - ฿12
 Colt 2 12 - Truly, your enemies are DOOMed - Two Handed | Long | CAP 2 |DAM 4d6 | RNG 8 | Reload 2 | Fire Rate 2 | JT 0   - ฿27
 Coach Gun - This gun has helped many sports teams to victory - Two Handed | Long | CAP 2 |DAM 6d6 | RNG 5 | Reload 2 | Fire Rate 2 | JT 0 - ฿35
 Colt Bushman Combination Shotgun - Thrice the barrels at quadruple the price - Two Handed | Long | CAP 2 | DAM 5d6 | RNG 8 | Reload 3 | Fire Rate 2 | JT 0 ALTFIRE CAP 1 | DAM 15 | RNG 20 | Pierce 2 | JT 0 - ฿85
