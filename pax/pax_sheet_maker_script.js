@@ -837,18 +837,37 @@ function buyShopItem(section, idx) {
   const bitsInput = document.getElementById('bits');
   let bits = parseFloat(bitsInput.value);
 
-  if (bits < item.cost) {
-    alert('Not enough bits!');
-    return;
-  }
+  // List of free unarmed items (case-insensitive match)
+  const freeUnarmedItems = [
+    "Wrestling",
+    "Maretial Arts",
+    "Bare Hooves",
+    "Dusters"
+  ];
 
-  // Check if item already exists in inventory (match by name and stats)
+  // Check if item is free (cost is 0 or "Free") and is in the freeUnarmedItems list
+  const isFreeUnarmed = (
+    (item.cost === 0 || (typeof item.priceDisplay === "string" && item.priceDisplay.toLowerCase().includes("free"))) &&
+    freeUnarmedItems.some(freeName => item.name.trim().toLowerCase() === freeName.trim().toLowerCase())
+  );
+
+  // Check if already in inventory
   const existing = inventory.find(inv =>
     inv.name === item.name &&
     inv.info === item.description &&
     inv.stats === item.stats &&
     inv.cost === item.priceDisplay
   );
+
+  if (isFreeUnarmed && existing) {
+    alert("Only one free sample per customer, I'm not made of bits you know. (wait...I think I actually might be.)");
+    return;
+  }
+
+  if (bits < item.cost) {
+    alert('Not enough bits!');
+    return;
+  }
 
   if (existing) {
     existing.amount += 1;
@@ -880,6 +899,112 @@ function decrementBits() {
     bitsInput.value = bits - 1;
   }
 }
+
+let shopHeaderClickCount = 0;
+
+document.addEventListener("DOMContentLoaded", function () {
+  const shopHeaderImg = document.getElementById("shopHeaderImg");
+  const undertaleContainer = document.getElementById("undertaleTextBoxContainer");
+  const shopMusic = document.getElementById("shopMusic");
+
+  shopHeaderImg.addEventListener("click", function () {
+    shopHeaderClickCount++;
+
+    if (shopHeaderClickCount === 1) {
+      showUndertaleTextBox("sheetmaker_assets/undertale_text_box.gif", 6000);
+    } else if (shopHeaderClickCount === 2) {
+      showUndertaleTextBox("sheetmaker_assets/undertale_text_box(1).gif", 4000, function () {
+        setTimeout(function () {
+          showUndertaleTextBox("sheetmaker_assets/undertale_text_box(2).gif", 4000);
+        }, 1000);
+      });
+      shopMusic.style.display = "block";
+      shopMusic.play();
+    }
+  });
+
+  function showUndertaleTextBox(imgSrc, duration, callback) {
+    // Remove any existing text box
+    undertaleContainer.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = imgSrc;
+    img.className = "undertale-textbox";
+    undertaleContainer.appendChild(img);
+
+    setTimeout(function () {
+      img.style.opacity = "0";
+      setTimeout(function () {
+        undertaleContainer.innerHTML = "";
+        if (callback) callback();
+      }, 1000); // Wait for fade out
+    }, duration);
+  }
+});
+
+function exportToJSON() {
+  // Gather all character data
+  const characterData = {
+    baseStats,
+    skills,
+    proficiencies,
+    selectedTraits,
+    inventory,
+    characterName: document.getElementById('characterName').value,
+    characterBio: document.getElementById('characterBio').value,
+    race: document.getElementById('race').value,
+    characterLevel
+  };
+
+  const dataStr = JSON.stringify(characterData, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "pax_character_sheet.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('importJSONInput').addEventListener('change', function (event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    try {
+      const data = JSON.parse(e.target.result);
+
+      // Restore all character data
+      Object.assign(baseStats, data.baseStats);
+      Object.assign(skills, data.skills);
+      Object.assign(proficiencies, data.proficiencies);
+      selectedTraits = Array.isArray(data.selectedTraits) ? data.selectedTraits : [];
+      inventory = Array.isArray(data.inventory) ? data.inventory : [];
+      characterLevel = data.characterLevel || 1;
+
+      document.getElementById('characterName').value = data.characterName || "";
+      document.getElementById('characterBio').value = data.characterBio || "";
+      document.getElementById('race').value = data.race || "";
+
+      // Restore trait checkboxes
+      document.querySelectorAll('input[name="trait"]').forEach((checkbox) => {
+        checkbox.checked = selectedTraits.includes(checkbox.id);
+      });
+
+      updateDisplay();
+      renderInventory();
+      renderShop();
+      resetTraits(); // To update trait points and checkboxes
+
+    } catch (err) {
+      alert("Failed to import character sheet: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+});
+
 window.incrementBits = incrementBits;
 window.decrementBits = decrementBits;
 window.levelUp = levelUp;

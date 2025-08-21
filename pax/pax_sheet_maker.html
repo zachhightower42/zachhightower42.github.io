@@ -763,7 +763,9 @@
         </ul>
       </div>
     </div>
-<img src="sheetmaker_assets/anytime_lil_buddy_gumdrop.png" alt="Lil Buddy Gumdrop" class="shop-header-img" />    
+<img src="sheetmaker_assets/anytime_lil_buddy_gumdrop.png" alt="Lil Buddy Gumdrop" class="shop-header-img" id="shopHeaderImg" />
+<div id="undertaleTextBoxContainer" style="position: relative; display: inline-block;"></div>
+<audio id="shopMusic" src="sheetmaker_assets/Shop-R0uNPIa-I9c.mp3" loop style="display:none"></audio>
 <h2 class="shop-header">Shop</h2>
 <div>
   <label for="bits">Bits:</label>
@@ -792,5 +794,8 @@
 </table>
 <button onclick="addItemToInventory()">Add Item to Inventory</button>
     <button onclick="exportToPDF()">Export to PDF</button>
+    <button onclick="exportToJSON()">Export to JSON</button>
+    <input type="file" id="importJSONInput" style="display:none" accept=".json" />
+    <button onclick="document.getElementById('importJSONInput').click()">Import from JSON</button>
   </body>
 </html>
