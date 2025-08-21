@@ -913,7 +913,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (shopHeaderClickCount === 1) {
       showUndertaleTextBox("sheetmaker_assets/undertale_text_box.gif", 2500);
     } else if (shopHeaderClickCount === 2) {
-      showUndertaleTextBox("sheetmaker_assets/undertale_text_box(1).gif", 2500, function () {
+      showUndertaleTextBox("sheetmaker_assets/undertale_text_box(1).gif", 2700, function () {
         setTimeout(function () {
           showUndertaleTextBox("sheetmaker_assets/undertale_text_box(2).gif", 2500);
         }, 1000);
@@ -921,7 +921,7 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(function () {
       shopMusic.style.display = "block";
       shopMusic.play();
-    }, 1500); // Play music after 1 second delay
+    }, 1700); // Play music after 1 second or so delay
   }
 });
 
