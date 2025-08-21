@@ -503,7 +503,7 @@ Liquor:
 Cheap Shot - For those that want to get one up on their own liver - No stats - 10¢
 Booze Bottle - The bottle is the most expensive part of this deal! - No stats - ฿2
 Big Shot - For those that want to experience the smooth taste of being a BIG SHOT - No stats - 25¢ 
-Bottle - The sophisticated way to render yourself unconscious - No stats - ฿5
+~Liquer~ Bottle - The sophisticated way to render yourself unconscious - No stats - ฿5
 
 Gun Accessories:
 
@@ -565,8 +565,8 @@ Sewing Kit - Almost a quarter as effective as a regular surgeon's kit - (Unlimit
 Tanning Kit - Tan anywhere, anytime. Who needs the sun? (note, sun not included) - (Tan your leather wherever you go.  Leather not supplied.) - ฿15	
 Mechanics Toolbox - Works even if your name isn't nick! - (Unlimited repair of mechanical engines or devices.  Lacks specialist pieces.) - ฿30	
 Gourmands Provisions - Let him cook - (Pots, pans, plates, platters, and everything else you need to cook food you find.) - ฿20
-Roughnecks Rig - For when everyone else forgot to bring stuff to sleepover - (Tents, tinderboxes for campfires, kindling, bedrolls, and more for the outdoors.) ฿60	
-Smiths Trappings - Can handle both black and white smithing - (Hammers, nails, tools to handle everything from horseshoes to armored trains.) ฿25
+Roughnecks Rig - For when everyone else forgot to bring stuff to sleepover - (Tents, tinderboxes for campfires, kindling, bedrolls, and more for the outdoors.) - ฿60	
+Smiths Trappings - Can handle both black and white smithing - (Hammers, nails, tools to handle everything from horseshoes to armored trains.) - ฿25
 Carpenters Paraphernalia - Can be combined with an ant to create a carpenter ant - (Glue, nails, cutting tools, and everything else a woodworker needs.) - ฿10	
 
 Buys for the Affluent:
