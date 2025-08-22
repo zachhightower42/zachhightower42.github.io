@@ -1026,6 +1026,51 @@ document.addEventListener("DOMContentLoaded", function () {
       reader.readAsText(file);
     });
   }
+
+  const portraitInput = document.getElementById("portraitInput");
+  const portraitPreview = document.getElementById("portraitPreview");
+
+  portraitInput.addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Check file size
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File is too large! Maximum size is 5 MB.");
+      portraitInput.value = "";
+      return;
+    }
+
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      img.onload = function () {
+        // Check dimensions
+        if (img.width > 600 || img.height > 600) {
+          alert("Image dimensions are too large! Maximum is 600x600.");
+          portraitInput.value = "";
+          return;
+        }
+
+        // Scale to 450x450 (keep aspect ratio)
+        const canvas = document.createElement("canvas");
+        let scale = Math.min(450 / img.width, 450 / img.height, 1);
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Show preview
+        portraitPreview.src = canvas.toDataURL("image/png");
+        portraitPreview.style.display = "block";
+      };
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
 });
 
 function exportToJSON() {

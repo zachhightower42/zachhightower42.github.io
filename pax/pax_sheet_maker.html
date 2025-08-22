@@ -13,17 +13,24 @@
 
   </head>
   <body>
+    <div id="portraitUploadSection">
+  <label for="portraitInput"><strong>Character Portrait:</strong></label>
+  <input type="file" id="portraitInput" accept="image/*" />
+  <div id="portraitPreviewContainer">
+    <img id="portraitPreview" src="" alt="Portrait Preview" style="display:none; max-width:450px; max-height:450px; border-radius:10px; margin-top:10px;" />
+  </div>
+</div>
     <h2>Name and Bio</h2>
-      <div id="name">
-        <label for="characterName">Character Name:</label>
-        <input type="text" id="characterName" name="characterName">
-      </div>
-  
-        <div id="bio">
-          <label for="characterBio">Character Bio:</label>
-          <textarea id="characterBio" name="characterBio" rows="10" cols="100"></textarea>
-        </div>
-  
+<div id="characterInfo">
+  <div class="character-name-row">
+    <label for="characterName">Character Name:</label>
+    <input type="text" id="characterName" name="characterName">
+  </div>
+  <div class="character-bio-row">
+    <label for="characterBio">Character Bio:</label>
+    <textarea id="characterBio" name="characterBio" rows="6" cols="80"></textarea>
+  </div>
+</div>
     <h2>Stats</h2>
 <div id="baseStats">
     <div>
