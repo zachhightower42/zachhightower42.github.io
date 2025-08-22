@@ -24,11 +24,7 @@ This is a repository for various writing projects that are worthy enough to see 
 - [ ] Add the ability to export as a .json file that can be loaded back in to make edits and do other fun stuff
 - [ ] Make it impossible to get more than one of the free hoof items
 - [ ] Make it so that the user gets prompted about how many of an item he wants to remove when there are multiple. Box for them to type in the amount or a button next to it that says all. Plus one for cancel, just in case
-- [ ] Make the race selection area prettier
 - [ ] Make the character name and bio section prettier
 - [ ] Add in the ability to upload a character portrait
 - [ ] Put actual stats on anything that needs stats 
-- [ ] Fix this thing according to Scooty the 12gss
-stands for
-12 aguage
-single shot
+

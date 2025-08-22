@@ -50,15 +50,31 @@
 
 
     <h2>Race</h2>
-    <div id="raceSelection">
-      <label for="race">Race:</label>
-      <select id="race" onchange="updateRaceStats()">
-        <option value="">Select a race</option>
-        <option value="Earthen">Earthen</option>
-        <option value="Avian">Avian</option>
-        <option value="Mythican">Mythican</option></select
-      ><br />
-    </div>
+<div id="raceSelection" class="race-selection">
+  <button class="race-btn" id="raceEarthen" onclick="selectRace('Earthen')">
+    <span class="race-title">Earthen</span>
+    <ul class="race-desc">
+      <li>+5 Skill Points</li>
+      <li>+2 HP</li>
+    </ul>
+  </button>
+  <button class="race-btn" id="raceAvian" onclick="selectRace('Avian')">
+    <span class="race-title">Avian</span>
+    <ul class="race-desc">
+      <li>+5 Movespeed</li>
+      <li>Gain Flight trait</li>
+    </ul>
+  </button>
+  <button class="race-btn" id="raceMythican" onclick="selectRace('Mythican')">
+    <span class="race-title">Mythican</span>
+    <ul class="race-desc">
+      <li>+2 Proficiency Points</li>
+      <li>Set MP to 10</li>
+      <li>Unlock Witchery</li>
+    </ul>
+  </button>
+</div>
+<input type="hidden" id="race" value="">
 
     <h2 style="display: flex; align-items: center; justify-content: space-between;">
   Points Distribution
@@ -352,6 +368,7 @@
           <input type="number" id="history" value="5" readonly />
           <button onclick="incrementProficiency('history')">+</button>
           <button onclick="decrementProficiency('history')">-</button>
+
         </div>
       </div>
 

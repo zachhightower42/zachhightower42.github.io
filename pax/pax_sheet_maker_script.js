@@ -465,8 +465,52 @@ function renderInventory() {
 }
 
 function removeInventoryItem(index) {
-  inventory.splice(index, 1);
-  renderInventory();
+  const item = inventory[index];
+  if (item.amount > 1) {
+    // Create a prompt dialog for quantity
+    const dialog = document.createElement('div');
+    dialog.style.position = 'fixed';
+    dialog.style.top = '50%';
+    dialog.style.left = '50%';
+    dialog.style.transform = 'translate(-50%, -50%)';
+    dialog.style.background = '#fff';
+    dialog.style.border = '2px solid #3498db';
+    dialog.style.borderRadius = '10px';
+    dialog.style.padding = '20px';
+    dialog.style.zIndex = '9999';
+    dialog.innerHTML = `
+      <p>How many "${item.name}" would you like to remove?</p>
+      <input type="number" id="removeAmountInput" min="1" max="${item.amount}" value="1" style="width:60px; margin-right:10px;">
+      <button id="removeAmountOk">OK</button>
+      <button id="removeAmountAll">All</button>
+      <button id="removeAmountCancel" style="margin-left:10px;">Cancel</button>
+    `;
+    document.body.appendChild(dialog);
+
+    document.getElementById('removeAmountOk').onclick = function () {
+      const amt = parseInt(document.getElementById('removeAmountInput').value, 10);
+      if (amt >= 1 && amt < item.amount) {
+        item.amount -= amt;
+      } else if (amt >= item.amount) {
+        inventory.splice(index, 1);
+      }
+      document.body.removeChild(dialog);
+      renderInventory();
+    };
+
+    document.getElementById('removeAmountAll').onclick = function () {
+      inventory.splice(index, 1);
+      document.body.removeChild(dialog);
+      renderInventory();
+    };
+
+    document.getElementById('removeAmountCancel').onclick = function () {
+      document.body.removeChild(dialog);
+    };
+  } else {
+    inventory.splice(index, 1);
+    renderInventory();
+  }
 }
 
 // Paste the shop_items.md content as a string
@@ -923,7 +967,7 @@ document.addEventListener("DOMContentLoaded", function () {
       shopMusic.play();
     }, 1700); // Play music after 1 second or so delay
   }
-});
+  });
 
   function showUndertaleTextBox(imgSrc, duration, callback) {
     // Remove any existing text box
@@ -940,6 +984,47 @@ document.addEventListener("DOMContentLoaded", function () {
         if (callback) callback();
       }, 1000); // Wait for fade out
     }, duration);
+  }
+
+  // Add this inside the DOMContentLoaded block:
+  const importInput = document.getElementById('importJSONInput');
+  if (importInput) {
+    importInput.addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const data = JSON.parse(e.target.result);
+
+          // Restore all character data
+          Object.assign(baseStats, data.baseStats);
+          Object.assign(skills, data.skills);
+          Object.assign(proficiencies, data.proficiencies);
+          selectedTraits = Array.isArray(data.selectedTraits) ? data.selectedTraits : [];
+          inventory = Array.isArray(data.inventory) ? data.inventory : [];
+          characterLevel = data.characterLevel || 1;
+
+          document.getElementById('characterName').value = data.characterName || "";
+          document.getElementById('characterBio').value = data.characterBio || "";
+          document.getElementById('race').value = data.race || "";
+
+          // Restore trait checkboxes
+          document.querySelectorAll('input[name="trait"]').forEach((checkbox) => {
+            checkbox.checked = selectedTraits.includes(checkbox.id);
+          });
+
+          updateDisplay();
+          renderInventory();
+          renderShop();
+          resetTraits(); // To update trait points and checkboxes
+
+        } catch (err) {
+          alert("Failed to import character sheet: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
   }
 });
 
@@ -1006,6 +1091,14 @@ document.getElementById('importJSONInput').addEventListener('change', function (
   };
   reader.readAsText(file);
 });
+
+function selectRace(race) {
+  document.getElementById('race').value = race;
+  // Highlight selected button
+  document.querySelectorAll('.race-btn').forEach(btn => btn.classList.remove('selected'));
+  document.getElementById('race' + race).classList.add('selected');
+  updateRaceStats();
+}
 
 window.incrementBits = incrementBits;
 window.decrementBits = decrementBits;
