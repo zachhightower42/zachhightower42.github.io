@@ -523,7 +523,7 @@ Boots - Regular set of boots. Price unchanged for those that need claw or paw bo
 Chaps - For riding, ass included, chapstick not included - No stats - ฿ 4
 Duster - Look like a cowboy hero, does not come with heroism - No stats - ฿ 7 
 Longjohns - Keep yourself warm, if you're too warm, try our shortjohns instead - No stats - ฿ 1
-Glasses - See all the fantastic savings, useful for drinks too! - No stats - 50¢
+Glasses - See all the fantastic savings, useful for drinks too! - Interacts with trait Four Eyes - 50¢
 Shirt/blouse, dress - Our most beautiful model yet - No stats - ฿ 3
 Shirt/blouse, work - Our most functional model yet - No stats - ฿ 1
 Silk stockings - Silky smooth, even better thank milky smooth - No stats - ฿ 1
@@ -537,67 +537,67 @@ Stetson - Like a regular hat, but for cowboys! (cows and boys sold seperately) -
 
 Tobacco:
 
-Cigar - Impress your friends! Check if rooms have ventilation! - No stats - 5¢
-Pipe - Pretend to be Sherclop Holmes! (deductive reasoning sold seperately) - No stats - ฿2
-Tobacco, chewing (tin) - Hey buddy, don't give me any lip  - No stats - 50¢
-Tobacco, smoking (pouch) - Hey buddy, don't give me any pouch - No stats - 50¢
+Cigar - Impress your friends! Check if rooms have ventilation! - Interacts with trait Vice City - 5¢
+Pipe - Pretend to be Sherclop Holmes! (deductive reasoning sold seperately) - Interacts with trait Vice City - ฿2
+Tobacco, chewing (tin) - Hey buddy, don't give me any lip  - Interacts with trait Vice City - 50¢
+Tobacco, smoking (pouch) - Hey buddy, don't give me any pouch - Interacts with trait Vice City - 50¢
 
 Liquor: 
 
-Cheap Shot - For those that want to get one up on their own liver - No stats - 10¢
-Booze Bottle - The bottle is the most expensive part of this deal! - No stats - ฿2
-Big Shot - For those that want to experience the smooth taste of being a BIG SHOT - No stats - 25¢ 
-~Liquer~ Bottle - The sophisticated way to render yourself unconscious - No stats - ฿5
+Cheap Shot - For those that want to get one up on their own liver - Interacts with trait Vice City - 10¢
+Booze Bottle - The bottle is the most expensive part of this deal! - Interacts with trait Vice City - ฿2
+Big Shot - For those that want to experience the smooth taste of being a BIG SHOT - Interacts with trait Vice City - 25¢ 
+~Liquer~ Bottle - The sophisticated way to render yourself unconscious - Interacts with trait Vice City - ฿5
 
 Gun Accessories:
 
-Gun belt - A belt to hold all your fantastic holsters! (note, belt is not actually a gun) - No stats - ฿2
-Holster - A holster to accesorize with your gun belt! Also holds guns. - No stats -  ฿3
-Quick draw holster - Draw even faster! Speeds up drawing animation by at least 1% - No stats - ฿11
-Rifle scabbard - Hold larger guns! - No stats - ฿3
-Speed load cylinder - Comes in full moon and half moon. (Also half sun and full sun for sunny personalities) - No stats - ฿3
-Rifle Scope - Look at things further away to make sure you're shooting the right things - No stats - ฿5
-Telescopic Rifle Scope - May or may not be a telescope - No stats - ฿8
+Gun belt - A belt to hold all your fantastic holsters! (note, belt is not actually a gun) - Allows equipping of holsters - ฿2
+Holster - A holster to accesorize with your gun belt! Also holds guns. - Allows equipping of any weapons that are not long  -  ฿3
+Quick draw holster - Draw even faster! Speeds up drawing animation by at least 1% - Allows equipping of any weapons that are not long, aids in quick draw rolls - ฿11
+Rifle scabbard - Hold larger guns! - Allows equipping of long weapons on the back - ฿3
+Speed load cylinder - Comes in full moon and half moon. (Also half sun and full sun for sunny personalities) - Allows for faster reloads with some revolvers - ฿3
+Rifle Scope - Look at things further away to make sure you're shooting the right things - Bonus to shots at a distance, makes shots up close more difficult - ฿5
+Telescopic Rifle Scope - May or may not be a telescope - Further bonus to shots at a distance, but shots up close are even more difficult - ฿8
 
 General Equipment:
 
-Axe, Small - A small axe for small jobs - No stats - ฿2
-Axe, Large Woodaxe - A large axe for large jobs - No stats - ฿4
-All Purpose Saddlebags - Carry everything you own, never let them take it away - No stats - ฿2
-Big Packmule Saddlebags - Carry everything that you own, and more! (note, carrying more than you own is technically thievery) - No stats - ฿3
+Axe, Small - A small axe for small jobs - One Handed | Short | Light | RNG 1 | DAM 10 | Inconspicuous | Affixable | Destruction 2 - ฿2
+Axe, Large Woodaxe - A large axe for large jobs - TwoHanded | Heavy | Long | RNG 1 | DAM 15 | Inconspicuous | Destruction 4 - ฿4
+All Purpose Saddlebags - Carry everything you own, never let them take it away - Carry stuff - ฿2
+Big Packmule Saddlebags - Carry everything that you own, and more! (note, carrying more than you own is technically thievery) - Carry more stuff - ฿3
 Barbed wire (per yard) - Erect a pointy barrier against intruders, prank your friends! - No stats - 5¢
-Bed roll - For sleeping under the stars. Not tested for sleeping over the stars - No stats - ฿4
+Bed roll - For sleeping under the stars. Not tested for sleeping over the stars - Allows you to sleep anywhere that is not actively hostile - ฿4
 Camera - Capture precious memories, as long as they stand still for an extended period of time - No stats - ฿5
-Canteen - You take a sip from your trusty Shop brand canteen - No stats - ฿1
+Canteen - You take a sip from your trusty Shop brand canteen - Holds 1 Liter of water - ฿1
 File - For filing things away into tiny pieces - No stats - 25¢
-Guitar - Now you can be that guy at a party. Comes with Freebird - No stats - ฿8
-Hammer - When you have this, every problem looks like a nail. Buy glasses to compensate for hammer induced vision impairment - No stats - 50¢
-Handcuffs - Usable for criminals and those you just want to keep close, comes with key - No stats - ฿1
-Harmonica - For those that feel the blues, but can't invest in a full band - No stats - 25¢
-Iron skillet - Fry your troubles away, unless those troubles are heart burn - No stats - 50¢
-Lantern - Light up your life - No stats - ฿2
-Matches (box of 100) - Start a fire, or hold one in your mouth to look cool (coolness not guaranteed) - No stats - 50¢
-Medical Supply Kit - If you buy our products, you'll need this - No stats - ฿10
-Mess kit - For cooking food, guaranteed clean on purchase - No stats - ฿2
-Photographic plate - Take photos so good you could eat off them! - No stats - ฿1
-Pick - Compatible with ice, not with guitars - No stats - ฿2
-Playing cards - Go all in, or fold, or call, you never call anymore - No stats - 25¢
-Rope (50) - Plenty of rope, plenty of applications, but please don't get hung up on it - No stats - ฿5
-Shovel - Dig yourself in deeper or dig yourself out - No stats - ฿1.50
-Spectacles - For when glasses just won't do. (note, previously sold glasses were just two glass cups) - No stats - ฿5
-Watch, standard - A watch made out of standards - No stats - ฿2.50
-Watch, gold - A watch made out of gold, for those without standards - No stats - ฿10
-Weapon Repair Kit - For when your weapons feel more like weapoffs - No stats - ฿5
+Guitar - Now you can be that guy at a party. Comes with Freebird - Usable with the Music skill - ฿8
+Hammer - When you have this, every problem looks like a nail. Buy glasses to compensate for hammer induced vision impairment - Usable in various industry skills - 50¢
+Handcuffs - Usable for criminals and those you just want to keep close, comes with key - Prevents use of hooves, can do more if you're creative - ฿1
+Harmonica - For those that feel the blues, but can't invest in a full band - Usable with music skill - 25¢
+Iron skillet - Fry your troubles away, unless those troubles are heart burn - Usable with cooking skill - 50¢
+Lantern - Light up your life - Illuminates dark areas, can be used for signals - ฿2
+Matches (box of 100) - Start a fire, or hold one in your mouth to look cool (coolness not guaranteed) - Unlocks starting fires - 50¢
+Medical Supply Kit - If you buy our products, you'll need this - Stabilize a player without needing to roll - ฿10
+Mess kit - For cooking food, guaranteed clean on purchase - Cooks food for one character - ฿2
+Photographic plate - Take photos so good you could eat off them! - Used with the camera to take photos - ฿1
+Pick - Compatible with ice, not with guitars - One Handed | Short | Light | RNG 1 | DAM 10 | Pierce 2 | Inconspicuous - ฿2
+Playing cards - Go all in, or fold, or call, you never call anymore - Unlocks all playing card games - 25¢
+Rope (50) - Plenty of rope, plenty of applications, but please don't get hung up on it - Various industry skill applications - ฿5
+Shovel - Dig yourself in deeper or dig yourself out - Effective digging, TwoHanded | Long | Unwieldly | RNG 1 | DAM 10 | Inconspicuous | Destruction 2  - ฿1.50
+Spectacles - For when glasses just won't do. (note, previously sold glasses were just two glass cups) - Interacts with four eyes trait - ฿5
+Watch, standard - A watch made out of standards - Always know time and date - ฿2.50
+Watch, gold - A watch made out of gold, for those without standards - Always know time and date, more impressive? - ฿10
+Weapon Repair Kit - For when your weapons feel more like weapoffs - Repair a jammed or malfunctioning weapon - ฿5
 
 Explosive Supplies:
 
-Blasting cap - Helps with blowing things up. Cannot be equipped on things that don't blow up - No stats - ฿1
-Dynamite (per stick) - Useful for mining and other applications (please do not use on bosses) - No stats - ฿3
-Fuse (per foot) - Limit of one foot per foot - No stats - 5¢
-Nitro (per pint) - Don't shake, stir, or look at it too hard - No stats - ฿2.50
-Thermite (per ounce) - Only a mite, for a more powerful version see the Thermost - No stats - ฿5
-Detonator, plunger - Only for the really bad clogs - No stats - ฿10
-Detonation wire (50) - Cool guys aren't close to explosions - No stats - ฿2.50
+Blasting cap - Helps with blowing things up. Cannot be equipped on things that don't blow up - Used in ad hoc explosive work - ฿1
+Dynamite (per stick) - Useful for mining and other applications (please do not use on bosses) - Mostly Reliable | Thrown or Placed | Light | DAM 10d4 | Blast 2 | 1 Round Fuse | Destruction 2 - ฿3
+Fuse (per foot) - Limit of one foot per foot - Used to setup a detonation on a timer - 5¢
+Nitro (per pint) - Don't shake, stir, or look at it too hard - Used for making all other explosives - ฿2.50
+Thermite (per ounce) - Only a mite, for a more powerful version see the Thermost - Reliable | Placed | DAM N/A | 2 Round Fuse | Destruction 5 - ฿5
+Detonator, plunger - Only for the really bad clogs - Activate explosives from a distance - ฿10
+Detonation wire (50) - Cool guys aren't close to explosions - Detonate explosives without a timer - ฿2.50
 
 
 Professionals Tools:
@@ -616,7 +616,7 @@ Carpenters Paraphernalia - Can be combined with an ant to create a carpenter ant
 Buys for the Affluent:
 
 Chariot - If you bought it, try guilt tripping someone else into pulling it - (Transports up to 10 individuals safely over long distances.) - ฿60
-Calabash Pipe - For those truly dedicated to the Sherclop holmes cosplay (comes with a free deerstalker) - No Stats - ฿10
+Calabash Pipe - For those truly dedicated to the Sherclop holmes cosplay (comes with a free deerstalker) - Interacts with trait Vice City - ฿10
 Top Hat - Prove that you're the top, with this hat - No Stats - ฿6
 Beard-Grooming Equipment - Comes with a free starter beard - No Stats - ฿8
 Gentlemans Cane - Made out of 100% pure gentleman - No Stats - ฿5
@@ -625,8 +625,8 @@ Railroad Company Shares - Collect all 4 to become insufferable in Moneighpoly - 
 Damascened Firearm - Engravings give no tactical advantage - No Stats - ฿25
 Gold Damascened Firearm - Engravings of this caliber also give no tactical advantage, try platinum? - No Stats - ฿50
 Specialty Ammunition - For guns that you only read about in magazines - No Stats (priced per bullet) - ฿2.50
-Telegram, Domestic - Perfect for sending messages to your wife, spouse, spife, or wouse - No Stats (priced per word) - 2¢
-Telegram, International - For when causing a domestic incident just won't cut it - No Stats (priced per word) - 50¢
+Telegram, Domestic - Perfect for sending messages to your wife, spouse, spife, or wouse - Communicate within the same nation (priced per word) - 2¢
+Telegram, International - For when causing a domestic incident just won't cut it - Communicate to a different nation (priced per word) - 50¢
 30 Volume Encyclopedia - This is useless! - No Stats - ฿25
 Barbers Tools - Unlocks hairstyle changes. (note, must have requisite amount of hair for changes) - No Stats - ฿12
 
