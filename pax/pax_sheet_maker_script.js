@@ -928,6 +928,18 @@ function buyShopItem(section, idx) {
   bits -= item.cost;
   bitsInput.value = bits;
   renderInventory();
+
+  // Play register effect
+  let registerAudio = document.getElementById('registerEffectAudio');
+  if (!registerAudio) {
+    registerAudio = document.createElement('audio');
+    registerAudio.id = 'registerEffectAudio';
+    registerAudio.src = 'sheetmaker_assets/registerEffect.mp3';
+    registerAudio.style.display = 'none';
+    document.body.appendChild(registerAudio);
+  }
+  registerAudio.currentTime = 0;
+  registerAudio.play();
 }
 
 function incrementBits() {
