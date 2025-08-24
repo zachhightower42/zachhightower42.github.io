@@ -7,7 +7,7 @@
 {% endraw %}
  This roll is made up of queries to the user using the `?{}` command in roll20 and a few other neat little tricks to allow for a nice looking display.
  
-![Basic Roll Example](zachhightower42.github.io/pax/roll%20examples%20images/ex%20for%20pax%20basic%20roll%201.png)
+![Basic Roll Example](roll%20examples%20images/ex%20for%20pax%20basic%20roll%201.png)
 
 **Initiative roll basic**
 {% raw %}
@@ -56,7 +56,7 @@ Currently it only goes up to calculating headshots, because in virtually all sce
 {% endraw %}
  This roll is made up of queries to the user using the `?{}` command in roll20 and a few other neat little tricks to allow for a nice looking display. It only allows for three different conditions on the roll.
  
-![Basic Roll Example](zachhightower42.github.io/pax/roll%20examples%20images/bug%20game%20basic%20example%20roll.png)
+![Basic Roll Example](roll%20examples%20images/bug%20game%20basic%20example%20roll.png)
 
 
 **Effect Roll**
@@ -65,4 +65,4 @@ Currently it only goes up to calculating headshots, because in virtually all sce
 {% endraw %}
 This roll is made up of queries to the user using the `?{}` command in roll20 and a few other neat little tricks to allow for a nice looking display. It takes in three values from the user and displays the effects of the roll so that you can see how it actually resolves.
  
-![Effect Roll Example](zachhightower42.github.io/pax/roll%20examples%20images/bug%20game%20effect%20roll%20example.png)
+![Effect Roll Example](roll%20examples%20images/bug%20game%20effect%20roll%20example.png)
