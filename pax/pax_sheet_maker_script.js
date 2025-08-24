@@ -1199,7 +1199,7 @@ function exportToJSON() {
   URL.revokeObjectURL(url);
 }
 
-// Import inside DOMContentLoaded
+/* // Import inside DOMContentLoaded
 if (importInput) {
   importInput.addEventListener('change', function (event) {
     const file = event.target.files[0];
@@ -1264,7 +1264,7 @@ if (importInput) {
     };
     reader.readAsText(file);
   });
-}
+} */
 
 
 
