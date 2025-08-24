@@ -29,8 +29,5 @@ This is a repository for various writing projects that are worthy enough to see 
 
 # TODO
 
-- [ ] Improve the styling of the skills and proficiencies section
-- [ ] Fix JSON not keeping character portrait, not re-selecting the race, not re-selecting traits, put the import and export buttons into their own specific section at the bottom of the page
-- [ ] Fix the styling for the character bio input area so that it is a little bit smaller on the right side
-- [ ] Give all prompts given to the user the same styling as that of the prompt for how many items they want to remove from their inventory, as this is the best looking so far
+- [ ] Fix JSON import not keeping character portrait, not re-selecting the race, not re-selecting traits, not remembering how many trait points were used
 

@@ -58,6 +58,61 @@ let proficiencies = {
   lightMagic: 5,
 };
 
+function styledPrompt({
+  message,
+  inputs = [{ type: "text", label: "", value: "" }],
+  okText = "OK",
+  cancelText = "Cancel",
+  allText = null
+}, callback) {
+  const dialog = document.createElement('div');
+  dialog.style.position = 'fixed';
+  dialog.style.top = '50%';
+  dialog.style.left = '50%';
+  dialog.style.transform = 'translate(-50%, -50%)';
+  dialog.style.background = '#fff';
+  dialog.style.border = '2px solid #3498db';
+  dialog.style.borderRadius = '10px';
+  dialog.style.padding = '20px';
+  dialog.style.zIndex = '9999';
+  dialog.style.boxShadow = '0 4px 16px rgba(52,152,219,0.15)';
+  dialog.innerHTML = `<p style="margin-bottom:12px;">${message}</p>`;
+
+  inputs.forEach((input, idx) => {
+    if (input.label) {
+      dialog.innerHTML += `<label style="font-weight:bold; color:#217dbb; margin-right:8px;">${input.label}</label>`;
+    }
+    dialog.innerHTML += `<input type="${input.type}" id="styledPromptInput${idx}" value="${input.value || ""}" 
+      ${input.min !== undefined ? `min="${input.min}"` : ""} 
+      ${input.max !== undefined ? `max="${input.max}"` : ""} 
+      style="width:120px; margin-right:10px; font-size:1.1em; padding:4px 8px; margin-bottom:8px;">`;
+    dialog.innerHTML += "<br/>";
+  });
+
+  dialog.innerHTML += `
+    <button id="styledPromptOk">${okText}</button>
+    ${allText ? `<button id="styledPromptAll">${allText}</button>` : ""}
+    <button id="styledPromptCancel" style="margin-left:10px;">${cancelText}</button>
+  `;
+  document.body.appendChild(dialog);
+
+  document.getElementById('styledPromptOk').onclick = function () {
+    const values = inputs.map((_, idx) => document.getElementById(`styledPromptInput${idx}`).value);
+    document.body.removeChild(dialog);
+    callback(values, false);
+  };
+  if (allText) {
+    document.getElementById('styledPromptAll').onclick = function () {
+      document.body.removeChild(dialog);
+      callback(null, true);
+    };
+  }
+  document.getElementById('styledPromptCancel').onclick = function () {
+    document.body.removeChild(dialog);
+    callback(null, false, true);
+  };
+}
+
 function updateRaceStats() {
   const race = document.getElementById("race").value;
   resetBaseStats();
@@ -110,14 +165,14 @@ function incrementSkill(skill, skillCap) {
     skills[skill]++;
     baseStats.skillPoints--;
     updateStats(skill);
-    
+
     // Increment associated proficiencies
     skillProficiencyMap[skill].forEach(proficiency => {
       if (proficiencies[proficiency] < 18) {
         proficiencies[proficiency]++;
       }
     });
-    
+
     updateDisplay();
   }
 }
@@ -127,14 +182,14 @@ function decrementSkill(skill) {
     skills[skill]--;
     baseStats.skillPoints++;
     updateStats(skill, true);
-    
+
     // Decrement associated proficiencies
     skillProficiencyMap[skill].forEach(proficiency => {
       if (proficiencies[proficiency] > 5) {
         proficiencies[proficiency]--;
       }
     });
-    
+
     updateDisplay();
   }
 }
@@ -144,8 +199,11 @@ function incrementProficiency(proficiency) {
     baseStats.proficiencyPoints--;
     updateDisplay();
   } else if (proficiencies[proficiency] === 17 && baseStats.proficiencyPoints > 0) {
-    alert("Can't increase proficiency beyond 18");
-    updateDisplay();
+    styledPrompt({
+      message: "Can't increase proficiency beyond 18.",
+      okText: "OK",
+      inputs: []
+    }, function () { updateDisplay(); });
   }
 }
 
@@ -162,7 +220,7 @@ function decrementSkill(skill) {
     skills[skill]--;
     baseStats.skillPoints++;
     updateStats(skill, true);
-    
+
 
     if (skillProficiencyMap[skill]) {
       skillProficiencyMap[skill].forEach(proficiency => {
@@ -171,7 +229,7 @@ function decrementSkill(skill) {
         }
       });
     }
-    
+
     updateDisplay();
   }
 }
@@ -210,7 +268,7 @@ function updateStats(skill, isDecrement = false) {
       }
       break;
   }
-}let characterLevel = 1;
+} let characterLevel = 1;
 
 function levelUp() {
   characterLevel++;
@@ -265,7 +323,11 @@ function updateTraits(checkbox) {
       baseStats.traitPoints--;
     } else {
       checkbox.checked = false;
-      alert("No more trait points available!");
+      styledPrompt({
+        message: "No more trait points available!",
+        okText: "OK",
+        inputs: []
+      }, function () { });
     }
   } else {
     const index = selectedTraits.indexOf(checkbox.id);
@@ -304,149 +366,158 @@ const skillProficiencyMap = {
 };
 
 function exportToPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    let yPos = 20;
-    const pageHeight = doc.internal.pageSize.height;
-    const pageWidth = doc.internal.pageSize.width;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  let yPos = 20;
+  const pageHeight = doc.internal.pageSize.height;
+  const pageWidth = doc.internal.pageSize.width;
 
-    function addContent(text, fontSize = 12, indent = 0, isBold = false) {
-        doc.setFontSize(fontSize);
-        doc.setFont(undefined, isBold ? 'bold' : 'normal');
-        const splitText = doc.splitTextToSize(text, pageWidth - 20 - indent);
-        if (yPos + (splitText.length * fontSize / 2) > pageHeight - 20) {
-            doc.addPage();
-            yPos = 20;
-        }
-        doc.text(splitText, 10 + indent, yPos);
-        yPos += splitText.length * fontSize / 2 + 5;
+  function addContent(text, fontSize = 12, indent = 0, isBold = false) {
+    doc.setFontSize(fontSize);
+    doc.setFont(undefined, isBold ? 'bold' : 'normal');
+    const splitText = doc.splitTextToSize(text, pageWidth - 20 - indent);
+    if (yPos + (splitText.length * fontSize / 2) > pageHeight - 20) {
+      doc.addPage();
+      yPos = 20;
     }
+    doc.text(splitText, 10 + indent, yPos);
+    yPos += splitText.length * fontSize / 2 + 5;
+  }
 
-    function addHorizontalLine() {
-        doc.setDrawColor(0);
-        doc.line(10, yPos, pageWidth - 10, yPos);
-        yPos += 5;
-    }
+  function addHorizontalLine() {
+    doc.setDrawColor(0);
+    doc.line(10, yPos, pageWidth - 10, yPos);
+    yPos += 5;
+  }
 
-    // Add title
-    doc.setFontSize(24);
-    doc.setFont(undefined, 'bold');
-    doc.text("Pax Character Sheet", pageWidth / 2, 15, { align: "center" });
-    addHorizontalLine();
-    yPos += 10; // Add extra space
-    
-        // Add character name
-        const characterName = document.getElementById('characterName').value;
-        addContent(`Character Name: ${characterName}`, 16, 0, true);
-        yPos += 5;
-        addHorizontalLine();
-        // Add character bio
-        const characterBio = document.getElementById('characterBio').value;
-        addContent("Character Bio:", 14, 0, true);
-        addContent(characterBio, 12, 10);
-        addHorizontalLine();
-        yPos += 10; // Add extra space
-    
-    // Add base stats
-    addContent("Stats", 18, 0, { align: "center", isBold: true });
-    addContent(`HP: ${baseStats.hp}    MP: ${baseStats.mp}`, 12, 10);
-    addContent(`Stamina: ${baseStats.stamina}    Stamina Regen: ${baseStats.staminaRegen}    Movespeed: ${baseStats.movespeed}`, 12, 10);
-    addHorizontalLine();
+  // Add title
+  doc.setFontSize(24);
+  doc.setFont(undefined, 'bold');
+  doc.text("Pax Character Sheet", pageWidth / 2, 15, { align: "center" });
+  addHorizontalLine();
+  yPos += 10; // Add extra space
 
-    // Add race
-    addContent(`Race: ${document.getElementById("race").value}`, 14, 0, { align: "center" });
-    addHorizontalLine();
+  // Add character name
+  const characterName = document.getElementById('characterName').value;
+  addContent(`Character Name: ${characterName}`, 16, 0, true);
+  yPos += 5;
+  addHorizontalLine();
+  // Add character bio
+  const characterBio = document.getElementById('characterBio').value;
+  addContent("Character Bio:", 14, 0, true);
+  addContent(characterBio, 12, 10);
+  addHorizontalLine();
+  yPos += 10; // Add extra space
 
-    // Add skills and proficiencies
-    addContent("Skills and Proficiencies", 16, 0, { align: "center" });
-    for (let skill in skills) {
-        addContent(`${skill}: ${skills[skill]}`, 14, 0, true);
-        if (skillProficiencyMap[skill]) {
-            let proficiencyText = "";
-            skillProficiencyMap[skill].forEach(proficiency => {
-                proficiencyText += `${proficiency}: ${proficiencies[proficiency]}    `;
-            });
-            doc.setFont(undefined, 'bold');
-            doc.text(proficiencyText, 30, yPos);
-            doc.setFont(undefined, 'normal');
-            yPos += 7;
-        }
-        addHorizontalLine();
-    }
-    addHorizontalLine();
+  // Add base stats
+  addContent("Stats", 18, 0, { align: "center", isBold: true });
+  addContent(`HP: ${baseStats.hp}    MP: ${baseStats.mp}`, 12, 10);
+  addContent(`Stamina: ${baseStats.stamina}    Stamina Regen: ${baseStats.staminaRegen}    Movespeed: ${baseStats.movespeed}`, 12, 10);
+  addHorizontalLine();
 
-    yPos += 10; // Add extra space
+  // Add race
+  addContent(`Race: ${document.getElementById("race").value}`, 14, 0, { align: "center" });
+  addHorizontalLine();
 
-
-    // Add selected traits with descriptions
-    addContent("Traits", 16, 0, { align: "center" });
-    selectedTraits.forEach(trait => {
-        const traitElement = document.querySelector(`label[for="${trait}"]`);
-        const traitName = traitElement.textContent;
-        const traitDescription = traitElement.nextElementSibling.textContent.trim();
-        
-        addContent(`${traitName}:`, 14, 0, true);
-        addContent(traitDescription, 12, 10);
-    });
-    addHorizontalLine();
-
-    // Add inventory
-    addContent("Inventory", 16, 0, { align: "center" });
-    if (inventory.length === 0) {
-      addContent("No items in inventory.", 12, 10);
-    } else {
-      inventory.forEach(item => {
-        addContent(
-          `Name: ${item.name}\nDescription: ${item.info}\nAmount: ${item.amount}\nStats: ${item.stats || ''}\nCost: ${item.cost}`,
-          12, 10
-        );
-        addHorizontalLine();
+  // Add skills and proficiencies
+  addContent("Skills and Proficiencies", 16, 0, { align: "center" });
+  for (let skill in skills) {
+    addContent(`${skill}: ${skills[skill]}`, 14, 0, true);
+    if (skillProficiencyMap[skill]) {
+      let proficiencyText = "";
+      skillProficiencyMap[skill].forEach(proficiency => {
+        proficiencyText += `${proficiency}: ${proficiencies[proficiency]}    `;
       });
+      doc.setFont(undefined, 'bold');
+      doc.text(proficiencyText, 30, yPos);
+      doc.setFont(undefined, 'normal');
+      yPos += 7;
     }
+    addHorizontalLine();
+  }
+  addHorizontalLine();
 
-    // Add footer with page numbers
-    const pageCount = doc.internal.getNumberOfPages();
-    for (let i = 1; i <= pageCount; i++) {
-        doc.setPage(i);
-        doc.setFontSize(10);
-        doc.text(`Page ${i} of ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: "center" });
-    }
+  yPos += 10; // Add extra space
 
-    // Save the PDF
-    doc.save("pax_character_sheet.pdf");
+
+  // Add selected traits with descriptions
+  addContent("Traits", 16, 0, { align: "center" });
+  selectedTraits.forEach(trait => {
+    const traitElement = document.querySelector(`label[for="${trait}"]`);
+    const traitName = traitElement.textContent;
+    const traitDescription = traitElement.nextElementSibling.textContent.trim();
+
+    addContent(`${traitName}:`, 14, 0, true);
+    addContent(traitDescription, 12, 10);
+  });
+  addHorizontalLine();
+
+  // Add inventory
+  addContent("Inventory", 16, 0, { align: "center" });
+  if (inventory.length === 0) {
+    addContent("No items in inventory.", 12, 10);
+  } else {
+    inventory.forEach(item => {
+      addContent(
+        `Name: ${item.name}\nDescription: ${item.info}\nAmount: ${item.amount}\nStats: ${item.stats || ''}\nCost: ${item.cost}`,
+        12, 10
+      );
+      addHorizontalLine();
+    });
+  }
+
+  // Add footer with page numbers
+  const pageCount = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(10);
+    doc.text(`Page ${i} of ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: "center" });
+  }
+
+  // Save the PDF
+  doc.save("pax_character_sheet.pdf");
 }
 
 let inventory = [];
 
 function addItemToInventory() {
-  // Prompt for all fields
-  const name = prompt("Enter item name:").trim();
-  if (!name) {
-    alert("Item name is required.");
-    return;
-  }
-  const info = prompt("Enter item description:").trim();
-  const stats = prompt("Enter item stats (optional):", "").trim();
-  const cost = prompt("Enter item cost (number or price string):", "").trim();
-  let amount = parseInt(prompt("Enter item amount:", "1"), 10);
-  if (isNaN(amount) || amount < 1) amount = 1;
+  styledPrompt({
+    message: "Add a new item to your inventory:",
+    inputs: [
+      { type: "text", label: "Name:", value: "" },
+      { type: "text", label: "Description:", value: "" },
+      { type: "text", label: "Stats:", value: "" },
+      { type: "text", label: "Cost:", value: "" },
+      { type: "number", label: "Amount:", value: "1", min: 1 }
+    ],
+    okText: "Add",
+    cancelText: "Cancel"
+  }, function (values, isAll, isCancel) {
+    if (isCancel) return;
+    const [name, info, stats, cost, amountStr] = values.map(v => v.trim());
+    if (!name) {
+      alert("Item name is required.");
+      return;
+    }
+    let amount = parseInt(amountStr, 10);
+    if (isNaN(amount) || amount < 1) amount = 1;
 
-  // Check if item already exists in inventory (match by name, info, stats, cost)
-  const existing = inventory.find(inv =>
-    inv.name === name &&
-    inv.info === info &&
-    inv.stats === stats &&
-    inv.cost === cost
-  );
+    // Check if item already exists in inventory (match by name, info, stats, cost)
+    const existing = inventory.find(inv =>
+      inv.name === name &&
+      inv.info === info &&
+      inv.stats === stats &&
+      inv.cost === cost
+    );
 
-  if (existing) {
-    existing.amount += amount;
-  } else {
-    inventory.push({ name, info, amount, stats, cost });
-  }
-  renderInventory();
+    if (existing) {
+      existing.amount += amount;
+    } else {
+      inventory.push({ name, info, amount, stats, cost });
+    }
+    renderInventory();
+  });
 }
-
 function renderInventory() {
   const tbody = document.getElementById('inventoryTable').querySelector('tbody');
   tbody.innerHTML = '';
@@ -904,15 +975,22 @@ function buyShopItem(section, idx) {
   );
 
   if (isFreeUnarmed && existing) {
-    alert("Only one free sample per customer, I'm not made of bits you know. (wait...I think I actually might be.)");
+    styledPrompt({
+      message: "Only one free sample per customer, I'm not made of bits you know. (wait...I think I actually might be.)",
+      okText: "OK",
+      inputs: []
+    }, function () { });
     return;
   }
 
   if (bits < item.cost) {
-    alert('Not enough bits!');
+    styledPrompt({
+      message: "Not enough bits!",
+      okText: "OK",
+      inputs: []
+    }, function () { });
     return;
   }
-
   if (existing) {
     existing.amount += 1;
   } else {
@@ -975,10 +1053,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1000);
       });
       setTimeout(function () {
-      shopMusic.style.display = "block";
-      shopMusic.play();
-    }, 1700); // Play music after 1 second or so delay
-  }
+        shopMusic.style.display = "block";
+        shopMusic.play();
+      }, 1700); // Play music after 1 second or so delay
+    }
   });
 
   function showUndertaleTextBox(imgSrc, duration, callback) {
@@ -1048,7 +1126,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Check file size
     if (file.size > 5 * 1024 * 1024) {
-      alert("File is too large! Maximum size is 5 MB.");
+      styledPrompt({
+        message: "File is too large! Maximum size is 5 MB.",
+        okText: "OK",
+        inputs: []
+      }, function () { });
       portraitInput.value = "";
       return;
     }
@@ -1060,7 +1142,11 @@ document.addEventListener("DOMContentLoaded", function () {
       img.onload = function () {
         // Check dimensions
         if (img.width > 600 || img.height > 600) {
-          alert("Image dimensions are too large! Maximum is 600x600.");
+          styledPrompt({
+            message: "Image dimensions are too large! Maximum is 600x600.",
+            okText: "OK",
+            inputs: []
+          }, function () { });
           portraitInput.value = "";
           return;
         }
@@ -1096,7 +1182,8 @@ function exportToJSON() {
     characterBio: document.getElementById('characterBio').value,
     race: document.getElementById('race').value,
     characterLevel,
-    portrait: document.getElementById('portraitPreview').src // Save portrait as dataURL
+    portrait: document.getElementById('portraitPreview').src,
+    traitPointsUsed: 2 - baseStats.traitPoints // Assuming 2 is the starting value
   };
 
   const dataStr = JSON.stringify(characterData, null, 2);
@@ -1112,7 +1199,7 @@ function exportToJSON() {
   URL.revokeObjectURL(url);
 }
 
-// In your import logic (inside DOMContentLoaded):
+// Import inside DOMContentLoaded
 if (importInput) {
   importInput.addEventListener('change', function (event) {
     const file = event.target.files[0];
@@ -1140,10 +1227,15 @@ if (importInput) {
           if (raceBtn) raceBtn.classList.add('selected');
         }
 
-        // Restore trait checkboxes
+        // Restore trait checkboxes and trait points
         document.querySelectorAll('input[name="trait"]').forEach((checkbox) => {
           checkbox.checked = selectedTraits.includes(checkbox.id);
         });
+        if (typeof data.traitPointsUsed === "number") {
+          baseStats.traitPoints = 2 - data.traitPointsUsed;
+        } else {
+          baseStats.traitPoints = 2 - selectedTraits.length;
+        }
 
         // Restore portrait
         if (data.portrait) {
@@ -1157,50 +1249,24 @@ if (importInput) {
         renderShop();
         resetTraits();
 
+        // Re-check traits after reset
+        document.querySelectorAll('input[name="trait"]').forEach((checkbox) => {
+          checkbox.checked = selectedTraits.includes(checkbox.id);
+        });
+
       } catch (err) {
-        alert("Failed to import character sheet: " + err.message);
+        styledPrompt({
+          message: "Failed to import character sheet: " + err.message,
+          okText: "OK",
+          inputs: []
+        }, function () { });
       }
     };
     reader.readAsText(file);
   });
 }
 
-/* document.getElementById('importJSONInput').addEventListener('change', function (event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    try {
-      const data = JSON.parse(e.target.result);
 
-      // Restore all character data
-      Object.assign(baseStats, data.baseStats);
-      Object.assign(skills, data.skills);
-      Object.assign(proficiencies, data.proficiencies);
-      selectedTraits = Array.isArray(data.selectedTraits) ? data.selectedTraits : [];
-      inventory = Array.isArray(data.inventory) ? data.inventory : [];
-      characterLevel = data.characterLevel || 1;
-
-      document.getElementById('characterName').value = data.characterName || "";
-      document.getElementById('characterBio').value = data.characterBio || "";
-      document.getElementById('race').value = data.race || "";
-
-      // Restore trait checkboxes
-      document.querySelectorAll('input[name="trait"]').forEach((checkbox) => {
-        checkbox.checked = selectedTraits.includes(checkbox.id);
-      });
-
-      updateDisplay();
-      renderInventory();
-      renderShop();
-      resetTraits(); // To update trait points and checkboxes
-
-    } catch (err) {
-      alert("Failed to import character sheet: " + err.message);
-    }
-  };
-  reader.readAsText(file);
-}); */
 
 function selectRace(race) {
   document.getElementById('race').value = race;
