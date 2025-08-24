@@ -1074,7 +1074,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function exportToJSON() {
-  // Gather all character data
   const characterData = {
     baseStats,
     skills,
@@ -1084,7 +1083,8 @@ function exportToJSON() {
     characterName: document.getElementById('characterName').value,
     characterBio: document.getElementById('characterBio').value,
     race: document.getElementById('race').value,
-    characterLevel
+    characterLevel,
+    portrait: document.getElementById('portraitPreview').src // Save portrait as dataURL
   };
 
   const dataStr = JSON.stringify(characterData, null, 2);
@@ -1098,6 +1098,59 @@ function exportToJSON() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+// In your import logic (inside DOMContentLoaded):
+if (importInput) {
+  importInput.addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const data = JSON.parse(e.target.result);
+
+        Object.assign(baseStats, data.baseStats);
+        Object.assign(skills, data.skills);
+        Object.assign(proficiencies, data.proficiencies);
+        selectedTraits = Array.isArray(data.selectedTraits) ? data.selectedTraits : [];
+        inventory = Array.isArray(data.inventory) ? data.inventory : [];
+        characterLevel = data.characterLevel || 1;
+
+        document.getElementById('characterName').value = data.characterName || "";
+        document.getElementById('characterBio').value = data.characterBio || "";
+        document.getElementById('race').value = data.race || "";
+
+        // Restore race selection button highlight
+        document.querySelectorAll('.race-btn').forEach(btn => btn.classList.remove('selected'));
+        if (data.race) {
+          const raceBtn = document.getElementById('race' + data.race);
+          if (raceBtn) raceBtn.classList.add('selected');
+        }
+
+        // Restore trait checkboxes
+        document.querySelectorAll('input[name="trait"]').forEach((checkbox) => {
+          checkbox.checked = selectedTraits.includes(checkbox.id);
+        });
+
+        // Restore portrait
+        if (data.portrait) {
+          const portraitPreview = document.getElementById('portraitPreview');
+          portraitPreview.src = data.portrait;
+          portraitPreview.style.display = data.portrait ? "block" : "none";
+        }
+
+        updateDisplay();
+        renderInventory();
+        renderShop();
+        resetTraits();
+
+      } catch (err) {
+        alert("Failed to import character sheet: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+  });
 }
 
 /* document.getElementById('importJSONInput').addEventListener('change', function (event) {

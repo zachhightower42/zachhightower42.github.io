@@ -817,9 +817,12 @@
   </tbody>
 </table>
 <button onclick="addItemToInventory()">Add Item to Inventory</button>
+   
+<div id="importExportSection" style="margin-top: 40px; padding: 18px 0; text-align: center; background: #f8faff; border-radius: 10px;">
     <button onclick="exportToPDF()">Export to PDF</button>
     <button onclick="exportToJSON()">Export to JSON</button>
     <input type="file" id="importJSONInput" style="display:none" accept=".json" />
     <button onclick="document.getElementById('importJSONInput').click()">Import from JSON</button>
+</div>
   </body>
 </html>
