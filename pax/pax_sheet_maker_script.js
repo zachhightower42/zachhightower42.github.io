@@ -986,7 +986,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, duration);
   }
 
-  // Add this inside the DOMContentLoaded block:
+  // Import JSON
   const importInput = document.getElementById('importJSONInput');
   if (importInput) {
     importInput.addEventListener('change', function (event) {
@@ -1100,7 +1100,7 @@ function exportToJSON() {
   URL.revokeObjectURL(url);
 }
 
-document.getElementById('importJSONInput').addEventListener('change', function (event) {
+/* document.getElementById('importJSONInput').addEventListener('change', function (event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
@@ -1135,7 +1135,7 @@ document.getElementById('importJSONInput').addEventListener('change', function (
     }
   };
   reader.readAsText(file);
-});
+}); */
 
 function selectRace(race) {
   document.getElementById('race').value = race;
