@@ -29,5 +29,7 @@ This is a repository for various writing projects that are worthy enough to see 
 
 # TODO
 
-- [ ] Fix JSON import not keeping character portrait, not re-selecting the race, not re-selecting traits, not remembering how many trait points were used
+- [ ] Fix JSON import not keeping character portrait, not re-selecting the race, not re-selecting traits, not remembering how many trait points were used. Attempted some fixes, they have not worked, check to see what can and can't be done with the JSON
+- [ ] Attempted to fix the CSS margin styling for skills and proficiencies a couple times to no effect, keep playing with it and label anything that hasn't worked with a commment
+- [ ] Import the poker predictor from my projects folder and put it on the site
 
