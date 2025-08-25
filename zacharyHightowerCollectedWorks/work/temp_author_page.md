@@ -1,7 +1,7 @@
 # Author Page for Zachary Hightower
 
 Here you can find a collection of stories I've written and my contact info
-Most of this was written a while ago, so it's not exactly up to date. Hoping to add more content soon, now that I have more time.  
+Most of this was written a while ago, so it's not exactly up to date. Hoping to add more content soon, now that I have more time. I like having even the old, embarassing work here, because it lets people see that anyone can get better at something. 
 
 
 # Short Stories
@@ -9,9 +9,13 @@ Most of this was written a while ago, so it's not exactly up to date. Hoping to 
 - [East County Abode for the Criminally Insane](https://docs.google.com/document/d/1jErO1yCQMoxg5IFo8Mry0P0Mc0WGHD4A/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [Easy Money](https://docs.google.com/document/d/19yh5lKTcVlgtHpgdd5tQ2KagtpXa2Ajn/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [One Late Night](https://docs.google.com/document/d/1xikYpGaaXFUP6BQcKNIJsdSj4c0mqdSZ/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
+
+
 # Novels
 - [Cover Art for Love Is Wyrd](https://drive.google.com/file/d/1uH8YAanV2DAt6KPDh0_8Jga9Ol2AXyT2/view?usp=sharing)
 - [Love is Wyrd](https://docs.google.com/document/d/1sejzW0F3SsB_NEqfibtPFbwxMyPJtWRJ/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
+
+
 # Poetry
 - [Misc. Poetry Collection](https://docs.google.com/document/d/1X5W5qqP3_uXCHZpq2V3TPySkXeUGIlGV/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [Butt Song](https://docs.google.com/document/d/1HUDTeJaz9ngibrHZxxWU2_3WFBSAfzCC/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
@@ -19,19 +23,29 @@ Most of this was written a while ago, so it's not exactly up to date. Hoping to 
 - [Monochrome](https://drive.google.com/file/d/1YaYkUncRUHNp70GiT6DIHXgZMzCSyNhN/view?usp=sharing)
 - [Sonnet One](https://drive.google.com/file/d/1P9WR93nIT8N5hIj5S9VFWfOjdhaeAooc/view?usp=sharing)
 - [Current Poetry Collection](https://docs.google.com/document/d/1raUSPHJYMEyF_mVEOF1TsdyUqjEAxPMQQODmVgL6WbM/edit?usp=sharing)
+
+
 # Roleplaying Fluff and Lore
+
+
 ## Memes
 - [The Most Difficult to Get Pun](https://docs.google.com/document/d/1UkQogPPbumh3RoVSOTSJ-W-VdI8ZYlf2/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [Revolver Ocelot](https://docs.google.com/document/d/1gdMqw3U_pCXH7jatdSvKCtcDXukPJRlQ/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [Cards Against The Frozen North](https://docs.google.com/document/d/1oxGCbrppf6zX44t9-XeYxf-GvvSimis3/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [Bane Fic](https://docs.google.com/document/d/1c6gdndyiWFf7kUpNPwpt_iz-Gos6yEVZ/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
+
+
 ## Onyx Division
 - [A Rose By Any Other Name](https://docs.google.com/document/d/1auZPn4TYamDgoTjHSKOXpEBbP6L-ANvT/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [A Stich In Time](https://drive.google.com/file/d/1eyHSur33IQoCkUaWi1seCm8E7KAgjFgc/view?usp=sharing)
+
+
 ## Pax Equus
 - [Resurrection](https://drive.google.com/file/d/1TGB5-7M0RC43D6bYZ7d3yeRZUsDq2Qj4/view?usp=sharing)
 - [Something Forgotten](https://drive.google.com/file/d/1PchEp5W6DtIKIbh1DpZgg_jvY-zxIlYg/view?usp=sharing)
 - [The Taking of the Emperor's Maiden](https://docs.google.com/document/d/13WKlfdutpRWYjPGLohrrA2vQ-iYIpJkgPJ9jP0c0_MM/edit?usp=sharing)
+
+
 ## The Frozen North
 - [Bani Interrogation Fluff](https://docs.google.com/document/d/1Pcpt5SSHXO2bb4IoJhQ3-Vmi_u-W0LN9/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [Bani Karl and the Cave of Shadows](https://docs.google.com/document/d/1RspDtUFBaOa3KuY54hNS1HZgR-Lyhcae/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
@@ -53,6 +67,8 @@ Most of this was written a while ago, so it's not exactly up to date. Hoping to 
 - [Bani Karl's Slashfic Stash, Arving's Cream on the Cobb](https://docs.google.com/document/d/1KEpXQWz5PtmWXKWsIAuV_Pdl9paxREQ4/edit?usp=sharing&ouid=116028691624975450534&rtpof=true&sd=true)
 - [The Bani Flowchart](https://drive.google.com/file/d/0B53pHPkLelLhcHN3T2xFdkVidG8/view?usp=sharing&resourcekey=0-a-iCojXN-KAihxGNdRA_sw)
 - [Letter of an Earth Pony Sergeant from the Sacred War](https://docs.google.com/document/d/19HeTx_AFJWdNTjHFzr_r4FROFVjQiToE1f74cTnoc1s/edit?usp=sharing)
+
+
 ## Unsorted 
 *Contains things from Growth, Midnight City, and Umbra Equines*
 - [Blood and Murder](https://drive.google.com/file/d/1y3WmplBbQhuCZcqti_fBWMvk19Kk2qvj/view?usp=sharing)
@@ -75,8 +91,13 @@ Most of this was written a while ago, so it's not exactly up to date. Hoping to 
 
 
 
-# Contact Info
-Feel free to contact me
+## NOTICE 
+All works that appear here are free to view. They may not be downloaded, distributed, or reproduced for commercial or private use without explicit permission from the author. No part or portion of the works may be used without credit to the author.
 
-Email: zachhightower42@gmail.com
-Discord: doc4242
+## Contact Info
+
+Feel free to contact me, especially with any bugs.
+
+**Email:** zachhightower42@gmail.com
+
+**Discord:** doc4242
