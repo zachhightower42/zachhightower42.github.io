@@ -32,4 +32,4 @@ This is a repository for various writing projects that are worthy enough to see 
 - [ ] Fix JSON import not keeping character portrait, not re-selecting the race, not re-selecting traits, not remembering how many trait points were used. Attempted some fixes, they have not worked, check to see what can and can't be done with the JSON
 - [ ] Attempted to fix the CSS margin styling for skills and proficiencies a couple times to no effect, keep playing with it and label anything that hasn't worked with a commment
 - [ ] Work on the text parser that's helping me convert Wonderful Cowboy Land's chat log into an easily readable book style narrative. Consider training an AI on OOC conversations and IC conversations that can then parse through it for me and make all the minor edits necessary. 
-
+- [ ] Finish work on the poker stats to make calculations more accurate and add in more features for ease of use

@@ -1,76 +1,100 @@
 import re
-
+import random
+import csv
+# Fix the training data so that it groups messages that one user sends in a row. Idea for this is to get the first message
+# and then wait until I see a sign of a system message, another user message, or a character action, to end the grouping
+# Hopefully this will cut way down on the amount of different labels I need to do, cause holy shit this is a lot
 OOC_USERS = [
-    "Doc (GM)", "Scott P.", "Yuppie b.", "Poage", "Nevermore", "UrbanCritter",
+    "Doc (GM)", "Scott P.", "Yuppie b.", "Poage", "Nevermore", "UrbanCritter","Scotty"
     "Varulv", "Moondew", "dimVitrarius"
 ]
 NARRATORS = [
     "Wonderful Cowboy Land"
 ]
 
-def process_chat_log(input_file, output_file):
-    ic_pattern = re.compile(r'^"(.+?)"\s*([A-Za-z \'\.\(\)\"-]+):$')
-    narrator_pattern = re.compile(r'^(.*?)(%s):$' % '|'.join(re.escape(n) for n in NARRATORS))
-    speaker_pattern = re.compile(r'^(.*?):$')
-    character_action_pattern = re.compile(r'^([A-Za-z \'\.\(\)\"-]+)\s.+')
-    # Patterns for filtering
-    date_header_pattern = re.compile(r'^\d{1,2}/\d{1,2}/\d{4} Chat Log')
-    url_pattern = re.compile(r'^https?://')
-    dice_pattern = re.compile(r'^\(.*\)$|^rolling\b|^=\s*\d+$')
-    hide_whispers_pattern = re.compile(r'^Hide Whispers$')
-    # Pattern: lines ending with OOC user name and colon
-    ooc_line_pattern = re.compile(r'^(.*?)(%s):$' % '|'.join(re.escape(n) for n in OOC_USERS))
+def is_system_line(line):
+    return (
+        re.match(r'^\(\s*\+\s*\+\s*\+\s*\+\s*\+\s*\+\s*\+\s*\)$', line) or
+        re.match(r'^\(\s*\+\s*\+\s*\)$', line) or
+        re.match(r'^\(\s*\+\s*\)$', line) or
+        re.match(r'^\(\s*\)$', line) or
+        re.match(r'^\d+$', line) or
+        re.match(r'^rolling \d+d\d+!$', line) or
+        re.match(r'^rolling \d+d\d+kh\d+!!-?\d*$', line) or
+        re.match(r'^\(To GM\) rolling \d+d\d+kh\d+!!$', line) or
+        re.match(r'^\(To GM\) rolling \d+d\d+.*$', line) or
+        re.match(r'^= \d+$', line) or
+        re.match(r'^\d{1,2}/\d{1,2}/\d{4} Chat Log for', line) or
+        re.match(r'^https?://', line) or
+        re.match(r'^\d+/\d+$', line) or
+        re.match(r'^Doc \(GM\):0+$', line)
+    )
 
-    with open(input_file, 'r', encoding='utf-8') as infile, \
-         open(output_file, 'w', encoding='utf-8') as outfile:
+def categorize_message(line):
+    # System message
+    if is_system_line(line):
+        return "system message"
+    # Out-of-character: OOC user speaking
+    for user in OOC_USERS:
+        if line.startswith(user + ":"):
+            return "out-of-character"
+    # Game master: narrator or GM describing events
+    for narrator in NARRATORS:
+        if line.startswith(narrator + ":") or narrator in line:
+            return "game master"
+    # Character dialogue: any quoted message not from OOC user or narrator
+    if line.startswith('"'):
+        return "character dialogue"
+    # Character dialogue: quoted speech with character name
+    if re.match(r'^".+?"[A-Za-z \'\.\(\)\"-]+:', line):
+        return "character dialogue"
+    # Character action: character name followed by action
+    if re.match(r'^[A-Za-z \'\.\(\)\"-]+\s.+', line):
+        return "character action"
+    # In-character: fallback
+    return "in-character"
 
-        for line in infile:
-            line = line.strip()
-            # Remove unwanted lines
-            if (date_header_pattern.match(line) or
-                url_pattern.match(line) or
-                dice_pattern.match(line) or
-                hide_whispers_pattern.match(line)):
-                continue
+def process_chat_log_for_training(input_file, train_ratio=0.8):
+    data = []
+    with open(input_file, 'r', encoding='utf-8') as infile:
+        lines = [line.rstrip() for line in infile if line.strip()]
+    
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        # Group consecutive system messages
+        if is_system_line(line):
+            group = [line]
+            i += 1
+            while i < len(lines) and is_system_line(lines[i]):
+                group.append(lines[i])
+                i += 1
+            message = '\n'.join(group)
+            category = "system message"
+            data.append({"message": message, "category": category})
+        else:
+            category = categorize_message(line)
+            data.append({"message": line, "category": category})
+            i += 1
 
-            # Remove lines ending with OOC user name and colon
-            if ooc_line_pattern.match(line):
-                continue
+    random.shuffle(data)
+    split_idx = int(len(data) * train_ratio)
+    training_data = data[:split_idx]
+    test_data = data[split_idx:]
 
-            # In-character quoted line
-            ic_match = ic_pattern.match(line)
-            if ic_match:
-                quote = ic_match.group(1)
-                char_name = ic_match.group(2)
-                if char_name not in OOC_USERS and char_name not in NARRATORS:
-                    first_name = char_name.split()[0].replace('"', '').replace("'", "")
-                    outfile.write(f'"{quote}"\nSaid {first_name}\n\n')
-                continue
+    return training_data, test_data
 
-            # Narrator line: remove narrator name, keep message
-            narrator_match = narrator_pattern.match(line)
-            if narrator_match:
-                message = narrator_match.group(1).strip()
-                if message:
-                    outfile.write(f"{message}\n\n")
-                continue
+def export_to_csv(data, filename):
+    with open(filename, 'w', encoding='utf-8', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=['message', 'category'])
+        writer.writeheader()
+        for item in data:
+            writer.writerow(item)
 
-            # OOC/user lines: skip
-            speaker_match = speaker_pattern.match(line)
-            if speaker_match:
-                speaker = speaker_match.group(1)
-                if speaker in OOC_USERS:
-                    continue  # skip OOC lines
+if __name__ == "__main__":
+    training_data, test_data = process_chat_log_for_training(
+        'zacharyHightowerCollectedWorks/work/roleplaying_games/wcat_chat_log_1.txt'
+    )
 
-            # Character action line: starts with character name, not OOC/Narrator
-            action_match = character_action_pattern.match(line)
-            if action_match:
-                char_name = action_match.group(1)
-                if char_name not in OOC_USERS and char_name not in NARRATORS:
-                    outfile.write(f"{line}\n\n")
-                continue
-
-            # Otherwise, skip line
-
-# Usage
-process_chat_log('zacharyHightowerCollectedWorks/work/roleplaying_games/wcat_chat_log_1.txt', 'zacharyHightowerCollectedWorks/work/roleplaying_games/wcat_chat_log_1_in_character.txt')
+    export_to_csv(training_data, 'training_data.csv')
+    export_to_csv(test_data, 'test_data.csv')
