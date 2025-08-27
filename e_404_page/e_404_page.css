@@ -4,6 +4,10 @@ html, body {
   padding: 0;
 }
 
+body {
+  background: black;
+}
+
 #container {
   position: relative;
   width: 100vw;
@@ -97,21 +101,23 @@ html, body {
   color: #fff; /* White text */
   font-family: 'PerfectDOS', monospace;
   font-size: 1.5vw;
-  background: transparent;
+  background: black;
   z-index: 40;
   white-space: pre-wrap;
   overflow-y: auto;
 }
 
 .story-nav {
-  position: absolute;
+  position: fixed;
   bottom: 4vw;
   left: 0;
   width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-end;
   gap: 2vw;
   z-index: 41;
+  pointer-events: none; /* Prevents blocking scroll, buttons will override */
 }
 
 .story-nav button, .story-home-btn {
@@ -123,11 +129,20 @@ html, body {
   border: 2px solid #00FF00;
   border-radius: 0.5vw;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .story-home-btn {
-  position: absolute;
+  position: fixed;
   top: 2vw;
   left: 2vw;
   z-index: 42;
+}
+
+.story-nav .prev-btn {
+  margin-left: 2vw;
+}
+
+.story-nav .next-btn {
+  margin-right: 2vw;
 }

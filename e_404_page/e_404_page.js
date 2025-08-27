@@ -145,6 +145,7 @@ function showChapter() {
 
   const prevBtn = document.createElement('button');
   prevBtn.textContent = '< Previous Chapter';
+  prevBtn.className = 'prev-btn';
   prevBtn.disabled = currentChapter === 0;
   prevBtn.onclick = () => {
     if (currentChapter > 0) {
@@ -155,6 +156,7 @@ function showChapter() {
 
   const nextBtn = document.createElement('button');
   nextBtn.textContent = 'Next Chapter >';
+  nextBtn.className = 'next-btn';
   nextBtn.disabled = currentChapter >= chapters.length - 1;
   nextBtn.onclick = () => {
     if (currentChapter < chapters.length - 1) {
