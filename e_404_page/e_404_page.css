@@ -1,0 +1,133 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#start-bg, #transition-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+#click-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+#black-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 10;
+  display: none;
+}
+
+#boot-text {
+  position: absolute;
+  top: 2vw;
+  left: 2vw;
+  color: #00FF00;
+  font-family: 'PerfectDOS', monospace;
+  font-size: 2vw;
+  white-space: pre-wrap;
+  z-index: 20;
+  background: transparent;
+}
+
+#story-select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 30;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5vw;
+}
+
+.story-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.story-icon-container img {
+  width: 6vw;
+  height: 6vw;
+  margin-bottom: 1vw;
+}
+
+.story-icon-label {
+  color: #00FF00;
+  font-family: 'PerfectDOS', monospace;
+  font-size: 1.2vw; /* Reduced from 2vw */
+  text-align: center;
+}
+
+.story-content {
+  position: absolute;
+  top: 6vw;
+  left: 10vw;
+  width: 80vw;
+  min-height: 60vh;
+  color: #fff; /* White text */
+  font-family: 'PerfectDOS', monospace;
+  font-size: 1.5vw;
+  background: transparent;
+  z-index: 40;
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
+
+.story-nav {
+  position: absolute;
+  bottom: 4vw;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  z-index: 41;
+}
+
+.story-nav button, .story-home-btn {
+  font-family: 'PerfectDOS', monospace;
+  font-size: 1.2vw;
+  padding: 0.8vw 2vw;
+  background: #222;
+  color: #fff;
+  border: 2px solid #00FF00;
+  border-radius: 0.5vw;
+  cursor: pointer;
+}
+
+.story-home-btn {
+  position: absolute;
+  top: 2vw;
+  left: 2vw;
+  z-index: 42;
+}

@@ -9,6 +9,7 @@ Pages to visit
 - [Armitage's Caselog](pax/armitageJournal/armitageJournal.html)
 - [Zachary Hightower's Author Page](zacharyHightowerCollectedWorks/work/temp_author_page.md) 
 - [Poker Hand Evaluator](https://zachhightowerpokerstats.streamlit.app/)
+- [e_404](e_404_page/e_404_page.html)
 
 ## NOTICE 
 All works that appear here are free to view. They may not be downloaded, distributed, or reproduced for commercial or private use without explicit permission from the author. No part or portion of the works may be used without credit to the author.
