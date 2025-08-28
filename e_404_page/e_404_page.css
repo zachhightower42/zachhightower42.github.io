@@ -182,16 +182,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  align-items: stretch;
 }
 
 #google-docs-iframe {
-  margin-top: 0;
-  width: 100vw;
-  height: 100vh;
+  margin-top: 1vw;
+  width: 60vw;
+  height: 60vh;
   border: none;
   background: black;
-  display: block;
 }
 
 .google-docs-home-btn {
