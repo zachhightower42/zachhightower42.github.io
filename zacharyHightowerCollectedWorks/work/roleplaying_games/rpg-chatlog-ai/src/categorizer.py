@@ -6,7 +6,14 @@ import pandas as pd
 class ChatCategorizer:
     def __init__(self):
         self.model = make_pipeline(CountVectorizer(), MultinomialNB())
-        self.categories = ['out-of-character', 'in-character', 'game master', 'character dialogue', 'character actions']
+        self.categories = [
+            'out-of-character',
+            'in-character',
+            'game master',
+            'character dialogue',
+            'character actions',
+            'system message'  
+        ]
 
     def train_model(self, data_file):
         data = pd.read_csv(data_file)

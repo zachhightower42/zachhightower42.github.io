@@ -1,8 +1,42 @@
 # rpg-chatlog-ai/src/main.py
 
 import sys
+import pandas as pd
+from categorizer import ChatCategorizer
 from data_processing import ChatLogProcessor
-from model import ChatCategorizer
+
+def train_and_test():
+    # Paths to your CSV files
+    train_path = '/home/zachary/Desktop/zachhightower.com/training_data.csv'
+    test_path = '/home/zachary/Desktop/zachhightower.com/test_data.csv'
+    chatlog_path = '/home/zachary/Desktop/zachhightower.com/zacharyHightowerCollectedWorks/work/roleplaying_games/wcat_chat_log_1.txt'
+    output_path = '/home/zachary/Desktop/zachhightower.com/cleaned_chat_log.txt'
+
+    # Train model
+    categorizer = ChatCategorizer()
+    categorizer.train_model(train_path)
+
+    # Test model
+    test_data = pd.read_csv(test_path)
+    correct = 0
+    for _, row in test_data.iterrows():
+        pred = categorizer.predict_category(row['message'])
+        if pred == row['category']:
+            correct += 1
+    print(f'Test accuracy: {correct/len(test_data):.2%}')
+
+    # Process chat log
+    with open(chatlog_path, 'r') as f:
+        raw_lines = [line.strip() for line in f if line.strip()]
+
+    # Only process actual chat messages (skip headers, etc.)
+    processor = ChatLogProcessor()
+    processor.model = categorizer.model  # Use trained model
+
+    processed = processor.process_chat_log(raw_lines)
+    with open(output_path, 'w') as out:
+        for entry in processed:
+            out.write(f"{entry['message']}\n")
 
 def main():
     # Initialize the chat log processor and categorizer
@@ -10,7 +44,7 @@ def main():
     categorizer = ChatCategorizer()
 
     # Load data for training
-    categorizer.load_data('path/to/training/data')
+    categorizer.load_data('training_data.csv')
 
     # Train the model
     categorizer.train_model()
@@ -39,4 +73,4 @@ def main():
             break
 
 if __name__ == "__main__":
-    main()
+    train_and_test()
