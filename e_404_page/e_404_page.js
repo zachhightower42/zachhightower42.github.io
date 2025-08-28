@@ -67,7 +67,7 @@ function showStorySelect() {
   // Play background music at reduced volume
   const music = document.getElementById('story-music');
   music.currentTime = 0;
-  music.volume = 0.2;
+  music.volume = 0.1;
   music.play();
 
   // Add icons for each story

@@ -124,8 +124,8 @@ body {
   font-family: 'PerfectDOS', monospace;
   font-size: 1.2vw;
   padding: 0.8vw 2vw;
-  background: #222;
-  color: #fff;
+  background: #00000000;
+  color: #00000000;
   border: 2px solid #00ff00;
   border-radius: 0.5vw;
   cursor: pointer;
@@ -140,9 +140,11 @@ body {
 }
 
 .story-nav .prev-btn {
+  display: none; /* Hidden by default */
   margin-left: 2vw;
 }
 
 .story-nav .next-btn {
+  display: none; /* Hidden by default */
   margin-right: 2vw;
 }
