@@ -179,6 +179,12 @@ function createTaskbarButton(label, iconPath, onClick) {
   button.appendChild(icon);
   button.appendChild(text);
 
+  // Only show label for non-home buttons
+  if (label === 'Home') {
+    button.title = 'Return to story select';
+    text.style.display = 'none'; // Hide text for home button, icon only
+  }
+
   return button;
 }
 
@@ -259,14 +265,6 @@ function showChapter() {
   navDiv.appendChild(prevBtn);
   navDiv.appendChild(nextBtn);
   document.body.appendChild(navDiv);
-
-  // Home button
-  const homeBtn = document.createElement('button');
-  homeBtn.textContent = '(Home)';
-  homeBtn.className = 'story-home-btn';
-  homeBtn.id = 'story-home-btn';
-  homeBtn.onclick = showStorySelect;
-  document.body.appendChild(homeBtn);
 }
 
 // Markdown parser for story content (white text, headings, paragraphs)
@@ -297,16 +295,6 @@ function showGoogleDocsEditor() {
   viewIframe.id = 'google-docs-iframe';
   viewIframe.src = "https://docs.google.com/document/d/1vDibC16hCYVIrFz9LB3uIOpQMhwFQo0RcP4GmukkGl4/preview";
   editorDiv.appendChild(viewIframe);
-
-  // Home button (top left)
-  const homeBtn = document.createElement('button');
-  homeBtn.textContent = '(Home)';
-  homeBtn.className = 'google-docs-home-btn';
-  homeBtn.onclick = () => {
-    editorDiv.remove();
-    showStorySelect();
-  };
-  editorDiv.appendChild(homeBtn);
 
   // Link to create a copy (bottom center)
   const createLink = document.createElement('a');

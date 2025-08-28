@@ -158,6 +158,7 @@ body {
   top: 2vw;
   left: 2vw;
   z-index: 42;
+  display: none !important; /* Hide the home button */
 }
 
 .story-nav .prev-btn,
@@ -198,6 +199,7 @@ body {
   border-radius: 0.5vw;
   cursor: pointer;
   z-index: 51;
+  display: none !important; /* Hide the Google Docs home button */
 }
 
 /* Windows-style taskbar at the bottom */
@@ -232,9 +234,9 @@ body {
 
 #taskbar-separator {
   width: 2px;
-  height: 2.5vw;         /* Increased height */
+  height: 3vw;         /* Increased height */
   background: #00FF00;
-  margin-left: 0.5vw;
+  margin-left: 1vw;
   pointer-events: none;   /* Non-interactable */
   user-select: none;      /* Prevent selection */
 }
