@@ -185,9 +185,9 @@ body {
 }
 
 #google-docs-iframe {
-  margin-top: 1vw;
-  width: 60vw;
-  height: 60vh;
+  margin-top: 10vw;
+  width: 40vw;
+  height: 70vh;
   border: none;
   background: black;
 }
