@@ -1,3 +1,12 @@
+/*
+  e_404_page.css
+  Styles for Interactive 404 Page
+  - Boot sequence
+  - Story selection and reading
+  - Google Docs personnel file viewer
+*/
+
+/* General layout */
 html, body {
   height: 100%;
   margin: 0;
@@ -8,6 +17,7 @@ body {
   background: black;
 }
 
+/* Main container */
 #container {
   position: relative;
   width: 100vw;
@@ -15,6 +25,7 @@ body {
   overflow: hidden;
 }
 
+/* Start and transition screens */
 #start-bg, #transition-bg {
   position: absolute;
   top: 0;
@@ -25,6 +36,7 @@ body {
   display: block;
 }
 
+/* Clickable area overlay */
 #click-area {
   position: absolute;
   top: 0;
@@ -34,6 +46,7 @@ body {
   z-index: 2;
 }
 
+/* Black screen overlay */
 #black-screen {
   position: absolute;
   top: 0;
@@ -45,6 +58,7 @@ body {
   display: none;
 }
 
+/* Boot text styling */
 #boot-text {
   position: absolute;
   top: 2vw;
@@ -57,6 +71,7 @@ body {
   background: transparent;
 }
 
+/* Story select screen */
 #story-select {
   position: absolute;
   top: 0;
@@ -72,33 +87,38 @@ body {
   gap: 5vw;
 }
 
-.story-icon-container {
+/* Story icon styling */
+.story-icon-container,
+.google-docs-icon-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
 }
 
-.story-icon-container img {
+.story-icon-container img,
+.google-docs-icon-container img {
   width: 6vw;
   height: 6vw;
   margin-bottom: 1vw;
 }
 
-.story-icon-label {
+.story-icon-label,
+.google-docs-label {
   color: #00FF00;
   font-family: 'PerfectDOS', monospace;
-  font-size: 1.2vw; /* Reduced from 2vw */
+  font-size: 1.2vw;
   text-align: center;
 }
 
+/* Story content display */
 .story-content {
   position: absolute;
   top: 6vw;
   left: 10vw;
   width: 80vw;
   min-height: 60vh;
-  color: #fff; /* White text */
+  color: #fff;
   font-family: 'PerfectDOS', monospace;
   font-size: 1.5vw;
   background: black;
@@ -107,6 +127,7 @@ body {
   overflow-y: auto;
 }
 
+/* Navigation buttons */
 .story-nav {
   position: fixed;
   bottom: 4vw;
@@ -117,7 +138,7 @@ body {
   align-items: flex-end;
   gap: 2vw;
   z-index: 41;
-  pointer-events: none; /* Prevents blocking scroll, buttons will override */
+  pointer-events: none;
 }
 
 .story-nav button, .story-home-btn {
@@ -139,37 +160,12 @@ body {
   z-index: 42;
 }
 
-.story-nav .prev-btn {
-  display: none; /* Hidden by default */
-  margin-left: 2vw;
-}
-
+.story-nav .prev-btn,
 .story-nav .next-btn {
-  display: none; /* Hidden by default */
-  margin-right: 2vw;
+  display: none;
 }
 
-/* Add styling for the Google Docs icon and editor screen */
-.google-docs-icon-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
-
-.google-docs-icon-container img {
-  width: 6vw;
-  height: 6vw;
-  margin-bottom: 1vw;
-}
-
-.google-docs-label {
-  color: #00FF00;
-  font-family: 'PerfectDOS', monospace;
-  font-size: 1.2vw;
-  text-align: center;
-}
-
+/* Google Docs editor screen */
 #google-docs-editor {
   position: absolute;
   top: 0;
@@ -193,10 +189,6 @@ body {
 }
 
 .google-docs-home-btn {
-  position: fixed;
-  top: 2vw;
-  left: 2vw;
-  z-index: 51;
   font-family: 'PerfectDOS', monospace;
   font-size: 1.2vw;
   padding: 0.8vw 2vw;
@@ -205,4 +197,66 @@ body {
   border: 2px solid #00ff0000;
   border-radius: 0.5vw;
   cursor: pointer;
+  z-index: 51;
+}
+
+/* Windows-style taskbar at the bottom */
+
+
+#windows-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 3vw;
+  background: #000;
+  border-top: 2px solid #00FF00;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+
+#taskbar-start-area {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1vw;
+  border-right: 2px solid #00FF00;
+}
+
+#taskbar-icon {
+  width: 2vw;
+  height: 2vw;
+  margin-right: 0.8vw;
+}
+
+#taskbar-separator {
+  width: 2px;
+  height: 2vw;
+  background: #00FF00;
+  margin-left: 0.5vw;
+}
+
+/* Equus-Soft branding on boot screen */
+#equus-soft-brand {
+  position: absolute;
+  top: 2vw;
+  right: 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 25;
+}
+
+#equus-soft-icon {
+  width: 3vw;
+  height: 3vw;
+}
+
+#equus-soft-label {
+  margin-top: 0.5vw;
+  color: #00FF00;
+  font-family: 'PerfectDOS', monospace;
+  font-size: 1.2vw;
+  text-align: center;
 }

@@ -7,6 +7,7 @@ import csv
 #System messages good
 #character actions need better detection
 #ooc needs better detection
+# 70 percent detection for first run of AI categorizer
 
 def categorize_message(message):
     # System message: URLs, headers, rolls, or lines with mostly numbers/symbols

@@ -1,3 +1,11 @@
+// e_404_page.js
+// Interactive 404 Page logic
+// - Boot sequence animation
+// - Story selection and reading
+// - Google Docs personnel file viewer
+// - Sound and music control
+
+// --- Boot Sequence Text ---
 const bootText = `
 # ES-DOS 487
 
@@ -11,17 +19,16 @@ Loading root folder...
 Rendering desktop...
 `;
 
+// --- Story Files ---
 const storyFiles = [
   { name: "double_life", label: "double_life" },
   { name: "butterfly_effect", label: "butterfly_effect" }
 ];
 
-// Add Google Docs icon and editor logic
-// filepath: /home/zachary/Desktop/zachhightower.com/e_404_page/e_404_page.js
-
-// Add this to your storyFiles array if you want to keep it consistent, or handle separately
+// --- Google Docs Template URL ---
 const googleDocsTemplateUrl = "https://docs.google.com/document/d/1Ze9dcg69HO25bUG0vJbV0Ou92UKY2Aq2MCIggROXuxM/copy";
 
+// --- Markdown Parsing ---
 function parseMarkdown(md) {
   // Simple markdown to HTML conversion for headings and line breaks
   return md
@@ -30,6 +37,7 @@ function parseMarkdown(md) {
     .replace(/\n/g, '<br>');
 }
 
+// --- Boot Text Typing Animation ---
 function typeText(element, html, sound, speed = 30) {
   let i = 0;
   let tag = false;
@@ -53,19 +61,15 @@ function typeText(element, html, sound, speed = 30) {
   type();
 }
 
-// Add chapter tracking and story loading
+// --- Story Loading and Navigation ---
 let currentStory = null;
 let currentChapter = 0;
 let chapters = [];
 
 function showStorySelect() {
-  // Hide story content if present
   hideStoryContent();
-
-  // Hide boot text
   document.getElementById('boot-text').style.display = 'none';
 
-  // Show story select screen
   const storySelect = document.getElementById('story-select');
   storySelect.innerHTML = '';
   storySelect.style.display = 'flex';
@@ -105,7 +109,7 @@ function showStorySelect() {
   googleContainer.onclick = showGoogleDocsEditor;
 
   const googleImg = document.createElement('img');
-  googleImg.src = 'assets/text file icon.png'; // Use a different icon if desired
+  googleImg.src = 'assets/text file icon.png';
   googleImg.alt = "Google Docs Editor";
 
   const googleLabel = document.createElement('div');
@@ -115,9 +119,67 @@ function showStorySelect() {
   googleContainer.appendChild(googleImg);
   googleContainer.appendChild(googleLabel);
   storySelect.appendChild(googleContainer);
+
+  // Add Windows-style taskbar
+  let taskbar = document.getElementById('windows-taskbar');
+  if (taskbar) taskbar.remove(); // Remove if already exists
+
+  taskbar = document.createElement('div');
+  taskbar.id = 'windows-taskbar';
+
+  // Start area with icon and separator
+  const startArea = document.createElement('div');
+  startArea.id = 'taskbar-start-area';
+
+  const icon = document.createElement('img');
+  icon.id = 'taskbar-icon';
+  icon.src = 'assets/equus_soft_icon.png';
+  icon.alt = 'Equus Soft Icon';
+
+  startArea.appendChild(icon);
+
+  // Separator bar
+  const separator = document.createElement('div');
+  separator.id = 'taskbar-separator';
+  separator.textContent = '|';
+  separator.style.color = 'white';
+  separator.style.margin = '0 10px';
+
+  startArea.appendChild(separator);
+  taskbar.appendChild(startArea);
+
+  // Taskbar buttons (Home, Refresh, Edit)
+  const homeButton = createTaskbarButton('Home', 'assets/home_icon.png', showStorySelect);
+  const refreshButton = createTaskbarButton('Refresh', 'assets/refresh_icon.png', () => location.reload());
+  const editButton = createTaskbarButton('Edit', 'assets/edit_icon.png', showGoogleDocsEditor);
+
+  taskbar.appendChild(homeButton);
+  taskbar.appendChild(refreshButton);
+  taskbar.appendChild(editButton);
+
+  document.body.appendChild(taskbar);
+}
+
+function createTaskbarButton(label, iconPath, onClick) {
+  const button = document.createElement('div');
+  button.className = 'taskbar-button';
+  button.onclick = onClick;
+
+  const icon = document.createElement('img');
+  icon.src = iconPath;
+  icon.alt = label + ' Icon';
+
+  const text = document.createElement('span');
+  text.textContent = label;
+
+  button.appendChild(icon);
+  button.appendChild(text);
+
+  return button;
 }
 
 function hideStoryContent() {
+  // Remove story content and navigation buttons
   const contentDiv = document.getElementById('story-content');
   if (contentDiv) contentDiv.remove();
   const navDiv = document.getElementById('story-nav');
@@ -163,7 +225,7 @@ function showChapter() {
   contentDiv.innerHTML = parseMarkdownStory(chapters[currentChapter]);
   document.body.appendChild(contentDiv);
 
-  // Create navigation buttons
+  // Create navigation buttons (currently hidden)
   const navDiv = document.createElement('div');
   navDiv.id = 'story-nav';
   navDiv.className = 'story-nav';
@@ -212,6 +274,7 @@ function parseMarkdownStory(md) {
     .replace(/\n/g, '<br>');
 }
 
+// --- Google Docs Viewer ---
 function showGoogleDocsEditor() {
   // Hide story select and any story content
   document.getElementById('story-select').style.display = 'none';
@@ -257,6 +320,7 @@ function showGoogleDocsEditor() {
   document.body.appendChild(editorDiv);
 }
 
+// --- Initial Boot Sequence Click Handler ---
 document.querySelector('#click-area rect').addEventListener('click', function() {
   document.getElementById('insert-sound').play();
   document.getElementById('start-bg').style.display = 'none';

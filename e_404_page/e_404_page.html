@@ -1,9 +1,17 @@
+<!--
+  Interactive 404 Page
+  - Animated boot sequence
+  - Story selection and reading
+  - Google Docs personnel file viewer
+  - Background music and sound effects
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Interactive 404 Page</title>
   <link rel="stylesheet" href="e_404_page.css">
+  <!-- DOS font for retro styling -->
   <style>
     @font-face {
       font-family: 'PerfectDOS';
@@ -15,9 +23,10 @@
 </head>
 <body>
   <div id="container">
+    <!-- Start screen and clickable area -->
     <img src="assets/404 start screen animated.gif" id="start-bg" alt="Start Screen" />
     <svg id="click-area" width="100vw" height="100vh" style="position:absolute;top:0;left:0;">
-      <!-- Rectangle shifted right and down by 1/3 of the image width and height -->
+      <!-- Clickable rectangle for boot sequence -->
       <rect 
         x="30%" 
         y="15%" 
@@ -28,13 +37,21 @@
         cursor="pointer"
       />
     </svg>
+    <!-- Sound effects and music -->
     <audio id="insert-sound" src="assets/MS DOS Insert Sound.mp3"></audio>
     <audio id="boot-sound" src="assets/Old 90s PC boot sequence (4K).mp3"></audio>
     <audio id="story-music" src="assets/background music for 404 story page.mp3" loop></audio>
+    <!-- Transition animation -->
     <img src="assets/404 screen transition animation vers 2.gif" id="transition-bg" style="display:none;position:absolute;top:0;left:0;" alt="Transition Animation" />
+    <!-- Boot text and story select -->
     <div id="black-screen" style="display:none;position:absolute;top:0;left:0;width:100vw;height:100vh;background:black;z-index:10;"></div>
     <div id="boot-text" style="display:none;"></div>
     <div id="story-select" style="display:none;"></div>
+    <!-- Add Equus-Soft icon and label to boot screen -->
+    <div id="equus-soft-brand">
+      <img src="assets/equus_soft_icon.png" alt="Equus-Soft Icon" id="equus-soft-icon" />
+      <div id="equus-soft-label">Equus-Soft</div>
+    </div>
   </div>
   <script src="e_404_page.js"></script>
 </body>
