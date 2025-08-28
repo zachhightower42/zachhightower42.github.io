@@ -162,6 +162,8 @@ function showStorySelect() {
   taskbar.appendChild(editButton);
 
   document.body.appendChild(taskbar);
+
+  makeEquusSoftLogoClickable(); // Make logo clickable to open start menu
 }
 
 function createTaskbarButton(label, iconPath, onClick) {
@@ -310,6 +312,71 @@ function showGoogleDocsEditor() {
   editorDiv.appendChild(createLink);
 
   document.body.appendChild(editorDiv);
+}
+
+// --- Start Menu ---
+function showStartMenu() {
+  // Remove if already open
+  let menu = document.getElementById('start-menu');
+  if (menu) {
+    menu.remove();
+    return;
+  }
+
+  menu = document.createElement('div');
+  menu.id = 'start-menu';
+
+  // About entry
+  const aboutEntry = document.createElement('div');
+  aboutEntry.className = 'start-menu-entry';
+  aboutEntry.onclick = () => {
+    menu.remove();
+    loadEquusSoftAbout();
+  };
+
+  const aboutIcon = document.createElement('img');
+  aboutIcon.src = 'assets/about_icon.png';
+  aboutIcon.alt = 'About';
+
+  const aboutLabel = document.createElement('span');
+  aboutLabel.textContent = 'About';
+
+  aboutEntry.appendChild(aboutIcon);
+  aboutEntry.appendChild(aboutLabel);
+
+  menu.appendChild(aboutEntry);
+
+  document.body.appendChild(menu);
+}
+
+// Make Equus Soft logo clickable to open start menu
+function makeEquusSoftLogoClickable() {
+  const icon = document.getElementById('taskbar-icon');
+  if (icon) {
+    icon.style.cursor = 'pointer';
+    icon.onclick = showStartMenu;
+  }
+}
+
+// Load Equus Soft About page styled like story pages
+function loadEquusSoftAbout() {
+  hideStoryContent();
+  // Remove start menu if open
+  const menu = document.getElementById('start-menu');
+  if (menu) menu.remove();
+
+  fetch('assets/stories/equus_soft_about.md')
+    .then(res => res.text())
+    .then(md => {
+      // Use story content styling
+      const contentDiv = document.createElement('div');
+      contentDiv.id = 'story-content';
+      contentDiv.className = 'story-content';
+      contentDiv.innerHTML = parseMarkdownStory(md);
+      document.body.appendChild(contentDiv);
+
+      // No top-left home button, user should use the taskbar home icon
+    });
 }
 
 // --- Initial Boot Sequence Click Handler ---
