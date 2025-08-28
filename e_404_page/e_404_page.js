@@ -331,7 +331,7 @@ document.querySelector('#click-area rect').addEventListener('click', function() 
   document.getElementById('click-area').style.display = 'none';
   document.getElementById('transition-bg').style.display = 'block';
 
-  // Hide Equus-Soft logo during transition animation
+  // Always hide Equus-Soft logo during transition animation
   const equusBrand = document.getElementById('equus-soft-brand');
   if (equusBrand) equusBrand.style.display = 'none';
 
@@ -347,5 +347,34 @@ document.querySelector('#click-area rect').addEventListener('click', function() 
     const bootTextDiv = document.getElementById('boot-text');
     bootTextDiv.style.display = 'block';
     typeText(bootTextDiv, bootTextHtml, document.getElementById('boot-sound'), 30);
-  }, 2000); // Adjust duration to match your animation length
+
+    // Hide Equus-Soft logo after boot text animation is done
+    // Add this inside typeText's completion callback:
+    const originalTypeText = typeText;
+    typeText = function(element, html, sound, speed = 30) {
+      let i = 0;
+      let tag = false;
+      let out = '';
+      sound.currentTime = 0;
+      sound.play();
+
+      function type() {
+        if (i < html.length) {
+          if (html[i] === '<') tag = true;
+          if (html[i] === '>') tag = false;
+          out += html[i];
+          element.innerHTML = out;
+          i++;
+          setTimeout(type, tag ? 0 : speed);
+        } else {
+          sound.pause();
+          if (equusBrand) equusBrand.style.display = 'none'; // Hide logo after animation
+          setTimeout(showStorySelect, 800);
+        }
+      }
+      type();
+    };
+    // Call the new typeText
+    typeText(bootTextDiv, bootTextHtml, document.getElementById('boot-sound'), 30);
+  }, 2000);
 });

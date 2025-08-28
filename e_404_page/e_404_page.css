@@ -232,9 +232,11 @@ body {
 
 #taskbar-separator {
   width: 2px;
-  height: 2vw;
+  height: 2.5vw;         /* Increased height */
   background: #00FF00;
   margin-left: 0.5vw;
+  pointer-events: none;   /* Non-interactable */
+  user-select: none;      /* Prevent selection */
 }
 
 /* Equus-Soft branding on boot screen */
