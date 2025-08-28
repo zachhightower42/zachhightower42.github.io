@@ -223,12 +223,11 @@ function showGoogleDocsEditor() {
   editorDiv = document.createElement('div');
   editorDiv.id = 'google-docs-editor';
 
-  // Create iframe for Google Docs template link
-  const iframe = document.createElement('iframe');
-  iframe.id = 'google-docs-iframe';
-  iframe.src = googleDocsTemplateUrl;
-  iframe.allow = "clipboard-write";
-  editorDiv.appendChild(iframe);
+  // Create viewing iframe for Google Docs
+  const viewIframe = document.createElement('iframe');
+  viewIframe.id = 'google-docs-iframe';
+  viewIframe.src = "https://docs.google.com/document/d/1vDibC16hCYVIrFz9LB3uIOpQMhwFQo0RcP4GmukkGl4/edit?usp=sharing";
+  editorDiv.appendChild(viewIframe);
 
   // Home button
   const homeBtn = document.createElement('button');
@@ -239,6 +238,18 @@ function showGoogleDocsEditor() {
     showStorySelect();
   };
   editorDiv.appendChild(homeBtn);
+
+  // Link to create a copy
+  const createLink = document.createElement('a');
+  createLink.href = "https://docs.google.com/document/d/1vDibC16hCYVIrFz9LB3uIOpQMhwFQo0RcP4GmukkGl4/copy";
+  createLink.target = "_blank";
+  createLink.className = 'google-docs-home-btn';
+  createLink.style.position = "fixed";
+  createLink.style.bottom = "2vw";
+  createLink.style.left = "2vw";
+  createLink.style.textAlign = "center";
+  createLink.textContent = "<Create Additional Personnel Files>";
+  editorDiv.appendChild(createLink);
 
   document.body.appendChild(editorDiv);
 }
