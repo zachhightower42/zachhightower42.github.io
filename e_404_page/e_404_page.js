@@ -70,11 +70,13 @@ function showStorySelect() {
   storySelect.innerHTML = '';
   storySelect.style.display = 'flex';
 
-  // Play background music at reduced volume
+  // Play background music at reduced volume only if not already playing
   const music = document.getElementById('story-music');
-  music.currentTime = 0;
-  music.volume = 0.1;
-  music.play();
+  if (music.paused) {
+    music.currentTime = 0;
+    music.volume = 0.1;
+    music.play();
+  }
 
   // Add icons for each story
   storyFiles.forEach(story => {
@@ -108,7 +110,7 @@ function showStorySelect() {
 
   const googleLabel = document.createElement('div');
   googleLabel.className = 'google-docs-label';
-  googleLabel.textContent = "Personnel File Editor";
+  googleLabel.textContent = "perssonell_file_editor";
 
   googleContainer.appendChild(googleImg);
   googleContainer.appendChild(googleLabel);
