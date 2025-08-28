@@ -110,7 +110,7 @@ function showStorySelect() {
 
   const googleLabel = document.createElement('div');
   googleLabel.className = 'google-docs-label';
-  googleLabel.textContent = "Personnel_file_editor";
+  googleLabel.textContent = "personnel_file_editor";
 
   googleContainer.appendChild(googleImg);
   googleContainer.appendChild(googleLabel);
