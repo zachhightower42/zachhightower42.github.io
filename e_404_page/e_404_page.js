@@ -12,9 +12,15 @@ Rendering desktop...
 `;
 
 const storyFiles = [
-  { name: "double_life", label: "Double Life" },
-  { name: "butterfly_effect", label: "Butterfly Effect" }
+  { name: "double_life", label: "double_life" },
+  { name: "butterfly_effect", label: "butterfly_effect" }
 ];
+
+// Add Google Docs icon and editor logic
+// filepath: /home/zachary/Desktop/zachhightower.com/e_404_page/e_404_page.js
+
+// Add this to your storyFiles array if you want to keep it consistent, or handle separately
+const googleDocsTemplateUrl = "https://docs.google.com/document/d/1Ze9dcg69HO25bUG0vJbV0Ou92UKY2Aq2MCIggROXuxM/copy";
 
 function parseMarkdown(md) {
   // Simple markdown to HTML conversion for headings and line breaks
@@ -90,6 +96,23 @@ function showStorySelect() {
     container.appendChild(label);
     storySelect.appendChild(container);
   });
+
+  // Add Google Docs icon
+  const googleContainer = document.createElement('div');
+  googleContainer.className = 'google-docs-icon-container';
+  googleContainer.onclick = showGoogleDocsEditor;
+
+  const googleImg = document.createElement('img');
+  googleImg.src = 'assets/text file icon.png'; // Use a different icon if desired
+  googleImg.alt = "Google Docs Editor";
+
+  const googleLabel = document.createElement('div');
+  googleLabel.className = 'google-docs-label';
+  googleLabel.textContent = "Personnel File Editor";
+
+  googleContainer.appendChild(googleImg);
+  googleContainer.appendChild(googleLabel);
+  storySelect.appendChild(googleContainer);
 }
 
 function hideStoryContent() {
@@ -185,6 +208,39 @@ function parseMarkdownStory(md) {
     .replace(/^## (.*)$/gm, '<span style="font-size:1.5vw;font-weight:bold;">$1</span><br>')
     .replace(/\n{2,}/g, '<br><br>')
     .replace(/\n/g, '<br>');
+}
+
+function showGoogleDocsEditor() {
+  // Hide story select and any story content
+  document.getElementById('story-select').style.display = 'none';
+  hideStoryContent();
+
+  // Remove existing editor if present
+  let editorDiv = document.getElementById('google-docs-editor');
+  if (editorDiv) editorDiv.remove();
+
+  // Create editor container
+  editorDiv = document.createElement('div');
+  editorDiv.id = 'google-docs-editor';
+
+  // Create iframe for Google Docs template link
+  const iframe = document.createElement('iframe');
+  iframe.id = 'google-docs-iframe';
+  iframe.src = googleDocsTemplateUrl;
+  iframe.allow = "clipboard-write";
+  editorDiv.appendChild(iframe);
+
+  // Home button
+  const homeBtn = document.createElement('button');
+  homeBtn.textContent = '(Home)';
+  homeBtn.className = 'google-docs-home-btn';
+  homeBtn.onclick = () => {
+    editorDiv.remove();
+    showStorySelect();
+  };
+  editorDiv.appendChild(homeBtn);
+
+  document.body.appendChild(editorDiv);
 }
 
 document.querySelector('#click-area rect').addEventListener('click', function() {

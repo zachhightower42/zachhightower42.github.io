@@ -148,3 +148,61 @@ body {
   display: none; /* Hidden by default */
   margin-right: 2vw;
 }
+
+/* Add styling for the Google Docs icon and editor screen */
+.google-docs-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.google-docs-icon-container img {
+  width: 6vw;
+  height: 6vw;
+  margin-bottom: 1vw;
+}
+
+.google-docs-label {
+  color: #00FF00;
+  font-family: 'PerfectDOS', monospace;
+  font-size: 1.2vw;
+  text-align: center;
+}
+
+#google-docs-editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#google-docs-iframe {
+  margin-top: 6vw;
+  width: 80vw;
+  height: 70vh;
+  border: none;
+  background: black;
+}
+
+.google-docs-home-btn {
+  position: fixed;
+  top: 2vw;
+  left: 2vw;
+  z-index: 51;
+  font-family: 'PerfectDOS', monospace;
+  font-size: 1.2vw;
+  padding: 0.8vw 2vw;
+  background: #00000000;
+  color: #00ff00;
+  border: 2px solid #00ff0000;
+  border-radius: 0.5vw;
+  cursor: pointer;
+}
