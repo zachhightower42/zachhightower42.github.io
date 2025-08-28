@@ -331,16 +331,16 @@ document.querySelector('#click-area rect').addEventListener('click', function() 
   document.getElementById('click-area').style.display = 'none';
   document.getElementById('transition-bg').style.display = 'block';
 
-  // Show Equus-Soft logo during boot sequence
+  // Hide Equus-Soft logo during transition animation
   const equusBrand = document.getElementById('equus-soft-brand');
-  if (equusBrand) equusBrand.style.display = 'block';
+  if (equusBrand) equusBrand.style.display = 'none';
 
   setTimeout(function() {
     document.getElementById('transition-bg').style.display = 'none';
     document.getElementById('black-screen').style.display = 'block';
 
-    // Hide Equus-Soft logo before boot text starts typing
-    if (equusBrand) equusBrand.style.display = 'none';
+    // Show Equus-Soft logo only during boot text animation
+    if (equusBrand) equusBrand.style.display = 'block';
 
     // Show boot text and play boot sound
     const bootTextHtml = parseMarkdown(bootText);
