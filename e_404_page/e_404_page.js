@@ -70,6 +70,10 @@ function showStorySelect() {
   hideStoryContent();
   document.getElementById('boot-text').style.display = 'none';
 
+  // Hide Equus-Soft logo after boot screen
+  const equusBrand = document.getElementById('equus-soft-brand');
+  if (equusBrand) equusBrand.style.display = 'none';
+
   const storySelect = document.getElementById('story-select');
   storySelect.innerHTML = '';
   storySelect.style.display = 'flex';
@@ -326,9 +330,17 @@ document.querySelector('#click-area rect').addEventListener('click', function() 
   document.getElementById('start-bg').style.display = 'none';
   document.getElementById('click-area').style.display = 'none';
   document.getElementById('transition-bg').style.display = 'block';
+
+  // Show Equus-Soft logo during boot sequence
+  const equusBrand = document.getElementById('equus-soft-brand');
+  if (equusBrand) equusBrand.style.display = 'block';
+
   setTimeout(function() {
     document.getElementById('transition-bg').style.display = 'none';
     document.getElementById('black-screen').style.display = 'block';
+
+    // Hide Equus-Soft logo before boot text starts typing
+    if (equusBrand) equusBrand.style.display = 'none';
 
     // Show boot text and play boot sound
     const bootTextHtml = parseMarkdown(bootText);
