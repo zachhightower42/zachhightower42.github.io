@@ -233,7 +233,7 @@ body {
 }
 
 #taskbar-separator {
-  width: 2px;
+  width: 8px;
   height: 3vw;         /* Increased height */
   background: #00FF00;
   margin-left: 1vw;
@@ -307,7 +307,7 @@ body {
   width: 22vw;
   background: #000;
   border: 2px solid #00FF00;
-  border-radius: 0.5vw;
+  border-radius: 0; 
   z-index: 200;
   box-shadow: 0 0 2vw #00FF0055;
   display: flex;

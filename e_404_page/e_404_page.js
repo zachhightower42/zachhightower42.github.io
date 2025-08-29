@@ -74,6 +74,10 @@ function showStorySelect() {
   const equusBrand = document.getElementById('equus-soft-brand');
   if (equusBrand) equusBrand.style.display = 'none';
 
+  // Remove personnel file editor if present
+  const editorDiv = document.getElementById('google-docs-editor');
+  if (editorDiv) editorDiv.remove();
+
   const storySelect = document.getElementById('story-select');
   storySelect.innerHTML = '';
   storySelect.style.display = 'flex';
@@ -184,7 +188,6 @@ function createTaskbarButton(label, iconPath, onClick) {
   // Only show label for non-home buttons
   if (label === 'Home') {
     button.title = 'Return to story select';
-    text.style.display = 'none'; // Hide text for home button, icon only
   }
 
   return button;
