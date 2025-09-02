@@ -1,23 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
     // --- DOM Elements ---
-    const video = document.getElementById('bookVideo');
+    const bookPreview = document.getElementById('bookPreview');
+    const bookAnimated = document.getElementById('bookAnimated');
     const iframeWrapper = document.getElementById('iframeWrapper');
     const bgMusic = document.getElementById('bgMusic');
 
-    // --- Make video clickable and show pointer ---
-    video.style.cursor = 'pointer';
-
-    // --- On first click: play video, music, and disable further clicks ---
-    video.addEventListener('click', function() {
-        video.play();
-        bgMusic.style.display = 'block';
-        bgMusic.play();
-        video.style.pointerEvents = 'none'; // prevent further clicks
-    });
-
-    // --- When video ends: hide video, show iframe, show last frame ---
-    video.addEventListener('ended', function() {
-        video.style.display = 'none';
-        iframeWrapper.style.display = 'flex';
+    // --- On click: show animated book opening, then show iframe and play music ---
+    bookPreview.addEventListener('click', function() {
+        // Prevent further clicks
+        bookPreview.style.pointerEvents = 'none';
+        // Hide preview, show animated webp
+        bookPreview.style.display = 'none';
+        bookAnimated.src = 'assets/book_opening_animated.webp';
+        bookAnimated.style.display = 'block';
+        // Wait for animation duration (e.g., 2.5 seconds)
+        setTimeout(function() {
+            // Leave bookAnimated visible as background
+            iframeWrapper.style.display = 'flex';
+            bgMusic.style.display = 'block';
+            bgMusic.play();
+        }, 4000); // Adjust this to match your .webp animation duration
     });
 });

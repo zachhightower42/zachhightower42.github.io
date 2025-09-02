@@ -8,12 +8,12 @@
 </head>
 <body>
     <div class="video-wrapper">
-        <video id="bookVideo" preload="auto" poster="assets/book_opening_first_frame.png"
-            class="book-media">
-            <source src="assets/book_opening_alphaBack.webm" type="video/webm">
-        </video>
+        <!-- Static preview image, initially visible -->
+        <img id="bookPreview" src="assets/book_opening_preview.webp" alt="Book Preview" />
+        <!-- Animated book opening image, initially hidden -->
+        <img id="bookAnimated" src="" alt="Book Opening Animation" style="display:none;" />
+        <!-- Iframe wrapper, initially hidden -->
         <div id="iframeWrapper" class="iframe-wrapper" style="display:none;">
-            <img id="bookLastFrame" src="assets/book_opening_last_frame.png" class="book-media" alt="Book Open" />
             <iframe src="https://docs.google.com/document/d/e/2PACX-1vRAFxPhfi3Z8PnTfaw5bJ-7p9hE9SvhqdGvY8g88kBURI-83LYyazePdSrZFZ_cU9SZZtQtZJb0SiZ4/pub?embedded=true" allowfullscreen></iframe>
         </div>
     </div>

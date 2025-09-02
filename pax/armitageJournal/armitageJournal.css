@@ -15,71 +15,62 @@ body {
     left: 50%;
     bottom: 0;
     transform: translateX(-80%);
-    width: 800px;
-    height: 600px;
-    max-width: 800px;
-    max-height: 600px;
+    width: 900px;
+    height: 700px;
+    max-width: 900px;
+    max-height: 700px;
     min-width: 800px;
     min-height: 600px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: visible;
 }
 
-/* --- Book Media (video, images) --- */
-.book-media {
-    width: 1200px;
-    height: 900px;
+/* --- Book Preview and Animated Book --- */
+#bookPreview,
+#bookAnimated {
+    position: absolute;
+    top: -120px;
+    left: 85px;
+    width: 1050px;
+    height: 950px;
     display: block;
     margin: 0 auto;
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
     background: transparent;
+    z-index: 1;
 }
 
-/* --- Iframe and Last Frame --- */
+/* --- Iframe Wrapper --- */
 .iframe-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    width: 1100px;
+    height: 600px;
     background: transparent;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2; /* Ensure it is above the book image */
 }
 
-/* --- Make media inside iframe-wrapper 20% bigger --- */
-.iframe-wrapper .book-media,
-#bookLastFrame {
-    width: 1440px;
-    height: 1080px;
-}
-
-/* --- Shrink iframe by 20% --- */
+/* --- Iframe --- */
 .iframe-wrapper iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 960px;
+    width: 770px;
     height: 720px;
     border: none;
     background: transparent;
     border-radius: 12px;
     box-shadow: none;
-    z-index: 2;
     pointer-events: auto;
     transition: box-shadow 0.2s;
-    cursor: default; /* Remove pointer cursor */
+    cursor: default;
 }
 
 /* --- Audio Controls --- */
 audio {
     z-index: 10;
-}
-
-/* --- Only show pointer cursor for video --- */
-#bookVideo {
-    cursor: pointer;
 }
