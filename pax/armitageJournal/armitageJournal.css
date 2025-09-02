@@ -13,53 +13,76 @@ body {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 135%;
-    max-width: 1300px;
+    width: 100%;
+    max-width: 830px;
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 750px;
 }
 
-.video-overlay {
-    position: absolute;
-    left: 0; top: 0; right: 0; bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(30,20,10,0.5);
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 2;
-}
-
-#iframeWrapper {
-    position: absolute;
-    left: 0; top: 0; right: 0; bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
+.book-media {
+    width: 100%;
+    max-width: 830px;
+    min-height: 600px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
+    background: transparent;
 }
 
 .iframe-wrapper {
+    position: relative;
     width: 100%;
     max-width: 830px;
     min-height: 600px;
     background: transparent;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-iframe {
-    width: 100%;
-    height: 90vh;
-    display: block;
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
     border: none;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
     background: transparent;
     border-radius: 12px;
-    max-width: 830px;
-    max-height: 600px;
+    box-shadow: none;
+    z-index: 2;
+    pointer-events: auto;
+    transition: box-shadow 0.2s;
+}
+
+.iframe-wrapper:hover iframe {
+    box-shadow: 0 0 0 6px #e6c97a, 0 4px 24px rgba(0,0,0,0.534);
+    cursor: pointer;
+}
+
+.iframe-wrapper:hover iframe {
+    cursor: pointer;
+}
+
+.iframe-wrapper:hover iframe {
+    box-shadow: 0 0 0 8px #e6c97a, 0 4px 24px rgba(0,0,0,0.534);
+}
+
+.iframe-wrapper iframe {
+    /* fallback for pointer on non-hover */
+    cursor: pointer;
+}
+
+#bookLastFrame {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 12px;
+}
+
+audio {
+    z-index: 10;
 }
