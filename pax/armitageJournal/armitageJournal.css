@@ -14,8 +14,8 @@ body {
     bottom: 0;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 930px;
-    min-height: 700px;
+    max-width: 1030px;
+    min-height: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,8 +24,8 @@ body {
 
 .book-media {
     width: 100%;
-    max-width: 930px;
-    min-height: 700px;
+    max-width: 1030px;
+    min-height: 800px;
     display: block;
     margin: 0 auto;
     border-radius: 12px;
@@ -36,8 +36,8 @@ body {
 .iframe-wrapper {
     position: relative;
     width: 100%;
-    max-width: 930px;
-    min-height: 700px;
+    max-width: 1030px;
+    min-height: 800px;
     background: transparent;
     box-sizing: border-box;
     display: flex;
@@ -90,5 +90,11 @@ audio {
 /* Disable hover effects when .opened is present */
 .iframe-wrapper.opened:hover iframe {
     box-shadow: none;
+    cursor: default;
+}
+
+/* Only show hover effect if video is NOT playing */
+#bookVideo.playing:hover {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
     cursor: default;
 }
