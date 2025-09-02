@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="armitageJournal.css">
 </head>
 <body>
-    <div class="iframe-wrapper">
-        <iframe src="https://docs.google.com/document/d/e/2PACX-1vRAFxPhfi3Z8PnTfaw5bJ-7p9hE9SvhqdGvY8g88kBURI-83LYyazePdSrZFZ_cU9SZZtQtZJb0SiZ4/pub?embedded=true" allowfullscreen></iframe>
+    <div class="video-wrapper">
+        <video id="bookVideo" preload="auto" poster="assets/book_opening_first_frame.png" style="width:100%; max-width:1300px;" >
+            <source src="assets/book_opening_alphaBack.webm" type="video/webm">
+        </video>
+        <div id="videoOverlay" class="video-overlay">
+            <span>Click to open the journal</span>
+        </div>
+        <div id="iframeWrapper" class="iframe-wrapper" style="display:none;">
+            <iframe src="https://docs.google.com/document/d/e/2PACX-1vRAFxPhfi3Z8PnTfaw5bJ-7p9hE9SvhqdGvY8g88kBURI-83LYyazePdSrZFZ_cU9SZZtQtZJb0SiZ4/pub?embedded=true" allowfullscreen></iframe>
+        </div>
     </div>
-    <audio controls autoplay loop style="position: fixed; bottom: 20px; left: 20px;">
+    <audio id="bgMusic" controls autoplay loop style="position: fixed; bottom: 20px; left: 20px; display:none;">
         <source src="assets/background_music.mp3" type="audio/mpeg">
     </audio>
+    <script src="armitageJournal.js"></script>
 </body>
 </html>
