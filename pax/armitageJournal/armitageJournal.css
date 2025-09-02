@@ -14,8 +14,8 @@ body {
     bottom: 0;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 830px;
-    min-height: 600px;
+    max-width: 930px;
+    min-height: 700px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,8 +24,8 @@ body {
 
 .book-media {
     width: 100%;
-    max-width: 830px;
-    min-height: 600px;
+    max-width: 930px;
+    min-height: 700px;
     display: block;
     margin: 0 auto;
     border-radius: 12px;
@@ -36,8 +36,8 @@ body {
 .iframe-wrapper {
     position: relative;
     width: 100%;
-    max-width: 830px;
-    min-height: 600px;
+    max-width: 930px;
+    min-height: 700px;
     background: transparent;
     box-sizing: border-box;
     display: flex;
@@ -58,7 +58,7 @@ body {
 }
 
 .iframe-wrapper:hover iframe {
-    box-shadow: 0 0 0 6px #e6c97a, 0 4px 24px rgba(0,0,0,0.534);
+    box-shadow: 0 0 0 6px #000000, 0 4px 10px rgba(0,0,0,0.534);
     cursor: pointer;
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 .iframe-wrapper:hover iframe {
-    box-shadow: 0 0 0 8px #e6c97a, 0 4px 24px rgba(0,0,0,0.534);
+    box-shadow: 0 0 0 8px #000000, 0 4px 10px rgba(0,0,0,0.534);
 }
 
 .iframe-wrapper iframe {
@@ -85,4 +85,10 @@ body {
 
 audio {
     z-index: 10;
+}
+
+/* Disable hover effects when .opened is present */
+.iframe-wrapper.opened:hover iframe {
+    box-shadow: none;
+    cursor: default;
 }
