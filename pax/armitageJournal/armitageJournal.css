@@ -1,3 +1,4 @@
+/* --- Page Background --- */
 body {
     margin: 0;
     padding: 0;
@@ -8,13 +9,17 @@ body {
     background-repeat: no-repeat;
 }
 
+/* --- Main Media Wrapper --- */
 .video-wrapper {
     position: fixed;
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 100%;
+    width: 1030px;
+    height: 800px;
     max-width: 1030px;
+    max-height: 800px;
+    min-width: 1030px;
     min-height: 800px;
     display: flex;
     flex-direction: column;
@@ -22,10 +27,10 @@ body {
     align-items: center;
 }
 
+/* --- Book Media (video, images) --- */
 .book-media {
     width: 100%;
-    max-width: 1030px;
-    min-height: 800px;
+    height: 100%;
     display: block;
     margin: 0 auto;
     border-radius: 12px;
@@ -33,11 +38,11 @@ body {
     background: transparent;
 }
 
+/* --- Iframe and Last Frame --- */
 .iframe-wrapper {
     position: relative;
     width: 100%;
-    max-width: 1030px;
-    min-height: 800px;
+    height: 100%;
     background: transparent;
     box-sizing: border-box;
     display: flex;
@@ -55,26 +60,16 @@ body {
     z-index: 2;
     pointer-events: auto;
     transition: box-shadow 0.2s;
-}
-
-.iframe-wrapper:hover iframe {
-    box-shadow: 0 0 0 6px #000000, 0 4px 10px rgba(0,0,0,0.534);
     cursor: pointer;
 }
 
-.iframe-wrapper:hover iframe {
-    cursor: pointer;
-}
-
-.iframe-wrapper:hover iframe {
+/* --- Hover Effect for Iframe (only before .opened) --- */
+.iframe-wrapper:not(.opened):hover iframe {
     box-shadow: 0 0 0 8px #000000, 0 4px 10px rgba(0,0,0,0.534);
-}
-
-.iframe-wrapper iframe {
-    /* fallback for pointer on non-hover */
     cursor: pointer;
 }
 
+/* --- Last Frame Image Behind Iframe --- */
 #bookLastFrame {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -83,18 +78,19 @@ body {
     border-radius: 12px;
 }
 
+/* --- Audio Controls --- */
 audio {
     z-index: 10;
 }
 
-/* Disable hover effects when .opened is present */
-.iframe-wrapper.opened:hover iframe {
-    box-shadow: none;
-    cursor: default;
+/* --- Hover Effect for Book Video (only before .clicked) --- */
+#bookVideo:not(.clicked):hover {
+    box-shadow: 0 0 0 8px #000000ff, 0 4px 10px rgba(0,0,0,0.534);
+    cursor: pointer;
 }
 
-/* Only show hover effect if video is NOT playing */
-#bookVideo.playing:hover {
+/* --- Remove hover effect after first click --- */
+#bookVideo.clicked:hover {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
     cursor: default;
 }
