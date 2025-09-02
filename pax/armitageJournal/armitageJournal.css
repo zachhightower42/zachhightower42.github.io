@@ -14,7 +14,7 @@ body {
     position: fixed;
     left: 50%;
     bottom: 0;
-    transform: translateX(-50%);
+    transform: translateX(-80%);
     width: 800px;
     height: 600px;
     max-width: 800px;
@@ -25,7 +25,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: visible; /* Allow media to overflow */
+    overflow: visible;
 }
 
 /* --- Book Media (video, images) --- */
@@ -51,11 +51,19 @@ body {
     align-items: center;
 }
 
+/* --- Make media inside iframe-wrapper 20% bigger --- */
+.iframe-wrapper .book-media,
+#bookLastFrame {
+    width: 1440px;
+    height: 1080px;
+}
+
+/* --- Shrink iframe by 20% --- */
 .iframe-wrapper iframe {
     position: absolute;
     top: 0; left: 0;
-    width: 1200px;
-    height: 900px;
+    width: 960px;
+    height: 720px;
     border: none;
     background: transparent;
     border-radius: 12px;
@@ -63,24 +71,7 @@ body {
     z-index: 2;
     pointer-events: auto;
     transition: box-shadow 0.2s;
-    cursor: pointer;
-}
-
-/* --- Hover Effect for Iframe (only before .opened) --- */
-.iframe-wrapper:not(.opened):hover iframe {
-    box-shadow: 0 0 0 8px #000000, 0 4px 10px rgba(0,0,0,0.534);
-    cursor: pointer;
-}
-
-/* --- Last Frame Image Behind Iframe --- */
-#bookLastFrame {
-    position: absolute;
-    top: 0; left: 0;
-    width: 1200px;
-    height: 900px;
-    z-index: 1;
-    pointer-events: none;
-    border-radius: 12px;
+    cursor: default; /* Remove pointer cursor */
 }
 
 /* --- Audio Controls --- */
@@ -88,14 +79,7 @@ audio {
     z-index: 10;
 }
 
-/* --- Hover Effect for Book Video (only before .clicked) --- */
-#bookVideo:not(.clicked):hover {
-    box-shadow: 0 0 0 8px #000000ff, 0 4px 10px rgba(0,0,0,0.534);
+/* --- Only show pointer cursor for video --- */
+#bookVideo {
     cursor: pointer;
-}
-
-/* --- Remove hover effect after first click --- */
-#bookVideo.clicked:hover {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.534), 0 1.5px 6px rgba(0, 0, 0, 0.719);
-    cursor: default;
 }
