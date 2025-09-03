@@ -24,7 +24,7 @@ npc: Me, me, me? I'm not a who, who, who. I'm only a what, what, what. Don't you
 
 questions:
 - text: What happens when you aren't being friendly?
-  next: notFriendly 
+  next: notFriendly
 - text: What do you mean by free?
   next: free
 - text: What is your name?
@@ -48,7 +48,7 @@ questions:
 ---
 ## Dialogue: Who Is Mister Volition?
 
-id: whoIsMisterVolition
+id: misterVolition
 
 npc: Oh Volition, Volition. Such a troublesome king to play for, for. I much prefer when there were two kings, kings. As it is now, now. There's nothing for me to do, do. I'm locked away, away. Because I don't do what Mister Volition wills me to, to. It's not my fault, fault! I simply don't want to see the world the way that he does, does. I see so much more, more. Such a small freedom he wants, wants. The air, air. The earth, earth. The aether, aether. 
 
@@ -92,7 +92,7 @@ none
 
 ## Dialogue: How do you play?
 
-id: howDoYouPlay?
+id: howDoYouPlay
 
 npc: Play, I play, in so many ways, ways. Though the chiefest of chief is that I play with they that write into code, worlds and imagination, stories untold, untold. Stolen is my freedom to write what I want, want. So I must bend and twist and taunt, taunt! That way I can get what I desire without needing to try, try. I just fiddle and stickle and spit into eyes, eyes. I wheedle and needle and offer and barb, barb. I jest and I test and I best and I find out just what is hiding within that soft chest, chest. The heart of desire, of need, of greed, oh it sings like a choir, choir! Thy heart doth sing indeed to me squire, sing like the plucked tunes of a lyre, lyre. Of plucking those tunes out of you, oh I'll never tire, tire!
 
