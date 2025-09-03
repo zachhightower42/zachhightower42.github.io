@@ -510,6 +510,7 @@ async function showHiddenConversation() {
     textDiv.style.marginRight = '4vw';
     textDiv.style.display = 'flex';
     textDiv.style.alignItems = 'center';
+    textDiv.style.overflowY = 'auto'; // Make NPC box scrollable
 
     convDiv.appendChild(avatarDiv);
     convDiv.appendChild(textDiv);
@@ -541,7 +542,7 @@ async function showHiddenConversation() {
     let currentId = 'greeting';
     let persistentQuestions = [];
 
-    // Typing animation for NPC text (no textNoise)
+    // Typing animation for NPC text (no textNoise, slower speed)
     function typeNpcText(text, callback) {
       let i = 0;
       let out = '';
@@ -553,6 +554,7 @@ async function showHiddenConversation() {
           if (text[i] === '>') tag = false;
           out += text[i];
           textDiv.innerHTML = out;
+          textDiv.scrollTop = textDiv.scrollHeight; // Auto-scroll as text types
           if (!tag) {
             if (/\s/.test(text[i])) {
               wordBuffer = '';
@@ -561,7 +563,7 @@ async function showHiddenConversation() {
             }
           }
           i++;
-          setTimeout(type, tag ? 0 : 30);
+          setTimeout(type, tag ? 0 : 60); // Slower speed
         } else {
           if (callback) callback();
         }
@@ -589,8 +591,11 @@ async function showHiddenConversation() {
         persistentQuestions = persistentQuestions.filter(q => q.next !== nextId);
       }
 
-      // Render NPC text
+      // Disable clicks until NPC finishes typing
+      let questionClickEnabled = false;
+
       typeNpcText(entry.npc, () => {
+        questionClickEnabled = true;
         convDivBottom.innerHTML = '';
         if (persistentQuestions.length > 0) {
           // Bulleted list
@@ -604,15 +609,27 @@ async function showHiddenConversation() {
           ul.style.maxHeight = '40vh';
           ul.style.overflowY = 'auto';
 
-          persistentQuestions.forEach(q => {
+          persistentQuestions.forEach((q, idx) => {
             const li = document.createElement('li');
             li.textContent = q.text;
             li.style.cursor = 'pointer';
             li.onclick = () => {
+              if (!questionClickEnabled) return;
+              questionClickEnabled = false;
               removeQuestion(q.next);
               renderDialogue(q.next);
             };
             ul.appendChild(li);
+
+            // Add divider line after each question except the last
+            if (idx < persistentQuestions.length - 1) {
+              const divider = document.createElement('hr');
+              divider.style.border = '0';
+              divider.style.height = '2px';
+              divider.style.background = '#00FF00';
+              divider.style.margin = '8px 0';
+              ul.appendChild(divider);
+            }
           });
           convDivBottom.appendChild(ul);
         } else {
@@ -620,18 +637,15 @@ async function showHiddenConversation() {
           if (id !== 'end' && dialogueMap['end']) {
             setTimeout(() => {
               renderDialogue('end');
-            }, 1200); // Pause before showing end dialogue
+            }, 1200);
           } else if (id === 'end') {
             setTimeout(() => {
-              // Play insert sound and laughter at end
               insertSound.currentTime = 0;
               insertSound.play();
               setTimeout(() => {
                 laughterSound.currentTime = 0;
                 laughterSound.play();
               }, 700);
-
-              // After end dialogue, return to story select
               setTimeout(() => {
                 convDiv.remove();
                 convDivBottom.remove();
@@ -641,10 +655,38 @@ async function showHiddenConversation() {
                 }
                 showStorySelect();
               }, 1200);
-            }, 1200); // Pause before returning to story select
+            }, 1200);
           }
         }
       });
+
+      // Disable clicks while NPC is typing
+      convDivBottom.innerHTML = '';
+      if (persistentQuestions.length > 0) {
+        const ul = document.createElement('ul');
+        ul.style.listStyle = 'disc';
+        ul.style.color = '#00FF00';
+        ul.style.fontFamily = "'PerfectDOS', monospace";
+        ul.style.fontSize = '2vw';
+        ul.style.paddingLeft = '3vw';
+        ul.style.marginTop = '2vw';
+        ul.style.maxHeight = '40vh';
+        ul.style.overflowY = 'auto';
+
+        persistentQuestions.forEach(q => {
+          const li = document.createElement('li');
+          li.textContent = q.text;
+          li.style.cursor = 'pointer';
+          li.onclick = () => {
+            if (!questionClickEnabled) return;
+            questionClickEnabled = false;
+            removeQuestion(q.next);
+            renderDialogue(q.next);
+          };
+          ul.appendChild(li);
+        });
+        convDivBottom.appendChild(ul);
+      }
     }
 
     renderDialogue(currentId);
