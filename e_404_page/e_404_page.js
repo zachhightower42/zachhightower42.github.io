@@ -437,7 +437,7 @@ function showHiddenConversation() {
   const prevConv = document.getElementById('hidden-conversation');
   if (prevConv) prevConv.remove();
 
-  // Wait 2 seconds, then show green rectangle and play new music
+  // Wait 2 seconds, then show green bordered rectangle and play new music
   setTimeout(() => {
     // Play hidden conversation music
     let hiddenMusic = document.getElementById('hidden-conversation-music');
@@ -451,7 +451,7 @@ function showHiddenConversation() {
     hiddenMusic.currentTime = 0;
     hiddenMusic.play();
 
-    // Create green rectangle container
+    // Create green bordered rectangle container
     const convDiv = document.createElement('div');
     convDiv.id = 'hidden-conversation';
     convDiv.style.position = 'absolute';
@@ -459,21 +459,25 @@ function showHiddenConversation() {
     convDiv.style.left = '0';
     convDiv.style.width = '100vw';
     convDiv.style.height = '50vh';
-    convDiv.style.background = '#00FF00';
+    convDiv.style.background = 'black';
     convDiv.style.display = 'flex';
     convDiv.style.alignItems = 'center';
     convDiv.style.zIndex = '999';
+    convDiv.style.border = '8px solid #00FF00';
+    convDiv.style.boxSizing = 'border-box';
 
-    // Avatar square
+    // Avatar square with green border, black inside
     const avatarDiv = document.createElement('div');
     avatarDiv.style.width = '20vh';
     avatarDiv.style.height = '20vh';
-    avatarDiv.style.background = '#00FF00';
+    avatarDiv.style.background = 'black';
     avatarDiv.style.display = 'flex';
     avatarDiv.style.alignItems = 'center';
     avatarDiv.style.justifyContent = 'center';
     avatarDiv.style.marginLeft = '4vw';
     avatarDiv.style.marginRight = '2vw';
+    avatarDiv.style.border = '8px solid #00FF00';
+    avatarDiv.style.boxSizing = 'border-box';
 
     const avatarImg = document.createElement('img');
     avatarImg.src = 'assets/orange_404.png';
@@ -488,7 +492,7 @@ function showHiddenConversation() {
     textDiv.id = 'hidden-conversation-text';
     textDiv.style.flex = '1';
     textDiv.style.height = '80%';
-    textDiv.style.color = '#000';
+    textDiv.style.color = '#00FF00';
     textDiv.style.fontFamily = "'PerfectDOS', monospace";
     textDiv.style.fontSize = '2vw';
     textDiv.style.background = 'transparent';
@@ -502,7 +506,7 @@ function showHiddenConversation() {
     document.body.appendChild(convDiv);
 
     // Typing animation with sound every other character
-    const greetingText = document.getElementById('greeting_npc')?.textContent || "Hello, I am the hidden NPC.";
+    const greetingText = document.getElementById('greeting_npc')?.textContent || "Well, well, well, looks like someone is poking around where they don't belong, belong. What do you want with little old me, I'm just a little leftover program, nothing to see here, here. And if Mister Volition knew you were talking to me, he'd be quite severe, severe.";
     let i = 0;
     let out = '';
     let tag = false;
