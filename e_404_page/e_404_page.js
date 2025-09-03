@@ -667,7 +667,7 @@ async function showHiddenConversation() {
           if (id !== 'end' && dialogueMap['end']) {
             setTimeout(() => {
               renderDialogue('end');
-            }, 1200);
+            }, 3200);
           } else if (id === 'end') {
             setTimeout(() => {
               insertSound.currentTime = 0;
@@ -684,8 +684,8 @@ async function showHiddenConversation() {
                   hiddenMusic.currentTime = 0;
                 }
                 showStorySelect();
-              }, 1200);
-            }, 1200);
+              }, 3200);
+            }, 3200);
           }
         }
       });
