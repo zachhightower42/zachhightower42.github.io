@@ -563,7 +563,7 @@ async function showHiddenConversation() {
             }
           }
           i++;
-          setTimeout(type, tag ? 0 : 45); // Slower speed
+          setTimeout(type, tag ? 0 : 55); // Slower speed
         } else {
           if (callback) callback();
         }
