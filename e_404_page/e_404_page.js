@@ -544,31 +544,57 @@ async function showHiddenConversation() {
 
     // Typing animation for NPC text (no textNoise, slower speed)
     function typeNpcText(text, callback) {
-      let i = 0;
+      const lines = text.split(/(?<=\.)\s+|(?<=\!)\s+|(?<=\?)\s+|[\n\r]+/).filter(l => l.trim().length > 0);
+      let currentLine = 0;
       let out = '';
-      let tag = false;
-      let wordBuffer = '';
-      function type() {
-        if (i < text.length) {
-          if (text[i] === '<') tag = true;
-          if (text[i] === '>') tag = false;
-          out += text[i];
-          textDiv.innerHTML = out;
-          textDiv.scrollTop = textDiv.scrollHeight; // Auto-scroll as text types
-          if (!tag) {
-            if (/\s/.test(text[i])) {
-              wordBuffer = '';
+      let paused = false;
+
+      function writeLines() {
+        let linesToWrite = lines.slice(currentLine, currentLine + 3);
+        let i = 0;
+        function typeLine() {
+          if (i < linesToWrite.length) {
+            let line = linesToWrite[i];
+            let j = 0;
+            let lineOut = '';
+            function typeChar() {
+              if (j < line.length) {
+                lineOut += line[j];
+                textDiv.innerHTML = out + lineOut;
+                textDiv.scrollTop = textDiv.scrollHeight;
+                j++;
+                setTimeout(typeChar, 10); // Faster typing
+              } else {
+                out += lineOut + '<br>';
+                i++;
+                setTimeout(typeLine, 200); // Short pause between lines
+              }
+            }
+            typeChar();
+          } else {
+            currentLine += 3;
+            if (currentLine < lines.length) {
+              paused = true;
+              // Wait for click or 10s
+              let resumed = false;
+              function resume() {
+                if (resumed) return;
+                resumed = true;
+                textDiv.removeEventListener('click', resume);
+                paused = false;
+                writeLines();
+              }
+              textDiv.addEventListener('click', resume);
+              setTimeout(resume, 10000);
             } else {
-              wordBuffer += text[i];
+              if (callback) callback();
             }
           }
-          i++;
-          setTimeout(type, tag ? 0 : 55); // Slower speed
-        } else {
-          if (callback) callback();
         }
+        typeLine();
       }
-      type();
+      out = '';
+      writeLines();
     }
 
     // Render current dialogue
@@ -591,7 +617,10 @@ async function showHiddenConversation() {
         persistentQuestions = persistentQuestions.filter(q => q.next !== nextId);
       }
 
-      // Disable clicks until NPC finishes typing
+      // Hide questions while NPC is typing
+      convDivBottom.innerHTML = '';
+
+      // Disable question clicks until NPC finishes
       let questionClickEnabled = false;
 
       typeNpcText(entry.npc, () => {
@@ -617,6 +646,7 @@ async function showHiddenConversation() {
               if (!questionClickEnabled) return;
               questionClickEnabled = false;
               removeQuestion(q.next);
+              convDivBottom.innerHTML = ''; // Hide questions until NPC finishes next dialogue
               renderDialogue(q.next);
             };
             ul.appendChild(li);
