@@ -274,6 +274,16 @@ function showChapter() {
 
 // Markdown parser for story content (white text, headings, paragraphs)
 function parseMarkdownStory(md) {
+  // Highlight FAQ link
+  md = md.replace(
+    /www\.equusSoft\/answers\.com/g,
+    '<span class="equus-soft-faq-link" style="color:#00FF00;cursor:pointer;text-decoration:underline;">www.equusSoft/answers.com</span>'
+  );
+  // Highlight and make "skeleton" clickable in FAQ
+  md = md.replace(
+    /\bskeleton\b/g,
+    '<span class="equus-soft-skeleton-link" style="color:#00FF00;cursor:pointer;text-decoration:underline;">skeleton</span>'
+  );
   return md
     .replace(/^# (.*)$/gm, '<span style="font-size:2vw;font-weight:bold;">$1</span><br>')
     .replace(/^## (.*)$/gm, '<span style="font-size:1.5vw;font-weight:bold;">$1</span><br>')
@@ -378,8 +388,143 @@ function loadEquusSoftAbout() {
       contentDiv.innerHTML = parseMarkdownStory(md);
       document.body.appendChild(contentDiv);
 
-      // No top-left home button, user should use the taskbar home icon
+      // Add click handler for FAQ link
+      const faqLink = contentDiv.querySelector('.equus-soft-faq-link');
+      if (faqLink) {
+        faqLink.onclick = function() {
+          loadEquusSoftFAQ();
+        };
+      }
     });
+}
+
+// Add this new function to load FAQ
+function loadEquusSoftFAQ() {
+  hideStoryContent();
+  fetch('assets/stories/equus_soft_faq.md')
+    .then(res => res.text())
+    .then(md => {
+      const contentDiv = document.createElement('div');
+      contentDiv.id = 'story-content';
+      contentDiv.className = 'story-content';
+      contentDiv.innerHTML = parseMarkdownStory(md);
+      document.body.appendChild(contentDiv);
+
+      // Add click handler for "skeleton"
+      const skeletonLink = contentDiv.querySelector('.equus-soft-skeleton-link');
+      if (skeletonLink) {
+        skeletonLink.onclick = function() {
+          hideStoryContent();
+          showHiddenConversation();
+        };
+      }
+    });
+}
+
+// --- Hidden Conversation ---
+function showHiddenConversation() {
+  // Stop regular music
+  const storyMusic = document.getElementById('story-music');
+  if (storyMusic) {
+    storyMusic.pause();
+    storyMusic.currentTime = 0;
+  }
+
+  // Remove any story content
+  hideStoryContent();
+
+  // Remove any previous hidden conversation elements
+  const prevConv = document.getElementById('hidden-conversation');
+  if (prevConv) prevConv.remove();
+
+  // Wait 2 seconds, then show green rectangle and play new music
+  setTimeout(() => {
+    // Play hidden conversation music
+    let hiddenMusic = document.getElementById('hidden-conversation-music');
+    if (!hiddenMusic) {
+      hiddenMusic = document.createElement('audio');
+      hiddenMusic.id = 'hidden-conversation-music';
+      hiddenMusic.src = 'assets/hidden_conversation.wav';
+      hiddenMusic.loop = true;
+      document.body.appendChild(hiddenMusic);
+    }
+    hiddenMusic.currentTime = 0;
+    hiddenMusic.play();
+
+    // Create green rectangle container
+    const convDiv = document.createElement('div');
+    convDiv.id = 'hidden-conversation';
+    convDiv.style.position = 'absolute';
+    convDiv.style.top = '0';
+    convDiv.style.left = '0';
+    convDiv.style.width = '100vw';
+    convDiv.style.height = '50vh';
+    convDiv.style.background = '#00FF00';
+    convDiv.style.display = 'flex';
+    convDiv.style.alignItems = 'center';
+    convDiv.style.zIndex = '999';
+
+    // Avatar square
+    const avatarDiv = document.createElement('div');
+    avatarDiv.style.width = '20vh';
+    avatarDiv.style.height = '20vh';
+    avatarDiv.style.background = '#00FF00';
+    avatarDiv.style.display = 'flex';
+    avatarDiv.style.alignItems = 'center';
+    avatarDiv.style.justifyContent = 'center';
+    avatarDiv.style.marginLeft = '4vw';
+    avatarDiv.style.marginRight = '2vw';
+
+    const avatarImg = document.createElement('img');
+    avatarImg.src = 'assets/orange_404.png';
+    avatarImg.alt = 'Avatar';
+    avatarImg.style.width = '90%';
+    avatarImg.style.height = '90%';
+    avatarImg.style.objectFit = 'contain';
+    avatarDiv.appendChild(avatarImg);
+
+    // Text area
+    const textDiv = document.createElement('div');
+    textDiv.id = 'hidden-conversation-text';
+    textDiv.style.flex = '1';
+    textDiv.style.height = '80%';
+    textDiv.style.color = '#000';
+    textDiv.style.fontFamily = "'PerfectDOS', monospace";
+    textDiv.style.fontSize = '2vw';
+    textDiv.style.background = 'transparent';
+    textDiv.style.marginLeft = '2vw';
+    textDiv.style.marginRight = '4vw';
+    textDiv.style.display = 'flex';
+    textDiv.style.alignItems = 'center';
+
+    convDiv.appendChild(avatarDiv);
+    convDiv.appendChild(textDiv);
+    document.body.appendChild(convDiv);
+
+    // Typing animation with sound every other character
+    const greetingText = document.getElementById('greeting_npc')?.textContent || "Hello, I am the hidden NPC.";
+    let i = 0;
+    let out = '';
+    let tag = false;
+    const textSound = new Audio('assets/e_404_hidden_converstation_text_noise.wav');
+
+    function type() {
+      if (i < greetingText.length) {
+        if (greetingText[i] === '<') tag = true;
+        if (greetingText[i] === '>') tag = false;
+        out += greetingText[i];
+        textDiv.innerHTML = out;
+        if (i % 2 === 1) {
+          textSound.currentTime = 0;
+          textSound.play();
+        }
+        i++;
+        setTimeout(type, tag ? 0 : 30);
+      }
+    }
+    type();
+
+  }, 2000);
 }
 
 // --- Initial Boot Sequence Click Handler ---
