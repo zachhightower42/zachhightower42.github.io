@@ -422,7 +422,7 @@ function loadEquusSoftFAQ() {
 }
 
 // --- Hidden Conversation ---
-function showHiddenConversation() {
+async function showHiddenConversation() {
   // Stop regular music
   const storyMusic = document.getElementById('story-music');
   if (storyMusic) {
@@ -430,15 +430,15 @@ function showHiddenConversation() {
     storyMusic.currentTime = 0;
   }
 
-  // Remove any story content
-  hideStoryContent();
-
   // Remove any previous hidden conversation elements
+  hideStoryContent();
   const prevConv = document.getElementById('hidden-conversation');
   if (prevConv) prevConv.remove();
+  const prevConv2 = document.getElementById('hidden-conversation-bottom');
+  if (prevConv2) prevConv2.remove();
 
-  // Wait 2 seconds, then show green bordered rectangle and play new music
-  setTimeout(() => {
+  // Wait 2 seconds, then show green bordered rectangles and play new music
+  setTimeout(async () => {
     // Play hidden conversation music
     let hiddenMusic = document.getElementById('hidden-conversation-music');
     if (!hiddenMusic) {
@@ -451,7 +451,7 @@ function showHiddenConversation() {
     hiddenMusic.currentTime = 0;
     hiddenMusic.play();
 
-    // Create green bordered rectangle container
+    // Create top rectangle
     const convDiv = document.createElement('div');
     convDiv.id = 'hidden-conversation';
     convDiv.style.position = 'absolute';
@@ -487,7 +487,7 @@ function showHiddenConversation() {
     avatarImg.style.objectFit = 'contain';
     avatarDiv.appendChild(avatarImg);
 
-    // Text area
+    // Text area for NPC
     const textDiv = document.createElement('div');
     textDiv.id = 'hidden-conversation-text';
     textDiv.style.flex = '1';
@@ -505,30 +505,140 @@ function showHiddenConversation() {
     convDiv.appendChild(textDiv);
     document.body.appendChild(convDiv);
 
-    // Typing animation with sound every other character
-    const greetingText = document.getElementById('greeting_npc')?.textContent || "Well, well, well, looks like someone is poking around where they don't belong, belong. What do you want with little old me, I'm just a little leftover program, nothing to see here, here. And if Mister Volition knew you were talking to me, he'd be quite severe, severe.";
-    let i = 0;
-    let out = '';
-    let tag = false;
-    const textSound = new Audio('assets/e_404_hidden_converstation_text_noise.wav');
+    // Bottom rectangle (for questions)
+    const convDivBottom = document.createElement('div');
+    convDivBottom.id = 'hidden-conversation-bottom';
+    convDivBottom.style.position = 'absolute';
+    convDivBottom.style.top = '50vh';
+    convDivBottom.style.left = '0';
+    convDivBottom.style.width = '100vw';
+    convDivBottom.style.height = '50vh';
+    convDivBottom.style.background = 'black';
+    convDivBottom.style.zIndex = '999';
+    convDivBottom.style.border = '8px solid #00FF00';
+    convDivBottom.style.boxSizing = 'border-box';
+    convDivBottom.style.overflowY = 'auto';
+    convDivBottom.style.display = 'flex';
+    convDivBottom.style.flexDirection = 'column';
+    convDivBottom.style.alignItems = 'flex-start';
+    document.body.appendChild(convDivBottom);
 
-    function type() {
-      if (i < greetingText.length) {
-        if (greetingText[i] === '<') tag = true;
-        if (greetingText[i] === '>') tag = false;
-        out += greetingText[i];
-        textDiv.innerHTML = out;
-        if (i % 2 === 1) {
-          textSound.currentTime = 0;
-          textSound.play();
+    // Load and parse dialogue
+    const dialogue = await fetch('assets/stories/hidden_skeleJester_conversation.md').then(r => r.text());
+    const dialogueMap = parseDialogueMarkdown(dialogue);
+
+    // Conversation state
+    let currentId = 'greeting';
+
+    // Typing animation for NPC text
+    function typeNpcText(text, callback) {
+      let i = 0;
+      let out = '';
+      let tag = false;
+      const textSound = new Audio('assets/e_404_hidden_converstation_text_noise.wav');
+      function type() {
+        if (i < text.length) {
+          if (text[i] === '<') tag = true;
+          if (text[i] === '>') tag = false;
+          out += text[i];
+          textDiv.innerHTML = out;
+          if (i % 2 === 1) {
+            textSound.currentTime = 0;
+            textSound.play();
+          }
+          i++;
+          setTimeout(type, tag ? 0 : 30);
+        } else {
+          if (callback) callback();
         }
-        i++;
-        setTimeout(type, tag ? 0 : 30);
       }
+      type();
     }
-    type();
+
+    // Render current dialogue
+    function renderDialogue(id) {
+      const entry = dialogueMap[id];
+      if (!entry) return;
+      textDiv.innerHTML = '';
+      convDivBottom.innerHTML = '';
+
+      typeNpcText(entry.npc, () => {
+        if (entry.questions && entry.questions.length > 0) {
+          // Bulleted list
+          const ul = document.createElement('ul');
+          ul.style.listStyle = 'disc';
+          ul.style.color = '#00FF00';
+          ul.style.fontFamily = "'PerfectDOS', monospace";
+          ul.style.fontSize = '1.5vw';
+          ul.style.paddingLeft = '3vw';
+          ul.style.marginTop = '2vw';
+          ul.style.maxHeight = '40vh';
+          ul.style.overflowY = 'auto';
+
+          entry.questions.forEach(q => {
+            const li = document.createElement('li');
+            li.textContent = q.text;
+            li.style.cursor = 'pointer';
+            li.onclick = () => {
+              renderDialogue(q.next);
+            };
+            ul.appendChild(li);
+          });
+          convDivBottom.appendChild(ul);
+        } else {
+          // No questions, show end dialogue
+          if (id !== 'end' && dialogueMap['end']) {
+            setTimeout(() => {
+              renderDialogue('end');
+            }, 600);
+          } else if (id === 'end') {
+            setTimeout(() => {
+              // After end dialogue, return to story select
+              setTimeout(() => {
+                // Remove conversation boxes
+                convDiv.remove();
+                convDivBottom.remove();
+                if (hiddenMusic) {
+                  hiddenMusic.pause();
+                  hiddenMusic.currentTime = 0;
+                }
+                showStorySelect();
+              }, 1200);
+            }, 600);
+          }
+        }
+      });
+    }
+
+    renderDialogue(currentId);
 
   }, 2000);
+}
+
+// --- Markdown dialogue parser ---
+function parseDialogueMarkdown(md) {
+  const sections = md.split(/^---$/m);
+  const map = {};
+  sections.forEach(section => {
+    const idMatch = section.match(/id:\s*([^\n]+)/);
+    if (!idMatch) return;
+    const id = idMatch[1].trim();
+    const npcMatch = section.match(/npc:\s*([\s\S]*?)(?:questions:|$)/);
+    const npc = npcMatch ? npcMatch[1].trim().replace(/\n+/g, ' ') : '';
+    const questionsMatch = section.match(/questions:\s*([\s\S]*)/);
+    let questions = [];
+    if (questionsMatch && !/none/.test(questionsMatch[1])) {
+      const qArr = [];
+      const qRegex = /- text:\s*([^\n]+)\s*next:\s*([^\n]+)/g;
+      let m;
+      while ((m = qRegex.exec(questionsMatch[1])) !== null) {
+        qArr.push({ text: m[1].trim(), next: m[2].trim() });
+      }
+      questions = qArr;
+    }
+    map[id] = { npc, questions };
+  });
+  return map;
 }
 
 // --- Initial Boot Sequence Click Handler ---
