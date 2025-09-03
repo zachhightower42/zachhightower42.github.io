@@ -529,12 +529,14 @@ async function showHiddenConversation() {
 
     // Conversation state
     let currentId = 'greeting';
+    let persistentQuestions = [];
 
     // Typing animation for NPC text
     function typeNpcText(text, callback) {
       let i = 0;
       let out = '';
       let tag = false;
+      let wordBuffer = '';
       const textSound = new Audio('assets/e_404_hidden_converstation_text_noise.wav');
       function type() {
         if (i < text.length) {
@@ -542,13 +544,25 @@ async function showHiddenConversation() {
           if (text[i] === '>') tag = false;
           out += text[i];
           textDiv.innerHTML = out;
-          if (i % 2 === 1) {
-            textSound.currentTime = 0;
-            textSound.play();
+          if (!tag) {
+            if (/\s/.test(text[i])) {
+              if (wordBuffer.length > 0) {
+                textSound.currentTime = 0;
+                textSound.play();
+                wordBuffer = '';
+              }
+            } else {
+              wordBuffer += text[i];
+            }
           }
           i++;
           setTimeout(type, tag ? 0 : 30);
         } else {
+          // Play sound for last word if text doesn't end with space
+          if (wordBuffer.length > 0) {
+            textSound.currentTime = 0;
+            textSound.play();
+          }
           if (callback) callback();
         }
       }
@@ -560,37 +574,53 @@ async function showHiddenConversation() {
       const entry = dialogueMap[id];
       if (!entry) return;
       textDiv.innerHTML = '';
-      convDivBottom.innerHTML = '';
 
+      // Add new questions to persistentQuestions if not already present
+      if (entry.questions && entry.questions.length > 0) {
+        entry.questions.forEach(q => {
+          if (!persistentQuestions.some(pq => pq.text === q.text && pq.next === q.next)) {
+            persistentQuestions.push(q);
+          }
+        });
+      }
+
+      // Remove the question that was just clicked
+      function removeQuestion(nextId) {
+        persistentQuestions = persistentQuestions.filter(q => q.next !== nextId);
+      }
+
+      // Render NPC text
       typeNpcText(entry.npc, () => {
-        if (entry.questions && entry.questions.length > 0) {
+        convDivBottom.innerHTML = '';
+        if (persistentQuestions.length > 0) {
           // Bulleted list
           const ul = document.createElement('ul');
           ul.style.listStyle = 'disc';
           ul.style.color = '#00FF00';
           ul.style.fontFamily = "'PerfectDOS', monospace";
-          ul.style.fontSize = '1.5vw';
+          ul.style.fontSize = '3vw';
           ul.style.paddingLeft = '3vw';
           ul.style.marginTop = '2vw';
           ul.style.maxHeight = '40vh';
           ul.style.overflowY = 'auto';
 
-          entry.questions.forEach(q => {
+          persistentQuestions.forEach(q => {
             const li = document.createElement('li');
             li.textContent = q.text;
             li.style.cursor = 'pointer';
             li.onclick = () => {
+              removeQuestion(q.next);
               renderDialogue(q.next);
             };
             ul.appendChild(li);
           });
           convDivBottom.appendChild(ul);
         } else {
-          // No questions, show end dialogue
+          // No questions left, show end dialogue
           if (id !== 'end' && dialogueMap['end']) {
             setTimeout(() => {
               renderDialogue('end');
-            }, 600);
+            }, 1200); // <-- Increased pause before showing end dialogue
           } else if (id === 'end') {
             setTimeout(() => {
               // After end dialogue, return to story select
@@ -604,7 +634,7 @@ async function showHiddenConversation() {
                 }
                 showStorySelect();
               }, 1200);
-            }, 600);
+            }, 1200); // <-- Increased pause before returning to story select
           }
         }
       });
