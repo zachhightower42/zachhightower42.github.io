@@ -430,6 +430,16 @@ async function showHiddenConversation() {
     storyMusic.currentTime = 0;
   }
 
+  // Play insert sound and laughter at start
+  const insertSound = document.getElementById('insert-sound');
+  const laughterSound = new Audio('assets/e_404_hidden_converstation_laughter.wav');
+  insertSound.currentTime = 0;
+  insertSound.play();
+  setTimeout(() => {
+    laughterSound.currentTime = 0;
+    laughterSound.play();
+  }, 700);
+
   // Remove any previous hidden conversation elements
   hideStoryContent();
   const prevConv = document.getElementById('hidden-conversation');
@@ -531,13 +541,12 @@ async function showHiddenConversation() {
     let currentId = 'greeting';
     let persistentQuestions = [];
 
-    // Typing animation for NPC text
+    // Typing animation for NPC text (no textNoise)
     function typeNpcText(text, callback) {
       let i = 0;
       let out = '';
       let tag = false;
       let wordBuffer = '';
-      const textSound = new Audio('assets/e_404_hidden_converstation_text_noise.wav');
       function type() {
         if (i < text.length) {
           if (text[i] === '<') tag = true;
@@ -546,11 +555,7 @@ async function showHiddenConversation() {
           textDiv.innerHTML = out;
           if (!tag) {
             if (/\s/.test(text[i])) {
-              if (wordBuffer.length > 0) {
-                textSound.currentTime = 0;
-                textSound.play();
-                wordBuffer = '';
-              }
+              wordBuffer = '';
             } else {
               wordBuffer += text[i];
             }
@@ -558,11 +563,6 @@ async function showHiddenConversation() {
           i++;
           setTimeout(type, tag ? 0 : 30);
         } else {
-          // Play sound for last word if text doesn't end with space
-          if (wordBuffer.length > 0) {
-            textSound.currentTime = 0;
-            textSound.play();
-          }
           if (callback) callback();
         }
       }
@@ -598,7 +598,7 @@ async function showHiddenConversation() {
           ul.style.listStyle = 'disc';
           ul.style.color = '#00FF00';
           ul.style.fontFamily = "'PerfectDOS', monospace";
-          ul.style.fontSize = '3vw';
+          ul.style.fontSize = '2vw';
           ul.style.paddingLeft = '3vw';
           ul.style.marginTop = '2vw';
           ul.style.maxHeight = '40vh';
@@ -620,12 +620,19 @@ async function showHiddenConversation() {
           if (id !== 'end' && dialogueMap['end']) {
             setTimeout(() => {
               renderDialogue('end');
-            }, 1200); // <-- Increased pause before showing end dialogue
+            }, 1200); // Pause before showing end dialogue
           } else if (id === 'end') {
             setTimeout(() => {
+              // Play insert sound and laughter at end
+              insertSound.currentTime = 0;
+              insertSound.play();
+              setTimeout(() => {
+                laughterSound.currentTime = 0;
+                laughterSound.play();
+              }, 700);
+
               // After end dialogue, return to story select
               setTimeout(() => {
-                // Remove conversation boxes
                 convDiv.remove();
                 convDivBottom.remove();
                 if (hiddenMusic) {
@@ -634,7 +641,7 @@ async function showHiddenConversation() {
                 }
                 showStorySelect();
               }, 1200);
-            }, 1200); // <-- Increased pause before returning to story select
+            }, 1200); // Pause before returning to story select
           }
         }
       });
