@@ -235,6 +235,10 @@ else:
         st.error(f"Invalid card label selected: {e}")
         st.stop()
 
+if card1 is None or card2 is None:
+    st.warning("Please enter/select both cards to continue.")
+    st.stop()
+
 suited = card1[1] == card2[1]
 
 # --- Manual or Multiselect Board Entry ---
