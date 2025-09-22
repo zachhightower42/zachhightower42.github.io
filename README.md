@@ -21,16 +21,22 @@ This one is for all the macros and instructions I've found useful when playing r
 
 This is a repository for various writing projects that are worthy enough to see the light of day.
 
+### narrative_work
+
+This index is going to just be a bunch of youtube embeds of my audiobooks/other VA work.
 
 
+## poker_stats
+
+Project folder for a python app that tracks how good a given poker hand in is in  Texas Hold 'Em. It need some improvements with regard to hand calculation and user experience. 
 
 
 
 
 # TODO
 
-- [ ] Fix JSON import not keeping character portrait, not re-selecting the race, not re-selecting traits, not remembering how many trait points were used. Attempted some fixes, they have not worked, check to see what can and can't be done with the JSON
+- [ ] Remove any character portrait saving from the JSON portions of the pax sheet maker. Add in a small popup that tells the user  that the character portrait won't be saved when exporting as a JSON and to have it somewhere seperate on their local machine. 
 - [ ] Attempted to fix the CSS margin styling for skills and proficiencies a couple times to no effect, keep playing with it and label anything that hasn't worked with a commment
-- [ ] Work on the text parser that's helping me convert Wonderful Cowboy Land's chat log into an easily readable book style narrative. Consider training an AI on OOC conversations and IC conversations that can then parse through it for me and make all the minor edits necessary. 
-- [ ] Finish work on the poker stats to make calculations more accurate and add in more features for ease of use
-- [ ] Work on adding the secret jester to the e_404 page after I finish with a bit more work on the FAQ and about sections
+- [ ] Restructure the idea of how the text parser and rewriter will work with the chat logs from Wonderful Cowboy Adventure Time. I need a workable basis that is sure to get me the results I want in the end. Currently, I think the main issue is to get it organized, and get a few scenes rewritten so that they flow correctly. 
+- [ ] Look back through poker stats to make notes and add documentation, maybe find areas that could use improvement like hand input ease of access. Giving the ability to put in something like 'as' to get ace of spades so on, so forth. 
+

@@ -7,7 +7,8 @@ Pages to visit
 - [Pax Sheet Maker](pax/pax_sheet_maker.html)
 - [Roll20 Macros and Instructions](pax/macros_and_instruc.md)
 - [Armitage's Caselog](pax/armitageJournal/armitageJournal.html)
-- [Zachary Hightower's Author Page](zacharyHightowerCollectedWorks/work/temp_author_page.md) 
+- [Zachary Hightower's Author Page](zacharyHightowerCollectedWorks/work/temp_author_page.md)
+- [Zachary Hightower's Voice Work](zacharyHightowerCollectedWorks/narrative_work/narrative_index.md)
 - [Poker Hand Evaluator](https://zachhightowerpokerstats.streamlit.app/)
 - [e_404](e_404_page/e_404_page.html)
 

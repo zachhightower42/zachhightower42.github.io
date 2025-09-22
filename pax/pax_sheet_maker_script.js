@@ -1109,6 +1109,7 @@ document.addEventListener("DOMContentLoaded", function () {
           renderShop();
           resetTraits(); // To update trait points and checkboxes
 
+          // Portrait is NOT restored from JSON
         } catch (err) {
           alert("Failed to import character sheet: " + err.message);
         }
@@ -1172,31 +1173,37 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function exportToJSON() {
-  const characterData = {
-    baseStats,
-    skills,
-    proficiencies,
-    selectedTraits,
-    inventory,
-    characterName: document.getElementById('characterName').value,
-    characterBio: document.getElementById('characterBio').value,
-    race: document.getElementById('race').value,
-    characterLevel,
-    portrait: document.getElementById('portraitPreview').src,
-    traitPointsUsed: 2 - baseStats.traitPoints // Assuming 2 is the starting value
-  };
+  // Show warning popup about portrait not being saved
+  styledPrompt({
+    message: "Character portrait will NOT be saved in the JSON export. Please save your portrait image separately on your local machine.",
+    okText: "OK",
+    inputs: []
+  }, function () {
+    const characterData = {
+      baseStats,
+      skills,
+      proficiencies,
+      selectedTraits,
+      inventory,
+      characterName: document.getElementById('characterName').value,
+      characterBio: document.getElementById('characterBio').value,
+      race: document.getElementById('race').value,
+      characterLevel,
+      traitPointsUsed: 2 - baseStats.traitPoints // Assuming 2 is the starting value
+    };
 
-  const dataStr = JSON.stringify(characterData, null, 2);
-  const blob = new Blob([dataStr], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
+    const dataStr = JSON.stringify(characterData, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "pax_character_sheet.json";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "pax_character_sheet.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
 }
 
 /* // Import inside DOMContentLoaded
