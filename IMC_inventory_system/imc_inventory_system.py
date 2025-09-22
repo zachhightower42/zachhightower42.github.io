@@ -83,11 +83,20 @@ def send_email(subject, body):
     msg["From"] = EMAIL_FROM
     msg["To"] = EMAIL_TO
     try:
+        print("Connecting to SMTP server...")
+        st.write("Connecting to SMTP server...")
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            print("Logging in to SMTP server...")
+            st.write("Logging in to SMTP server...")
             server.login(EMAIL_FROM, EMAIL_PASS)
+            print("Sending email...")
+            st.write("Sending email...")
             server.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
+            print("Email sent successfully.")
+            st.write("Email sent successfully.")
     except Exception as e:
         print("Email failed:", e)
+        st.error(f"Email failed: {e}")
 
 # --- UI: Login/Register ---
 def login_ui():
@@ -96,6 +105,7 @@ def login_ui():
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
+        st.write("Attempting login...")
         user = login(email, password)
         if user:
             st.session_state['user'] = user
@@ -111,6 +121,7 @@ def login_ui():
         reg_dept = st.selectbox("Department", DEPARTMENTS)
         reg_password = st.text_input("Set Password", type="password")
         if st.form_submit_button("Request Access"):
+            st.write("Submitting registration to database...")
             conn = get_db()
             c = conn.cursor()
             try:
@@ -118,24 +129,28 @@ def login_ui():
                           (name, reg_email, reg_password, reg_dept, "Member"))
                 conn.commit()
                 st.success("Request submitted. Await approval.")
+                print("Registration inserted into database.")
+                st.write("Registration inserted into database.")
                 # Send email to directors for approval
                 subject = "New Inventory System Access Request"
-                # Replace 'your-streamlit-url' with your deployed app URL
                 admin_url = "https://your-streamlit-url/?admin=1"
                 body = (
                     f"Name: {name}\nEmail: {reg_email}\nDepartment: {reg_dept}\n\n"
                     f"Approve or deny this user in the admin panel:\n{admin_url}"
                 )
+                st.write("Attempting to send approval email...")
                 send_email(subject, body)
             except sqlite3.IntegrityError:
                 st.error("Email already registered.")
+                print("Registration failed: Email already registered.")
+                st.write("Registration failed: Email already registered.")
 
     st.markdown("---")
     st.subheader("Forgot Password?")
     with st.form("forgot_pw_form"):
         forgot_email = st.text_input("Enter your registered email")
         if st.form_submit_button("Request Password Reset"):
-            # Send password reset request to director
+            st.write("Attempting to send password reset email...")
             subject = "Password Reset Request"
             body = f"Password reset requested for: {forgot_email}\nPlease review and respond."
             send_email(subject, body)
