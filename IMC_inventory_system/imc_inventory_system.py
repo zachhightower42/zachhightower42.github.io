@@ -4,6 +4,9 @@ import pandas as pd
 from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
+import requests
+
+
 
 # --- Constants ---
 DEPARTMENTS = [
@@ -78,24 +81,26 @@ def get_user_department(user):
     return user[4]  # department
 
 def send_email(subject, body):
-    msg = MIMEText(body)
-    msg["Subject"] = subject
-    msg["From"] = EMAIL_FROM
-    msg["To"] = EMAIL_TO
+    api_key = st.secrets["mailgun"]["api_key"]
+    domain = st.secrets["mailgun"]["domain"]
+    from_addr = st.secrets["mailgun"]["from"]
+    to_addr = st.secrets["mailgun"]["to"]
+
+    url = f"https://api.mailgun.net/v3/{domain}/messages"
+    data = {
+        "from": from_addr,
+        "to": [to_addr],
+        "subject": subject,
+        "text": body
+    }
     try:
-        print("Connecting to SMTP server...")
-        st.write("Connecting to SMTP server...")
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            print("Logging in to SMTP server...")
-            st.write("Logging in to SMTP server...")
-            server.login(EMAIL_FROM, EMAIL_PASS)
-            print("Sending email...")
-            st.write("Sending email...")
-            server.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
-            print("Email sent successfully.")
-            st.write("Email sent successfully.")
+        st.write("Sending email via Mailgun API...")
+        response = requests.post(url, auth=("api", api_key), data=data)
+        if response.status_code == 200:
+            st.write("Email sent successfully via Mailgun.")
+        else:
+            st.error(f"Mailgun error: {response.status_code} {response.text}")
     except Exception as e:
-        print("Email failed:", e)
         st.error(f"Email failed: {e}")
 
 # --- UI: Login/Register ---
