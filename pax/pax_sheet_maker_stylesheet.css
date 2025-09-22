@@ -74,7 +74,7 @@ h2 {
 }
 
 .skill:not(:last-child) {
-    margin-bottom: 0; /* Remove bottom margin for grid layout */
+    margin-bottom: 10px; /* Remove bottom margin for grid layout */
 }
 
 .skill:hover {
