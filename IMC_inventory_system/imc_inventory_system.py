@@ -2,6 +2,8 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 from datetime import datetime
+import smtplib
+from email.mime.text import MIMEText
 
 # --- Constants ---
 DEPARTMENTS = [
@@ -9,6 +11,10 @@ DEPARTMENTS = [
     "Concessions", "Deans", "Nurse", "Camp Directors"
 ]
 USER_ROLES = ["Member", "Admin", "Director"]
+
+EMAIL_FROM = st.secrets["email"]["from"]
+EMAIL_TO = st.secrets["email"]["to"]
+EMAIL_PASS = st.secrets["email"]["password"]
 
 # --- Database Setup ---
 def get_db():
@@ -71,6 +77,18 @@ def get_user_role(user):
 def get_user_department(user):
     return user[4]  # department
 
+def send_email(subject, body):
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = EMAIL_FROM
+    msg["To"] = EMAIL_TO
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(EMAIL_FROM, EMAIL_PASS)
+            server.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
+    except Exception as e:
+        print("Email failed:", e)
+
 # --- UI: Login/Register ---
 def login_ui():
     st.title("IMC Inventory System")
@@ -100,9 +118,28 @@ def login_ui():
                           (name, reg_email, reg_password, reg_dept, "Member"))
                 conn.commit()
                 st.success("Request submitted. Await approval.")
-                # TODO: Send email to directors for approval
+                # Send email to directors for approval
+                subject = "New Inventory System Access Request"
+                # Replace 'your-streamlit-url' with your deployed app URL
+                admin_url = "https://your-streamlit-url/?admin=1"
+                body = (
+                    f"Name: {name}\nEmail: {reg_email}\nDepartment: {reg_dept}\n\n"
+                    f"Approve or deny this user in the admin panel:\n{admin_url}"
+                )
+                send_email(subject, body)
             except sqlite3.IntegrityError:
                 st.error("Email already registered.")
+
+    st.markdown("---")
+    st.subheader("Forgot Password?")
+    with st.form("forgot_pw_form"):
+        forgot_email = st.text_input("Enter your registered email")
+        if st.form_submit_button("Request Password Reset"):
+            # Send password reset request to director
+            subject = "Password Reset Request"
+            body = f"Password reset requested for: {forgot_email}\nPlease review and respond."
+            send_email(subject, body)
+            st.success("Password reset request sent to camp directors.")
 
 # --- Inventory CRUD ---
 def get_inventory(department=None):
@@ -147,6 +184,36 @@ def delete_inventory_item(item_id):
     c = conn.cursor()
     c.execute("DELETE FROM inventory WHERE id=?", (item_id,))
     conn.commit()
+
+# --- Admin Panel ---
+def admin_panel(user):
+    st.title("Admin Panel")
+    st.subheader("Pending User Approvals")
+    conn = get_db()
+    c = conn.cursor()
+    c.execute("SELECT * FROM users WHERE approved=0")
+    pending = c.fetchall()
+    if not pending:
+        st.info("No pending users.")
+    else:
+        for u in pending:
+            st.write(f"Name: {u[1]}, Email: {u[2]}, Dept: {u[4]}, Role: {u[5]}")
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button(f"Approve {u[2]}"):
+                    c.execute("UPDATE users SET approved=1 WHERE id=?", (u[0],))
+                    conn.commit()
+                    st.success(f"Approved {u[2]}")
+            with col2:
+                if st.button(f"Deny {u[2]}"):
+                    c.execute("DELETE FROM users WHERE id=?", (u[0],))
+                    conn.commit()
+                    st.warning(f"Denied {u[2]}")
+    st.markdown("---")
+    st.subheader("All Users")
+    c.execute("SELECT id, name, email, department, role, approved FROM users")
+    df = pd.DataFrame(c.fetchall(), columns=["ID", "Name", "Email", "Department", "Role", "Approved"])
+    st.dataframe(df)
 
 # --- Main App ---
 def main_app(user):
@@ -215,6 +282,15 @@ def main_app(user):
 
 # --- App Entrypoint ---
 if 'user' not in st.session_state:
-    login_ui()
+    # Check for admin panel access via URL param
+    if st.query_params.get("admin") == "1":
+        # For security, you may want to require login as Director/Admin here
+        admin_panel(None)
+    else:
+        login_ui()
 else:
-    main_app(st.session_state['user'])
+    # If admin panel param is set and user is Director/Admin, show admin panel
+    if st.query_params.get("admin") == "1" and get_user_role(st.session_state['user']) in ["Admin", "Director"]:
+        admin_panel(st.session_state['user'])
+    else:
+        main_app(st.session_state['user'])
