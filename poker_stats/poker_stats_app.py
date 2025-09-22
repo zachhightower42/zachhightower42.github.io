@@ -184,7 +184,7 @@ def validate_board_cards(board_cards, expected_count):
     if len(set(board_cards)) != len(board_cards):
         raise ValueError("Duplicate cards detected in board cards.")
 
-# Usage:
+""" # Usage:
 try:
     card1 = validate_card_input(card1)
     card2 = validate_card_input(card2)
@@ -192,7 +192,7 @@ try:
         raise ValueError("Duplicate cards selected.")
 except ValueError as e:
     st.error(str(e))
-    st.stop()
+    st.stop() """
 
 st.title("Poker Hand Improvement Probabilities")
 
