@@ -83,16 +83,20 @@ def to_treys(card):
                  '9': '9', '8': '8', '7': '7', '6': '6', '5': '5',
                  '4': '4', '3': '3', '2': '2'}
     suit_map = {'s': 's', 'h': 'h', 'd': 'd', 'c': 'c'}
-    return value_map[card[0]] + suit_map[card[1]]
+    try:
+        return value_map[card[0]] + suit_map[card[1]]
+    except (KeyError, IndexError):
+        raise ValueError(f"Invalid card code: {card}")
 
 def count_better_hands(hero_hand, board_cards):
     evaluator = Evaluator()
     deck = Deck()
-    # Remove hero's cards and board cards from deck
     used = set(hero_hand + board_cards)
     deck.cards = [c for c in deck.cards if Card.int_to_str(c) not in [to_treys(card) for card in used]]
-    hero = [Card.new(to_treys(card)) for card in hero_hand]
-    board = [Card.new(to_treys(card)) for card in board_cards]
+    if len(deck.cards) < 2:
+        raise ValueError("Not enough cards left in deck to enumerate opponent hands.")
+    hero = [Card.new(to_treys(card)) for c in hero_hand]
+    board = [Card.new(to_treys(card)) for c in board_cards]
     hero_score = evaluator.evaluate(hero, board)
     better = 0
     total = 0
@@ -121,12 +125,17 @@ def simulate_improvement(hero_hand, board_cards, target_rank, n_trials=5000):
         return 1.0 if hand_class <= target_rank else 0.0
 
     deck = [c for c in ALL_CARDS if c not in hero_hand + board_cards]
+    if len(deck) < needed:
+        raise ValueError("Not enough cards left in deck to complete the board.")
     hero = [Card.new(to_treys(c)) for c in hero_hand]
     board = [Card.new(to_treys(c)) for c in board_cards]
     improve_count = 0
 
     for _ in range(n_trials):
-        draw = random.sample(deck, needed)
+        try:
+            draw = random.sample(deck, needed)
+        except ValueError:
+            raise ValueError("Not enough cards left in deck to sample for simulation.")
         full_board = board + [Card.new(to_treys(c)) for c in draw]
         score = evaluator.evaluate(hero, full_board)
         hand_class = evaluator.get_rank_class(score)
@@ -158,23 +167,77 @@ def enumerate_improvement(hero_hand, board_cards, target_rank):
 
     return improve_count / total if total else 0
 
+# Example: Validate manual input (add where you process manual card entry)
+def validate_card_input(card_str):
+    """Validate a card string like 'As' or 'Td'."""
+    if len(card_str) != 2:
+        raise ValueError(f"Card '{card_str}' must be two characters.")
+    value, suit = card_str[0], card_str[1]
+    if value not in CARD_VALUES or suit not in SUITS:
+        raise ValueError(f"Card '{card_str}' is not a valid card.")
+    return card_str
+
+def validate_board_cards(board_cards, expected_count):
+    """Ensure correct number and uniqueness of board cards."""
+    if len(board_cards) != expected_count:
+        raise ValueError(f"Expected {expected_count} board cards, got {len(board_cards)}.")
+    if len(set(board_cards)) != len(board_cards):
+        raise ValueError("Duplicate cards detected in board cards.")
+
+# Usage:
+try:
+    card1 = validate_card_input(card1)
+    card2 = validate_card_input(card2)
+    if card1 == card2:
+        raise ValueError("Duplicate cards selected.")
+except ValueError as e:
+    st.error(str(e))
+    st.stop()
+
 st.title("Poker Hand Improvement Probabilities")
 
 st.write("Select your two cards (no duplicates):")
 
-col1, col2 = st.columns(2)
-with col1:
-    card1_label = st.selectbox("First card", ALL_CARD_LABELS)
-with col2:
-    card2_label = st.selectbox(
-        "Second card",
-        [c for c in ALL_CARD_LABELS if c != card1_label]
-    )
+# --- Manual or Dropdown Hand Entry ---
+hand_entry_mode = st.radio("Hand entry mode", ["Dropdown", "Manual"], horizontal=True, key="hand_entry_mode")
 
-card1 = CARD_LABEL_TO_CODE[card1_label]
-card2 = CARD_LABEL_TO_CODE[card2_label]
+if hand_entry_mode == "Manual":
+    hand_input = st.text_input("Enter your two cards (e.g., 'As Kd'):", key="hand_input")
+    card1_label = card2_label = None
+    card1 = card2 = None
+    if hand_input:
+        try:
+            parts = hand_input.strip().split()
+            if len(parts) != 2:
+                raise ValueError("Please enter exactly two cards separated by a space.")
+            card1 = validate_card_input(parts[0].capitalize())
+            card2 = validate_card_input(parts[1].capitalize())
+            if card1 == card2:
+                raise ValueError("Duplicate cards selected.")
+            card1_label = card_label(card1)
+            card2_label = card_label(card2)
+        except ValueError as e:
+            st.error(str(e))
+            st.stop()
+else:
+    col1, col2 = st.columns(2)
+    with col1:
+        card1_label = st.selectbox("First card", ALL_CARD_LABELS)
+    with col2:
+        card2_label = st.selectbox(
+            "Second card",
+            [c for c in ALL_CARD_LABELS if c != card1_label]
+        )
+    try:
+        card1 = CARD_LABEL_TO_CODE[card1_label]
+        card2 = CARD_LABEL_TO_CODE[card2_label]
+    except KeyError as e:
+        st.error(f"Invalid card label selected: {e}")
+        st.stop()
+
 suited = card1[1] == card2[1]
 
+# --- Manual or Multiselect Board Entry ---
 st.header("Board Cards (Community Cards)")
 board_stage = st.selectbox("Current street", ["Preflop", "Flop", "Turn", "River"])
 street_to_count = {"Preflop": 0, "Flop": 3, "Turn": 4, "River": 5}
@@ -182,8 +245,9 @@ board_count = street_to_count[board_stage]
 
 available_board_labels = [c for c in ALL_CARD_LABELS if c not in [card1_label, card2_label]]
 
+board_entry_mode = st.radio("Board entry mode", ["Multiselect", "Manual"], horizontal=True, key="board_entry_mode")
+
 if board_stage == "Preflop":
-    # Greyed out area with info
     st.markdown(
         """
         <div style="background-color:#f0f0f0; padding:10px; border-radius:5px; color:#888;">
@@ -193,13 +257,57 @@ if board_stage == "Preflop":
         unsafe_allow_html=True
     )
     board_labels = []
+    board_cards = []
 else:
-    board_labels = st.multiselect(
-        f"Select board cards ({board_count}):",
-        available_board_labels,
-        max_selections=board_count
-    )
-board_cards = [CARD_LABEL_TO_CODE[lab] for lab in board_labels]
+    if board_entry_mode == "Manual":
+        board_input = st.text_input(
+            f"Enter {board_count} board cards (e.g., 'Ah Ks 7d'):",
+            key="board_input"
+        )
+        board_labels = []
+        board_cards = []
+        if board_input:
+            try:
+                parts = [p.capitalize() for p in board_input.strip().split()]
+                if len(parts) != board_count:
+                    raise ValueError(f"Please enter exactly {board_count} cards.")
+                seen = set()
+                for p in parts:
+                    c = validate_card_input(p)
+                    if c in [card1, card2]:
+                        raise ValueError(f"Board card {c} duplicates a hand card.")
+                    if c in seen:
+                        raise ValueError(f"Duplicate card {c} in board.")
+                    seen.add(c)
+                    board_labels.append(card_label(c))
+                    board_cards.append(c)
+            except ValueError as e:
+                st.error(str(e))
+                st.stop()
+    else:
+        board_labels = st.multiselect(
+            f"Select board cards ({board_count}):",
+            available_board_labels,
+            max_selections=board_count
+        )
+        board_cards = [CARD_LABEL_TO_CODE[lab] for lab in board_labels]
+
+try:
+    validate_board_cards(board_cards, board_count)
+except ValueError as e:
+    st.error(str(e))
+    st.stop()
+
+# Add this after board_count is set, before hand/board entry UI
+st.sidebar.header("Simulation Settings")
+num_opponents = st.sidebar.number_input(
+    "Number of opponents to simulate against",
+    min_value=1,
+    max_value=9,
+    value=1,
+    step=1,
+    help="Simulate your hand strength against this many random opponents."
+)
 
 if st.button("Show Probabilities"):
     hand_type = get_hand_type(card1, card2, suited)
@@ -220,13 +328,50 @@ if st.button("Show Probabilities"):
     else:
         st.warning("No probabilities available for this hand type yet.")
 
-# After showing probabilities
+# --- Hand strength evaluation and progress bar ---
 if board_count == len(board_cards) and board_count >= 3:
     with st.spinner("Evaluating hand strength..."):
         better, total, prob = count_better_hands([card1, card2], board_cards)
         st.subheader("Opponent Hand Comparison")
         st.write(f"Number of possible better hands: **{better}** out of {total}")
         st.write(f"Probability a random hand is better: **{prob:.2%}**")
+
+        # Calculate probability you have the best hand vs N opponents
+        percent_best = (1 - prob) ** num_opponents
+        st.markdown("**% of times you have the best hand**")
+        st.progress(percent_best)
+        st.write(f"{percent_best:.2%} (vs {num_opponents} opponent{'s' if num_opponents > 1 else ''})")
+
+        # --- Recommended Betting Strategies Section ---
+        st.header("Recommended Betting Strategies")
+
+        # Simple logic for recommendations
+        if percent_best > 0.8:
+            st.success(
+                "🟢 **Strong Hand:**\n\n"
+                "- If all opponents have checked or called, consider a **value bet** to extract chips.\n"
+                "- If there was a raise pre-flop and you have a premium hand, consider a **re-raise** or call depending on position.\n"
+                "- If facing aggression post-flop, you can often continue with confidence."
+            )
+        elif percent_best > 0.5:
+            st.info(
+                "🟡 **Decent Hand:**\n\n"
+                "- If opponents have checked, a **small value bet** or check is reasonable.\n"
+                "- If facing a bet, consider **calling** or **folding** depending on bet size and position.\n"
+                "- Avoid overcommitting unless you improve further."
+            )
+        elif percent_best > 0.2:
+            st.warning(
+                "🟠 **Marginal Hand:**\n\n"
+                "- If checked to you, consider **checking back** or making a small bluff.\n"
+                "- If facing a bet or raise, usually **fold** unless you have strong draws or reads."
+            )
+        else:
+            st.error(
+                "🔴 **Weak Hand:**\n\n"
+                "- If there was a bet or raise pre-flop, **fold** unless you have strong pot odds or a specific read.\n"
+                "- Avoid investing more chips with this hand."
+            )
 
 HAND_CLASS_OPTIONS = {
     "Pair or better": 8,
@@ -284,3 +429,27 @@ if st.button("Simulate Custom Target Improvement"):
     st.write(f"Probability of improving to {custom_target}: **{prob:.2%}**")
     if prob == 0.0:
         st.warning(f"No possible improvement to {custom_target} with the selected cards and board.")
+
+# --- Board stage and count already defined above ---
+# board_stage = st.selectbox(...)
+# board_count = street_to_count[board_stage]
+
+# --- Random Hand/Board Generation Button ---
+if st.button("Generate Random Hand/Board"):
+    # Draw random hand
+    all_cards = ALL_CARDS.copy()
+    random.shuffle(all_cards)
+    rand_hand = all_cards[:2]
+    rand_board = []
+    if board_count > 0:
+        rand_board = all_cards[2:2+board_count]
+    # Set session state for hand
+    st.session_state["hand_entry_mode"] = "Manual"
+    st.session_state["hand_input"] = f"{rand_hand[0]} {rand_hand[1]}"
+    # Set session state for board
+    st.session_state["board_entry_mode"] = "Manual"
+    if board_count > 0:
+        st.session_state["board_input"] = " ".join(rand_board)
+    else:
+        st.session_state["board_input"] = ""
+    st.experimental_rerun()
