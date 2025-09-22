@@ -35,7 +35,6 @@ Project folder for a python app that tracks how good a given poker hand in is in
 
 # TODO
 
-- [ ] Remove any character portrait saving from the JSON portions of the pax sheet maker. Add in a small popup that tells the user  that the character portrait won't be saved when exporting as a JSON and to have it somewhere seperate on their local machine. 
 - [ ] Attempted to fix the CSS margin styling for skills and proficiencies a couple times to no effect, keep playing with it and label anything that hasn't worked with a commment
 - [ ] Restructure the idea of how the text parser and rewriter will work with the chat logs from Wonderful Cowboy Adventure Time. I need a workable basis that is sure to get me the results I want in the end. Currently, I think the main issue is to get it organized, and get a few scenes rewritten so that they flow correctly. 
 - [ ] Look back through poker stats to make notes and add documentation, maybe find areas that could use improvement like hand input ease of access. Giving the ability to put in something like 'as' to get ace of spades so on, so forth. 

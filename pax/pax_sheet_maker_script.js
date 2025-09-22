@@ -474,8 +474,9 @@ function exportToPDF() {
     doc.text(`Page ${i} of ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: "center" });
   }
 
-  // Save the PDF
-  doc.save("pax_character_sheet.pdf");
+  // Save the PDF with character name or fallback
+  let filename = (characterName && characterName.trim()) ? characterName.trim().replace(/[^\w\-]+/g, "_") : "pax_character_sheet";
+  doc.save(filename + ".pdf");
 }
 
 let inventory = [];
@@ -1196,9 +1197,13 @@ function exportToJSON() {
     const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 
+    // Use character name or fallback for filename
+    let characterName = document.getElementById('characterName').value;
+    let filename = (characterName && characterName.trim()) ? characterName.trim().replace(/[^\w\-]+/g, "_") : "pax_character_sheet";
+
     const a = document.createElement("a");
     a.href = url;
-    a.download = "pax_character_sheet.json";
+    a.download = filename + ".json";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
