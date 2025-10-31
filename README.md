@@ -39,3 +39,16 @@ Project folder for a python app that tracks how good a given poker hand in is in
 - [ ] Restructure the idea of how the text parser and rewriter will work with the chat logs from Wonderful Cowboy Adventure Time. I need a workable basis that is sure to get me the results I want in the end. Currently, I think the main issue is to get it organized, and get a few scenes rewritten so that they flow correctly. 
 - [ ] Look back through poker stats to make notes and add documentation, maybe find areas that could use improvement like hand input ease of access. Giving the ability to put in something like 'as' to get ace of spades so on, so forth. 
 
+## Mailgun Email Implementation, IMC Inventory
+
+- [ ] **Test Mailgun email integration:**  
+  The current implementation of email notifications uses the Mailgun API via the `requests` library. Credentials and configuration are stored in `.streamlit/secrets.toml`. The `send_email` function is set up to send registration and password reset notifications to the camp director's email.
+- [ ] **Verify email delivery:**  
+  Ensure that emails are actually being sent and received at `zachhightower42@gmail.com`.
+- [ ] **Handle Mailgun errors:**  
+  Check for and handle any errors returned by the Mailgun API in the Streamlit UI.
+- [ ] **Update documentation:**  
+  Add setup and troubleshooting steps for Mailgun in the README once testing is complete.
+
+**Implementation status:**  
+The Mailgun integration is in place, but full end-to-end testing and verification of email delivery has not yet been completed.

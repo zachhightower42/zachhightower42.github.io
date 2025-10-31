@@ -9,6 +9,7 @@ Pages to visit
 - [Armitage's Caselog](pax/armitageJournal/armitageJournal.html)
 - [Zachary Hightower's Author Page](zacharyHightowerCollectedWorks/work/temp_author_page.md)
 - [Zachary Hightower's Voice Work](zacharyHightowerCollectedWorks/narrative_work/narrative_index.md)
+- [Zachary Hightower's Artwork](zacharyHightowerCollectedWorks/art/art_index.md)
 - [Poker Hand Evaluator](https://zachhightowerpokerstats.streamlit.app/)
 - [e_404](e_404_page/e_404_page.html)
 
