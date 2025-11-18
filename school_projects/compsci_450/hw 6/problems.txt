@@ -1,0 +1,7 @@
+P1
+<assign> → <id> = <expr> 
+<id> → a | b | c 
+<expr> → <id> + <expr> | <id> * <expr> | (<expr>) | <id> 
+
+Do a leftmost derivation of the following using the above language:
+a = a * (b + (c * a))

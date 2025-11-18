@@ -11,7 +11,9 @@ Pages to visit
 - [Zachary Hightower's Voice Work](zacharyHightowerCollectedWorks/narrative_work/narrative_index.md)
 - [Zachary Hightower's Artwork](zacharyHightowerCollectedWorks/art/art_index.md)
 - [Poker Hand Evaluator](https://zachhightowerpokerstats.streamlit.app/)
+- [Poker Hand Evaluator Info](poker_stats/README_poker_stats.md)
 - [e_404](e_404_page/e_404_page.html)
+- [School Projects](school_projects/sp_sub_index.md)
 
 ## NOTICE 
 All works that appear here are free to view. They may not be downloaded, distributed, or reproduced for commercial or private use without explicit permission from the author. No part or portion of the works may be used without credit to the author.
