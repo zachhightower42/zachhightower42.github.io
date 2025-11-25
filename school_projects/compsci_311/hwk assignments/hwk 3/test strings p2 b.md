@@ -1,0 +1,16 @@
+Accept 
+ba
+abaa
+aabaaa
+aabbaaaa
+aaaaaaaabaaaaaaaaa
+bbbbbbbaaaaaaa
+aaaabbbbaaaaaaaa
+Reject
+lambda/empty
+aba
+abbaa
+aaabaaa
+aabbaaaaa
+aaaaaaaabbaaaaaaaaa
+bbbbabbbaaaaaaa

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head<title>Profile Page</title></head>
+<body>
+	<table>
+<?php
+	require '/home/tlholsto/connections/pgconnect.php';
+	$lname = $_POST['lname'];
+	$pword = $_POST['pword'];
+	$query = 'select sid, firstname, lastname from student where loginname = ? and password = ?';
+	$statement = $dbConn->prepare($query);
+	$statement->execute([$lname, md5($pword)]);
+	$data = $statement->fetchAll();
+	if ($statement->rowCount() == 1){
+			foreach ($data as $row) {
+				echo "<tr><td>Identification Number:</td><td>" .$row['sid']. "</td></tr>";
+				echo "<tr><td>First Name:</td><td>" .$row['firstname']. "</td></tr>";
+				echo "<tr><td>Last Name: </td><td>" .$row['lastname']. "</td></tr>";
+			}
+	}
+	else{
+		echo "<script>confirm('Authentication Error');</script>";
+		header("location:login.html");
+	}
+?>
+</table>
+</body>
+</html>

@@ -1,0 +1,244 @@
+/* Copy the base styles from stylesheet_admin_manage_workers.css */
+@font-face {
+    font-family: "BrushScriptOpti";
+    src: url("fonts/BrushScriptOpti-Regular.otf") format("opentype");
+}
+  
+@font-face {
+    font-family: "Merriweather";
+    src: url("fonts/Merriweather-Regular.ttf") format("truetype");
+}
+
+/* Inherit the base styles from admin_manage_workers.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #12284C;
+}
+
+/* Animation and background styles remain the same */
+@keyframes backgroundSwap {
+    0%, 100% { background-image: url('../assets/background dash photos/background dash 1.png'); }
+    33.33% { background-image: url('../assets/background dash photos/background dash 2.png'); }
+    66.66% { background-image: url('../assets/background dash photos/background dash 3.png'); }
+}
+
+/* Add the missing body::before animation background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: backgroundSwap 90s infinite;
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+}
+
+/* Add the gradient footer effect */
+body::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(18, 40, 76, 0), rgba(18, 40, 76, 1));
+    z-index: -1;
+}
+
+/* Add header styles */
+header {
+             background-color: rgba(36, 81, 153, 0.753);
+             padding: 1rem;
+             display: flex;
+             align-items: center;
+}
+
+.logo {
+             margin-right: auto;
+}
+
+.logo h1 {
+             font-family: "BrushScriptOpti", Arial, sans-serif;
+             color: #cf152d;
+             text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
+             font-size: 24px;
+             margin: 0;
+}
+
+.navbar {
+             flex-grow: 1;
+}
+
+.navbar ul {
+             list-style-type: none;
+             margin: 0;
+             padding: 0;
+             display: flex;
+             justify-content: flex-start;
+}
+
+.navbar .dropbtn {
+             font-family: "Merriweather", Arial, sans-serif;
+             color: #cf152d;
+             text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
+             font-size: 18px;
+             text-decoration: none;
+             padding: 10px;
+}
+
+/* Center the main heading */
+main {
+             padding: 2rem;
+             text-align: center;
+             position: relative;
+             z-index: 1;
+}
+
+main h2 {
+             font-family: "BrushScriptOpti", Arial, sans-serif;
+             color: #cf152d;
+             text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
+             font-size: 42px;
+             margin: 20px 0;
+             text-align: center;
+}
+.organizers-table {
+    width: 90%;
+    margin: 20px auto;
+    background-color: rgba(36, 81, 153, 0.9);
+    border-radius: 8px;
+    border-collapse: collapse;
+}
+
+.organizers-table th, .organizers-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.organizers-table th {
+    background-color: rgba(207, 21, 45, 0.8);
+    color: white;
+}
+
+#addOrganizerBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.action-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.delete-btn {
+    background-color: #ff4444;
+}
+
+.message-btn {
+    background-color: #4CAF50;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+}
+
+.modal-content input, 
+.modal-content textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Update table styles to match workers table */
+.events-table {
+    width: 90%;
+    margin: 20px auto;
+    background-color: rgba(36, 81, 153);
+    border-radius: 8px;
+    border-collapse: collapse;
+}
+
+.events-table th, .events-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.events-table th {
+    background-color: rgba(207, 21, 45, 0.8);
+    color: white;
+}
+
+.approve-btn {
+    background-color: #4CAF50;
+}
+
+.reject-btn {
+    background-color: #ff4444;
+}
+
+.edit-btn {
+    background-color: #245199;
+}
+
+/* Add status indicator styles */
+.status-approved {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.status-unapproved {
+    color: #ff4444;
+    font-weight: bold;
+}

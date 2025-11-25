@@ -1,0 +1,104 @@
+/**
+ * stylesheet_login.css
+ * This CSS file defines the styles for the login page of the application.
+ * It includes styles for the body, header, logo, and login container.
+ * The login container has styles for the form inputs and submit button.
+ */
+/*login*/
+@font-face {
+  font-family: "BrushScriptOpti";
+  src: url("fonts/BrushScriptOpti-Regular.otf") format("opentype");
+}
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #12284c;
+
+  /* Background Image, currently non-functioning need to fiddle with */
+  background-image: url("assets/OleMiss_Banner.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 120px;
+}
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: -1;
+  pointer-events: none;
+  padding-top: 20px;
+}
+.logo-text {
+  background: rgba(255, 255, 255, 0);
+  font-family: "BrushScriptOpti", Arial, sans-serif;
+  color: #cf152d;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff;
+  font-size: 160px;
+  user-select: none;
+  margin: 0;
+}
+body {
+  position: relative;
+  z-index: 1;
+  padding-top: 180px; /* Adjust this value to fine-tune the spacing */
+}
+.login-container {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(36, 81, 153, 0.753);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+.login-container h1 {
+  font-family: "BrushScriptOpti", Arial, sans-serif;
+  margin-bottom: 1rem;
+  color: #cf152d;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff;
+
+  font-size: 50px;
+}
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.login-container input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.login-container input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.login-container button[type="button"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.login-container button[type="button"]:hover {
+  background-color: #0056b3;
+}

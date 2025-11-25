@@ -1,0 +1,82 @@
+<?php
+	require "/home/tlholsto/connections/connect.php";
+
+	if ($_SERVER["REQUEST_METHOD"]=="POST")
+	{
+
+        // Get user input from the login form
+        if(isset($_POST['username']) && !empty($_POST['username'])&& !empty($_POST['password']))
+        {
+            $username = $_POST['username'];
+            $query = "select username from users where username = :username";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+            //$count=$stmt->count();
+            if($stmt->fetchColumn() > 0)
+            {
+                $error=true;
+
+                $message= 'User already in system';
+            }
+            else{
+                $password = $_POST["password"];
+                $password2 = $_POST['password2'];
+
+                if ($password != $password2)
+                {
+                    $error=true;
+                    $message= "Passwords do not match!";
+                }
+                else{
+                    $error=false;
+                    $message;
+                    $sql = "insert into users (username,password) values (:username, :password)";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':username', $username);
+                    $stmt->bindParam(':password', password_hash($password,PASSWORD_DEFAULT));
+                    $stmt->execute();
+                    header('Location: login.php');
+                }
+            }
+        }
+        else{
+            $error=true;
+            $message='Input cannot be empty';
+        }
+
+    }
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles2.css">
+    <title>Account Creation Form</title>
+</head>
+<body>
+ <div class="navbar">
+<div class="title"><a href="login.php">Holston Public Bookstore</a></div>
+    </div>
+
+    <div class="main-content">
+    <h2>Account Creation Form</h2>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+        Username: <input type="text" name="username"><br><br>
+        Password: <input type="password" name="password"><br><br>
+        Verify Password: <input type="password" name="password2"><br><br>
+        <?php if(!$empty) {echo "<div class='error'>".$message."</div>";} ?>
+        <input type="submit" name="submit" value="Create Account">
+    </form>
+    <a href="login.php">Click here to login</a>
+    </div>
+<footer>
+	<?php require "includes/footer.php"; ?>
+
+</footer>
+</body>
+</html>
+

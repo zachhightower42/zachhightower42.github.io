@@ -1,0 +1,83 @@
+/**
+ * stylesheet_signup.css
+ * This CSS file styles the signup page of the application. It includes styles for the main body, header, logo text, and the signup container.
+ * The main body is centered vertically and horizontally, with a fixed header at the top and a signup container in the center.
+ * The signup container has a background color, rounded corners, and a drop shadow. It contains input fields for the user to enter their information and a submit button.
+ * The styles use a custom font, "BrushScriptOpti", for the logo text and the signup container heading, and Arial for the body text.
+ * The colors used are a dark blue background, a red accent color for the logo text, and a blue submit button.
+ */
+/*signup*/
+@font-face {
+  font-family: "BrushScriptOpti";
+  src: url("fonts/BrushScriptOpti-Regular.otf") format("opentype");
+}
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #12284c;
+  position: relative;
+  z-index: 1;
+  padding-top: 180px; /* Adjust this value to fine-tune the spacing */
+}
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: -1;
+  pointer-events: none;
+  padding-top: 20px;
+}
+.logo-text {
+  background: rgba(255, 255, 255, 0);
+  font-family: "BrushScriptOpti", Arial, sans-serif;
+  color: #cf152d;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff;
+  font-size: 160px;
+  user-select: none;
+  margin: 0;
+}
+.signup-container {
+  background-color: #245199;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.signup-container h1 {
+  font-family: "BrushScriptOpti", Arial, sans-serif;
+  margin-bottom: 1rem;
+  color: #cf152d;
+  font-size: 50px;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff;
+}.signup-container input[type="text"],
+.signup-container input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.signup-container input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.signup-container input[type="submit"]:hover {
+  background-color: #0056b3;
+}

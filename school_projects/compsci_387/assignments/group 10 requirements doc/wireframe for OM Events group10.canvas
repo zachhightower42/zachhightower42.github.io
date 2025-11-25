@@ -1,0 +1,16 @@
+{
+	"nodes":[
+		{"id":"4cb517f3ecba5576","x":-142,"y":-215,"width":250,"height":60,"type":"text","text":"Login page"},
+		{"id":"973119506cf0bd84","x":300,"y":-215,"width":250,"height":60,"type":"text","text":"Signup Page"},
+		{"id":"e07adeb93aea019a","x":-135,"y":-20,"width":250,"height":60,"type":"text","text":"Dashboard"},
+		{"id":"0d8e68c25f3d2567","x":-320,"y":120,"width":250,"height":60,"type":"text","text":"Worker Signup/Hours Update"},
+		{"id":"42836c4304e3e79a","x":80,"y":120,"width":250,"height":60,"type":"text","text":"Admin page"}
+	],
+	"edges":[
+		{"id":"87cd08af069b987b","fromNode":"4cb517f3ecba5576","fromSide":"right","toNode":"973119506cf0bd84","toSide":"top"},
+		{"id":"985f1d59df5b5c73","fromNode":"973119506cf0bd84","fromSide":"bottom","toNode":"4cb517f3ecba5576","toSide":"right"},
+		{"id":"06181d5c032ff4fe","fromNode":"4cb517f3ecba5576","fromSide":"bottom","toNode":"e07adeb93aea019a","toSide":"top"},
+		{"id":"4d0fd5d9ddf64efd","fromNode":"e07adeb93aea019a","fromSide":"bottom","toNode":"0d8e68c25f3d2567","toSide":"top"},
+		{"id":"0309ffdab019c9d9","fromNode":"e07adeb93aea019a","fromSide":"bottom","toNode":"42836c4304e3e79a","toSide":"top"}
+	]
+}

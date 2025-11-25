@@ -1,0 +1,22 @@
+{
+	"nodes":[
+		{"id":"19c5e6eb8c41920d","x":-140,"y":-540,"width":250,"height":140,"type":"text","text":"**Login Page**: Authentication page for students, instructors, TAs, and admins."},
+		{"id":"8247f431798b3fd0","x":-140,"y":-320,"width":250,"height":145,"type":"text","text":"**Home Page**: Personalized dashboard showing recent notes, heat system, and class navigation."},
+		{"id":"6781da2d63884fea","x":-307,"y":420,"width":258,"height":140,"type":"text","text":"**Note Display Page**: A detailed view of a selected note, with download and interaction options (like, comment)."},
+		{"id":"3d4476c9037a7065","x":20,"y":420,"width":250,"height":130,"type":"text","text":" **Note Upload/Edit Page**: Form for students to upload new notes or TAs/Instructors to edit existing notes."},
+		{"id":"f9dcce731eab0ee5","x":-391,"y":160,"width":265,"height":108,"type":"text","text":"**Section Page**: Separate page for each section of a course, displaying notes related to that section."},
+		{"id":"37232a8faf2001ac","x":-377,"y":-160,"width":238,"height":125,"type":"text","text":"**Course Search Results**: Search results for available courses that the user can join."},
+		{"id":"4449b0dd4e9e0b56","x":-139,"y":40,"width":265,"height":87,"type":"text","text":"**Course Page**: Overview of the course with options to view and upload notes."}
+	],
+	"edges":[
+		{"id":"f0adc532c4046364","fromNode":"19c5e6eb8c41920d","fromSide":"bottom","toNode":"8247f431798b3fd0","toSide":"top"},
+		{"id":"51c9575a06d67dd5","fromNode":"8247f431798b3fd0","fromSide":"bottom","toNode":"37232a8faf2001ac","toSide":"top"},
+		{"id":"4a05b5b1dc4e53d3","fromNode":"8247f431798b3fd0","fromSide":"bottom","toNode":"4449b0dd4e9e0b56","toSide":"top"},
+		{"id":"6dfe56288fa550ed","fromNode":"4449b0dd4e9e0b56","fromSide":"bottom","toNode":"f9dcce731eab0ee5","toSide":"top"},
+		{"id":"86eaa87ab6491b4a","fromNode":"4449b0dd4e9e0b56","fromSide":"bottom","toNode":"3d4476c9037a7065","toSide":"top"},
+		{"id":"a75621b1b9576776","fromNode":"4449b0dd4e9e0b56","fromSide":"bottom","toNode":"6781da2d63884fea","toSide":"top"},
+		{"id":"ba8183f9cc994602","fromNode":"f9dcce731eab0ee5","fromSide":"bottom","toNode":"6781da2d63884fea","toSide":"top"},
+		{"id":"9d47a493f0ced23d","fromNode":"f9dcce731eab0ee5","fromSide":"bottom","toNode":"3d4476c9037a7065","toSide":"top"},
+		{"id":"646a34765307154d","fromNode":"37232a8faf2001ac","fromSide":"bottom","toNode":"4449b0dd4e9e0b56","toSide":"top"}
+	]
+}

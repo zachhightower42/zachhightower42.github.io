@@ -1,0 +1,28 @@
+{
+	"nodes":[
+		{"id":"fef2816e7931d8c3","x":-141,"y":-412,"width":250,"height":60,"type":"text","text":"login"},
+		{"id":"69ae1b91192b28f6","x":60,"y":-300,"width":250,"height":60,"type":"text","text":"signup"},
+		{"id":"f3ee87e2b9a637c7","x":-141,"y":-180,"width":250,"height":60,"type":"text","text":"dashboard"},
+		{"id":"927bfc726f258f73","x":-740,"y":-25,"width":250,"height":60,"type":"text","text":"Attendee : View Events"},
+		{"id":"0f3b14111992c6f8","x":-615,"y":65,"width":250,"height":60,"type":"text","text":"Attendee : Liked Events"},
+		{"id":"0cbb23c7c1775ac9","x":-460,"y":160,"width":250,"height":60,"type":"text","text":"Organizer : Create Event"},
+		{"id":"d49394122e8338b8","x":-335,"y":240,"width":250,"height":60,"type":"text","text":"Organizer : View / Edit Your Events"},
+		{"id":"fe20ed24b943ad4a","x":-16,"y":240,"width":250,"height":60,"type":"text","text":"Worker : View Assigned Events"},
+		{"id":"5cffc5654f33e6fc","x":185,"y":160,"width":250,"height":60,"type":"text","text":"Worker : Update Schedule"},
+		{"id":"09acc8456f275273","x":340,"y":95,"width":250,"height":60,"type":"text","text":"Admin : Manage Users"},
+		{"id":"a90c8880be5fe7ee","x":520,"y":5,"width":250,"height":60,"type":"text","text":"Admin : Manage Events and Spaces"}
+	],
+	"edges":[
+		{"id":"52c6b4078a120c2a","fromNode":"fef2816e7931d8c3","fromSide":"bottom","toNode":"69ae1b91192b28f6","toSide":"top"},
+		{"id":"751f869da87aca56","fromNode":"fef2816e7931d8c3","fromSide":"bottom","toNode":"f3ee87e2b9a637c7","toSide":"top"},
+		{"id":"5fb342cd2d8791bf","fromNode":"69ae1b91192b28f6","fromSide":"bottom","toNode":"fef2816e7931d8c3","toSide":"top"},
+		{"id":"28e9b71016ead32a","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"927bfc726f258f73","toSide":"top"},
+		{"id":"a2e847fb203e0c9d","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"0f3b14111992c6f8","toSide":"top"},
+		{"id":"eba2cce89cf89415","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"d49394122e8338b8","toSide":"top"},
+		{"id":"e54ace019bd12fe9","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"0cbb23c7c1775ac9","toSide":"top"},
+		{"id":"539dec74ee082a4d","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"fe20ed24b943ad4a","toSide":"top"},
+		{"id":"1ad24a26638e1832","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"5cffc5654f33e6fc","toSide":"top"},
+		{"id":"1bf9c5aa2799bd43","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"09acc8456f275273","toSide":"top"},
+		{"id":"99d49b97dd085526","fromNode":"f3ee87e2b9a637c7","fromSide":"bottom","toNode":"a90c8880be5fe7ee","toSide":"top"}
+	]
+}

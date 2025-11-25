@@ -1,0 +1,1 @@
+- Go over homework 1 and quiz 1 before the test

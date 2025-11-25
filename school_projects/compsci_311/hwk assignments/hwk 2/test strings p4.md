@@ -1,0 +1,12 @@
+Accept
+abb
+ababbba
+abababbbaba
+Reject
+a
+b
+ab
+ba
+abbb
+ababbbaa
+ababbbba

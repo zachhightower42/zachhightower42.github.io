@@ -1,0 +1,7 @@
+- Ensure that we can authenticate users and hide features on dashboard/prevent access to dropdown menu items in the navigation bar based on that
+- Check event creation, add the ability for event organizers/admins to staff it with available workers
+- Change like to approve for any users recognized as admins (don't do this, this is just going to be on a separate admin page)
+- Check through the ERD and design an event space search for organizers and admins
+- Give the admins the option to add an event space
+- Make the page for workers to sign up, allow them to edit their profile if desired, make sure it updates based on hours assigned
+- Add notifications to the dashboard

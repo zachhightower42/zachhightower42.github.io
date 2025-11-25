@@ -1,0 +1,21 @@
+- Bare minimum
+	- Served through a web-page only 
+	- Handles three user types
+		- Manager
+		- Event organizer
+		- Event worker
+	- Manager users have the ability to cancel events and make spaces unavailable manually, highest level of permissions
+	- Shows event organizer and manager users a drop down list for available spaces, no further info other than that they are available
+	- Sign up portal for event workers
+	- Event workers only get to see whether they have been assigned to an event, when it is, and general information about it given by manage or event organizer users
+
+
+- Medium level (has all previous features, plus what is listed below)
+	- Handles four user types
+		- Manager
+		- Event organizer
+		- Event worker
+		- Attendee
+	- Shows manager and event organizer users available spaces through a searchable list and when one is selected through the search function, displays a small page of textual info about them. Capacity, current bookings, seating type, etc. 
+	- Event worker users have the ability to search events and choose to sign up for those specific events 
+	- Allows attendee users to search upcoming events and sign up to receive emails about upcoming events they might be interested in 
