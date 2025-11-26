@@ -11,5 +11,7 @@ Organized by class, highest to lowest, with TA work going at the top
 - [Computer Science 450 Fundamental Concepts in Programming and Formal Languages](compsci_450/index.md)
 - [Computer Science 423 Introduction to Operating Systems](compsci_423/index.md)
 - [Computer Science 387 Software Development Project](compsci_387/index.md)
+- [Computer Science 354 Web Programming](compsci_354/index.md)
 - [Computer Science 311 Models of Computation](compsci_311/index.md)
 - [Computer Science 300 Ethics/Social Responsibility in Computer Science](compsci_300/index.md)
+-

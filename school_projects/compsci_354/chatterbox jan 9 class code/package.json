@@ -1,0 +1,16 @@
+{
+  "name": "chatterbox-jan-9-class-code",
+  "version": "1.0.0",
+  "description": "class code 7, beginning of chatterbox project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
