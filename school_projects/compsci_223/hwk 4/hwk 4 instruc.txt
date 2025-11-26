@@ -1,0 +1,32 @@
+CSCI 223 Computer Org. & Assembly Language
+
+Homework #4
+
+2/13/2024
+
+Due: 9:30am on Tuesday 2/20/2024
+
+Submission: Upload your single C source file to the Blackboard. Make sure your program is compiled without error. The program source file should be in a plain text format with .c or .cpp file extension. If compilation fails, no points will be given. No late submission will be accepted.
+
+Bonus: 10% bonus for the submission by Sunday 2/18/2024
+
+
+int main()
+{
+   int x;
+   scanf("%d", &x);
+
+   // Code 1: write a code that prints "x" in binary
+   
+   // Code 2: print the address of variable "x" in hex
+   
+   // code 3: write code that finds out whether your machine is little-endian or big-endian
+
+   // Code 4: Write code that toggles (0-->1, 1-->0) the bit #7 of "x" without disturbing other bits. Then print "x" before and after toggling in hex)
+
+   // Code 5: Print the value of "x" before and after "right shift by 3"
+
+   return 0;
+   
+}
+

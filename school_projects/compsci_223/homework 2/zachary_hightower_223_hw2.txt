@@ -1,0 +1,32 @@
+CSCI 223 Computer Org. & Assembly Language
+
+Homework #2
+
+Zachary Hightower
+
+Due: 09:30am on Tuesday 2/6/2024
+
+Submission: Upload a file (.txt or .pdf) that has your answer computer-typed. No late submission will be accepted.
+
+
+Q: The marketing department at your company has promised customers that the next software release will show a 2x performance improvement. You have been assigned the task of delivering on that promise. You have determined that only 80% of the system can be improved. How much (in percentage) would you need to improve this part to meet the overall performance target? Hint: use Amdahl's law.
+
+A: We need a performance input twice the original amount in the next software release. Only 80% of the system can be improved. In the equation for Amdahl's law, we can represent our problem as.
+
+1 / (1-p) + p/s = 2
+
+Where p is the original proportion of what we can improve as it existed in the system. We know this is 80 percent, or .80
+s is the speedup of the part of the task that can benefit from improvement. 
+We use 2, because the theoretical speed we want to achieve is twice as fast as it is now. 
+
+Placing our values into the equation, we get.
+
+1 / (1-.8) + .8/s = 2
+
+If we perform the calculation, we arrive at the least amount we can increase the systems we can act on to achieve our desired output. 
+
+8/3 or 2.7, roughly.
+
+Represented as a percentage improvement, we need to improve the 80% of the system by 270% to meet the stated goal. 
+
+

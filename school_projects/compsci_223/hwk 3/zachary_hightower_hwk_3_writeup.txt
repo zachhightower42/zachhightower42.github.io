@@ -1,0 +1,13 @@
+Zach Hightower Homework 3 class 223 - Analysis of results
+
+
+
+    The two verions perform with significant differences between the two. The last time I ran the program it returned
+
+Version 1 Avg Time: 0.000877 milliseconds
+Version 2 Avg Time: 0.000282 milliseconds
+Using 2-D array size = 512x512 and Iterations = 30000 
+
+    This means that Version 2 takes about 32% of the time that Version 1 takes. We can attribute this to the way that the multi-dimensional array is stored within the memory. Because C and C++ are programming languages use row major order, we see the above result. If it were using column major order, we would see something like the opposite result when running this experiment. So, whenever using multi-dimensional structures like a 2-D array, we should ensure that our code follows row major order, as that is the most used ordering system today.  
+
+

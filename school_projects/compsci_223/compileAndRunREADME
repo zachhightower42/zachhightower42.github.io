@@ -1,0 +1,3 @@
+gcc <filename> -o <what the executable should be named>.<extension>
+
+./<executable>

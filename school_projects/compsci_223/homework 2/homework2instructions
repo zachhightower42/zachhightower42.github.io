@@ -1,0 +1,13 @@
+CSCI 223 Computer Org. & Assembly Language
+
+Homework #2
+
+2/1/2024
+
+Due: 09:30am on Tuesday 2/6/2024
+
+Submission: Upload a file (.txt or .pdf) that has your answer computer-typed. No late submission will be accepted.
+
+
+â€¢ The marketing department at your company has promised customers that the next software release will show a 2x performance improvement. You have been assigned the task of delivering on that promise. You have determined that only 80% of the system can be improved. How much (in percentage) would you need to improve this part to meet the overall performance target? Hint: use Amdahl's law.
+
