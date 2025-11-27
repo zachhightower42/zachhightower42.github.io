@@ -1,0 +1,10 @@
+Question: Give the Big-O performance of the following code fragment:
+
+i = n
+while i > 0:
+   k = 2 + 2
+   i = i // 2
+
+Answer: The complexity of this one is O(log n), because the input variable
+controlling the looping decreases by half each time, making the overall loop
+less time intensive.

@@ -1,0 +1,5 @@
+Both methods take more and more effort as it
+is required to return larger and larger lists. The recursion implementation appears to take
+more time versus the iterative implementation. The difference between the two appears to
+stay roughly the same as n gets larger. There also appears to be more of an up front cost
+to the recursive method.

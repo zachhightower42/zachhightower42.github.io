@@ -1,0 +1,1 @@
+When testing a set of 20000 arrays each with a size of 100 and populated with random double values, 

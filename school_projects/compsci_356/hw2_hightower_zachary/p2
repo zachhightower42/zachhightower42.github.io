@@ -1,0 +1,7 @@
+Question: Give the Big-O performance of the following code fragment:
+
+for i in range(n):
+     k = 2 + 2
+
+Answer: The complexity of this one should be linear O(n) because there are no nested loops
+and it operates with respect to the input variable.

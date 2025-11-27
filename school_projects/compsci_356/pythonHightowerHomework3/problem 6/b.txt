@@ -1,0 +1,3 @@
+Judging from the graph, it appears that the list implementation is more efficient than
+using python's deque pop method. Though the majority of the times are still within the
+range to be considered O(1).

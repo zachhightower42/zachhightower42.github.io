@@ -1,0 +1,19 @@
+Convert the above infix expressions to postfix (use full parentheses).
+
+
+    (A+B)*(C+D)*(E+F)
+
+    A+((B+C)*(D+E))
+
+    A*B*C*D+E+F
+
+a) (A+B)*(C+D)*(E+F)
+  = A B + C D + * E F + *
+    The expression directly above is the post fix expression without parenthesis
+    I don't know what the instructions mean by use full parenthesis, since none of the examples within the book actually have any form of parenthesis once the expression has been converted. 
+
+b) A+((B+C)*(D+E))
+  =A B C + D E + * +
+
+c) A*B*C*D+E+F
+ =A B * C * D * E + F +

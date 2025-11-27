@@ -1,0 +1,6 @@
+home
+house
+main
+movie
+homework
+maintenance

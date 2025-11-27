@@ -1,0 +1,34 @@
+CSCI 433 Midterm Exam 1 Spring 2023 February 9, 2024 
+Problem 1 (10 pts) 
+True
+True
+False
+True
+True
+True
+False (Because you could have something like sin and cos waves)
+True
+True (Implement circularly using mod)
+False
+
+
+Problem 2 (10 pts)
+ $$\sum ^{n-2}{i = 0} \sum ^{n-1}  {j = i + 1} 1 = \sum ^{n-2}{i = 0}n-1-(i+1)+1 = \sum ^{n-2}{i = 0}(n-i-1)  = \frac{n(n-1)}{2} \in \theta (n^2)$$
+
+Problem 3 (10 pts)
+
+Let N = n-m 
+T(N) =2T(N-1)
+T(0) = 1
+
+$T(N) = 2T(N-1) = 2^2T(N-2) = 2^3T(N-3)...= 2^N T(0) = 2^N$
+
+Bonus rewrite
+Alg isSubstring(S1, S2)
+if $S_1$.len() > $S_2$.len()
+return false
+else
+if strcmp($S_1, S_2$(1:len())) == true
+return true
+else
+return isSubstring($S_1, S_2$(2:end))

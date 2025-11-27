@@ -1,0 +1,10 @@
+Question: Give the Big-O performance of the following code fragment:
+
+for i in range(n):
+   for j in range(n):
+      for k in range(n):
+         k = 2 + 2
+
+Answer: Since we have three nested loops here that all operate with respect to the input
+variable and they do not halve in size after the loop, we can safely say that this
+time complexity of big O of O(n^3)

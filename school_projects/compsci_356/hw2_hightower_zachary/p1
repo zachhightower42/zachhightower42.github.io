@@ -1,0 +1,8 @@
+Question: Give the Big-O performance of the following code fragment:
+
+for i in range(n):
+   for j in range(n):
+      k = 2 + 2
+
+Answer: The time complexity will be O(n^2) since the loops are nested and both
+operate with respect to the input variable.

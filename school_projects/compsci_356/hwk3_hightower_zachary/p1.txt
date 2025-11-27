@@ -1,0 +1,34 @@
+1.Convert the following values to binary using “divide by 2.” Show the stack of remainders.
+
+    17
+
+    45
+
+    96
+
+a) 17 = (2*8) + 1
+    8 = (2*4) + 0 
+    4 = (2*2) + 0
+    2 = (2*1) + 0
+    0 = (2*0) + 1
+    Remainders bottom to top presented as binary:
+    10001
+b) 45 = (2*22) + 1
+   22 = (2*11) + 0
+   11 = (2*5)  + 1
+   5  = (2*2)  + 1
+   2  = (2*1)  + 0 
+   0  = (2*0)  + 1
+    Remainders bottom to top presented as binary:
+    101101
+c) 96 = (2*48) + 0
+   48 = (2*24) + 0
+   24 = (2*12) + 0
+   12 = (2*6)  + 0 
+   6  = (2*3)  + 0
+   3  = (2*1)  + 1
+   1  = (2*0)  + 1
+    Remainders bottom to top presented as binary:
+    1100000
+
+Note: a and b are essentially palindromes. The same backwards as forwards, but 96 is not
