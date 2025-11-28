@@ -5,6 +5,9 @@ This page contains work that I've done as part of my education at the University
 I used Obsidian to handle all the embedded images in the markdown files, if you need it, use this link to find the misceallenous images and support files folder, just slotting it into the directory should fix any embed issues.
 [Images and Support Files](https://drive.google.com/drive/folders/1djVKfT6OVH3nseiz8CnWJwd8M7XxtC_2?usp=sharing)
 
+If you'd rather view this in Github's repository structure, here's a link to that:
+[Site Repository](https://github.com/zachhightower42/zachhightower42.github.io)
+
 ## Navigation
 
 Organized by class, highest to lowest, with TA work going at the top

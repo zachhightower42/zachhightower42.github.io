@@ -1,18 +1,16 @@
-# Welcome to my Online Archive of Stuff
+# Welcome to my Online Archive :D
+
+If you'd rather view this in Github's repository structure, here's a link to that:
+[Site Repository](https://github.com/zachhightower42/zachhightower42.github.io)
 
 ## Navigation
 
-Pages to visit
+Places to visit, should be mostly self explanatory
 
-- [Pax Sheet Maker](pax/pax_sheet_maker.html)
-- [Roll20 Macros and Instructions](pax/macros_and_instruc.md)
-- [Armitage's Caselog](pax/armitageJournal/armitageJournal.html)
-- [Zachary Hightower's Author Page](zacharyHightowerCollectedWorks/work/temp_author_page.md)
-- [Zachary Hightower's Voice Work](zacharyHightowerCollectedWorks/narrative_work/narrative_index.md)
-- [Zachary Hightower's Artwork](zacharyHightowerCollectedWorks/art/art_index.md)
-- [Poker Hand Evaluator](https://zachhightowerpokerstats.streamlit.app/)
-- [Poker Hand Evaluator Info](poker_stats/README_poker_stats.md)
+- [Pax Equus](pax/pax_projects_index.md)
 - [e_404](e_404_page/e_404_page.html)
+- [Personal Artwork (voice,sketch,paint,writing)](artwork/voice_art_writing_index.md)
+- [Personal Projects](personal_projects/projects_index.md)
 - [School Projects](school_projects/sp_sub_index.md)
 
 ## NOTICE 
